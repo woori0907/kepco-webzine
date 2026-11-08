@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Fonts — Pretendard Variable (로컬 파일, 오프라인에서도 동작)
+   v1.3.9 · SIL Open Font License 1.1 → assets/fonts/LICENSE.txt
+   한 파일에 굵기 45–920이 모두 들어 있어 Regular·SemiBold·Bold를 함께 씁니다.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/PretendardVariable.woff2") format("woff2-variations"),
+       url("../fonts/PretendardVariable.woff2") format("woff2");
+}

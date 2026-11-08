@@ -8,6 +8,7 @@ Figma `Home` 페이지(Desktop 1440 · Tablet 768 · Mobile 375)를 HTML/CSS/JS�
 index.html
 assets/
   css/
+    fonts.css        Pretendard 로컬 폰트 등록 (인터넷 연결 없이 동작)
     tokens.css       Figma 변수(색상·간격·타이포·레이아웃)와 반응형 값
     base.css         리셋, 공통 요소
     components.css   Button · Card · Input(Field)
@@ -20,7 +21,12 @@ assets/
     reveal.js        스크롤하면 섹션·카드가 차례로 나타나는 효과
   images/
     logo-kepco.svg
+  fonts/
+    PretendardVariable.woff2   Pretendard v1.3.9 (SIL OFL 1.1)
+    LICENSE.txt
 ```
+
+외부 CDN 없이 모든 파일이 로컬에 있어 인터넷이 끊긴 환경에서도 똑같이 보입니다.
 
 ## 반응형 기준
 
