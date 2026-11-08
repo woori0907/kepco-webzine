@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Design tokens — Figma 변수(Variables)와 1:1 대응
+   Desktop(≥1024) · Tablet(768–1023) · Mobile(<768)
+   ========================================================================== */
+
+:root {
+  /* Font */
+  --font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+
+  /* Color — text */
+  --text-primary: #121416;
+  --text-secondary: #495057;
+  --text-tertiary: #868e96;
+  --text-link: #0f57d9;
+  --text-on-brand: #ffffff;
+  --text-error: #e5484d;
+
+  /* Color — background */
+  --bg-default: #ffffff;
+  --bg-subtle: #f8f9fa;
+  --bg-muted: #f1f3f5;
+  --bg-brand: #1a6dff;
+  --bg-brand-hover: #0f57d9;
+  --bg-brand-subtle: #ebf3ff;
+  --bg-overlay: rgba(18, 20, 22, 0.4);
+
+  /* Color — border */
+  --border-default: #e9ecef;
+  --border-strong: #adb5bd;
+  --border-brand: #1a6dff;
+  --border-error: #e5484d;
+  --border-width-default: 1px;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-3xl: 64px;
+
+  /* Radius */
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Layout — Desktop */
+  --layout-columns: 12;
+  --layout-margin: 120px;
+  --layout-gutter: 24px;
+  --layout-section-padding: 120px;
+  --layout-max-width: 1200px;
+  --header-height: 72px;
+
+  /* Typography — Desktop */
+  --font-size-display: 56px;
+  --line-height-display: 68px;
+  --letter-spacing-display: -1.12px;
+
+  --font-size-h3: 24px;
+  --line-height-h3: 32px;
+  --letter-spacing-h3: -0.24px;
+
+  --font-size-h4: 20px;
+  --line-height-h4: 28px;
+  --letter-spacing-h4: -0.1px;
+
+  --font-size-body-lg: 18px;
+  --line-height-body-lg: 30px;
+
+  --font-size-body: 16px;
+  --line-height-body: 26px;
+
+  --font-size-caption: 14px;
+  --line-height-caption: 20px;
+
+  /* Logo */
+  --logo-width: 118.869px;
+  --logo-height: 28px;
+  --footer-logo-width: 118.869px;
+  --footer-logo-height: 28px;
+  --footer-gap: 14px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-base: 280ms;
+}
+
+/* Tablet · 768 */
+@media (max-width: 1023px) {
+  :root {
+    --layout-margin: 40px;
+    --layout-gutter: 20px;
+    --layout-section-padding: 88px;
+
+    --font-size-display: 44px;
+    --line-height-display: 54px;
+    --letter-spacing-display: -0.88px;
+
+    --font-size-h3: 22px;
+    --line-height-h3: 30px;
+    --letter-spacing-h3: -0.22px;
+
+    --font-size-h4: 18px;
+    --line-height-h4: 26px;
+    --letter-spacing-h4: -0.09px;
+
+    --font-size-caption: 13px;
+    --line-height-caption: 20px;
+  }
+}
+
+/* Mobile · 375 */
+@media (max-width: 767px) {
+  :root {
+    --layout-margin: 20px;
+    --layout-gutter: 16px;
+    --layout-section-padding: 64px;
+    --header-height: 60px;
+
+    --font-size-display: 36px;
+    --line-height-display: 44px;
+    --letter-spacing-display: -0.72px;
+
+    --font-size-h3: 20px;
+    --line-height-h3: 28px;
+    --letter-spacing-h3: -0.2px;
+
+    --font-size-body-lg: 17px;
+    --line-height-body-lg: 28px;
+
+    --font-size-body: 15px;
+    --line-height-body: 24px;
+
+    --font-size-caption: 13px;
+    --line-height-caption: 18px;
+
+    --logo-width: 85.701px;
+    --logo-height: 20.187px;
+    --footer-logo-width: 106.133px;
+    --footer-logo-height: 25px;
+    --footer-gap: 8px;
+  }
+}

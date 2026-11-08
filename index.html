@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KEPCO Web Magazine</title>
+  <meta name="description" content="KEPCO 웹진 2026 October vol.640">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+
+  <script src="assets/js/menu.js" defer></script>
+  <script src="assets/js/header.js" defer></script>
+  <script src="assets/js/smooth-scroll.js" defer></script>
+  <script src="assets/js/newsletter.js" defer></script>
+  <script src="assets/js/reveal.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <!-- Header -->
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <p class="site-header__issue">2026 October vol.640</p>
+
+      <a class="site-header__logo" href="./" aria-label="KEPCO 웹진 홈">
+        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="119" height="28">
+      </a>
+
+      <button class="menu-button" type="button"
+              aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-menu"
+              data-menu-open>
+        <span class="menu-button__line"></span>
+        <span class="menu-button__line"></span>
+        <span class="menu-button__line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu drawer -->
+  <div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-label="전체 메뉴" hidden data-menu>
+    <div class="menu__overlay" data-menu-close></div>
+    <nav class="menu__panel" aria-label="주요 메뉴">
+      <div class="menu__head">
+        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="86" height="20">
+        <button class="menu__close" type="button" aria-label="메뉴 닫기" data-menu-close>
+          <span></span><span></span>
+        </button>
+      </div>
+      <ul class="menu__list">
+        <li><a class="menu__link" href="#articles">소개</a></li>
+        <li><a class="menu__link" href="#more">서비스</a></li>
+        <li><a class="menu__link" href="#newsletter">소식</a></li>
+        <li><a class="menu__link" href="#footer">고객센터</a></li>
+      </ul>
+      <p class="menu__issue">2026 October vol.640</p>
+    </nav>
+  </div>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero section" aria-labelledby="hero-title">
+      <div class="container hero__inner" data-reveal>
+        <p class="hero__eyebrow">WEB UI STARTER</p>
+        <h1 class="hero__title" id="hero-title">여기에 첫 화면 제목이 들어갑니다</h1>
+        <p class="hero__desc">프레임의 Responsive 모드(Desktop · Tablet · Mobile)에 따라 글자 크기, 여백, 컬럼 그리드가 함께 바뀝니다. 이 섹션은 확인용 샘플이니 지우고 시작하셔도 돼요.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#articles" data-scroll>시작하기</a>
+          <a class="btn btn--secondary" href="#more" data-scroll>더 알아보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards: 2 columns -->
+    <section class="section section--flush-top" id="articles" aria-label="주요 기사">
+      <div class="container grid grid--2">
+        <article class="card" data-reveal>
+          <a class="card__link" href="#">
+            <div class="card__image" aria-hidden="true"></div>
+            <div class="card__body">
+              <p class="card__category">카테고리</p>
+              <h2 class="card__title">카드 제목 1</h2>
+              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
+              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
+            </div>
+          </a>
+        </article>
+        <article class="card" data-reveal>
+          <a class="card__link" href="#">
+            <div class="card__image" aria-hidden="true"></div>
+            <div class="card__body">
+              <p class="card__category">카테고리</p>
+              <h2 class="card__title">카드 제목 2</h2>
+              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
+              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cards: 3 columns -->
+    <section class="section section--flush-top" id="more" aria-label="더 많은 기사">
+      <div class="container grid grid--3">
+        <article class="card" data-reveal>
+          <a class="card__link" href="#">
+            <div class="card__image" aria-hidden="true"></div>
+            <div class="card__body">
+              <p class="card__category">카테고리</p>
+              <h2 class="card__title">카드 제목 1</h2>
+              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
+              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
+            </div>
+          </a>
+        </article>
+        <article class="card" data-reveal>
+          <a class="card__link" href="#">
+            <div class="card__image" aria-hidden="true"></div>
+            <div class="card__body">
+              <p class="card__category">카테고리</p>
+              <h2 class="card__title">카드 제목 2</h2>
+              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
+              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
+            </div>
+          </a>
+        </article>
+        <article class="card" data-reveal>
+          <a class="card__link" href="#">
+            <div class="card__image" aria-hidden="true"></div>
+            <div class="card__body">
+              <p class="card__category">카테고리</p>
+              <h2 class="card__title">카드 제목 3</h2>
+              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
+              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Newsletter (Tablet · Mobile 프레임 기준) -->
+    <section class="section section--flush-top newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="container" data-reveal>
+        <h2 class="newsletter__title" id="newsletter-title">새 소식을 메일로 받아보세요</h2>
+        <form class="newsletter__form" novalidate data-newsletter>
+          <div class="field" data-field>
+            <label class="field__label" for="newsletter-email">이메일</label>
+            <input class="field__input" id="newsletter-email" name="email" type="email"
+                   placeholder="name@example.com" autocomplete="email" required
+                   aria-describedby="newsletter-help">
+            <p class="field__helper" id="newsletter-help" aria-live="polite"></p>
+          </div>
+          <button class="btn btn--primary newsletter__submit" type="submit">구독하기</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="footer">
+    <img class="site-footer__logo" src="assets/images/logo-kepco.svg" alt="KEPCO" width="119" height="28">
+    <p class="site-footer__copy">KEPCO Web Magazine © 2026 KEPCO. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
