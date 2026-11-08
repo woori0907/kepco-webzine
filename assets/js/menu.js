@@ -1,30 +1,39 @@
 /**
- * 전체 메뉴(드로어)
- * - 햄버거 버튼으로 열기, 닫기 버튼 · 배경 클릭 · ESC · 메뉴 링크 클릭으로 닫기
- * - 열려 있는 동안 본문 스크롤 잠금, 포커스를 메뉴 안에 가둠
- * - 닫으면 메뉴를 열었던 버튼으로 포커스 복귀
+ * 목차(전체 메뉴)
+ * - 헤더의 ‘목차’ 버튼과 하단 탭바의 ‘목차’ 버튼 어디서나 열림
+ * - 닫기 버튼 · 배경 클릭 · ESC · 목차 링크 클릭으로 닫힘
+ * - 열려 있는 동안 본문 스크롤 잠금, 포커스를 목차 안에 가둠
+ * - 닫으면 목차를 열었던 버튼으로 포커스 복귀
  */
 (function () {
   'use strict';
 
   var menu = document.querySelector('[data-menu]');
-  var openButton = document.querySelector('[data-menu-open]');
-  if (!menu || !openButton) return;
+  var openers = document.querySelectorAll('[data-menu-open]');
+  if (!menu || !openers.length) return;
 
   var panel = menu.querySelector('.menu__panel');
-  var closeTriggers = menu.querySelectorAll('[data-menu-close]');
-  var links = menu.querySelectorAll('.menu__link');
+  var closers = menu.querySelectorAll('[data-menu-close]');
+  var links = menu.querySelectorAll('a[href]');
   var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var lastOpener = null;
   var closeTimer = null;
 
   function isOpen() {
     return menu.classList.contains('is-open');
   }
 
-  function open() {
+  function setExpanded(value) {
+    Array.prototype.forEach.call(openers, function (btn) {
+      btn.setAttribute('aria-expanded', value ? 'true' : 'false');
+    });
+  }
+
+  function open(trigger) {
     if (isOpen()) return;
     clearTimeout(closeTimer);
+    lastOpener = trigger || openers[0];
 
     menu.hidden = false;
     // hidden 해제 직후 한 프레임 뒤에 클래스를 붙여야 트랜지션이 동작
@@ -33,11 +42,10 @@
     });
 
     document.body.classList.add('is-locked');
-    openButton.setAttribute('aria-expanded', 'true');
-    openButton.setAttribute('aria-label', '메뉴 닫기');
+    setExpanded(true);
 
-    var first = panel.querySelector(FOCUSABLE);
-    if (first) first.focus({ preventScroll: true });
+    var current = panel.querySelector('[aria-current="page"]') || panel.querySelector(FOCUSABLE);
+    if (current) current.focus({ preventScroll: true });
 
     document.addEventListener('keydown', onKeydown);
   }
@@ -48,16 +56,14 @@
 
     menu.classList.remove('is-open');
     document.body.classList.remove('is-locked');
-    openButton.setAttribute('aria-expanded', 'false');
-    openButton.setAttribute('aria-label', '메뉴 열기');
+    setExpanded(false);
     document.removeEventListener('keydown', onKeydown);
 
-    var delay = reducedMotion.matches ? 0 : 280;
     closeTimer = setTimeout(function () {
       menu.hidden = true;
-    }, delay);
+    }, reducedMotion.matches ? 0 : 320);
 
-    if (restoreFocus) openButton.focus({ preventScroll: true });
+    if (restoreFocus && lastOpener) lastOpener.focus({ preventScroll: true });
   }
 
   function onKeydown(event) {
@@ -66,12 +72,10 @@
       close();
       return;
     }
-
     if (event.key !== 'Tab') return;
 
     var focusable = Array.prototype.slice.call(panel.querySelectorAll(FOCUSABLE));
     if (!focusable.length) return;
-
     var first = focusable[0];
     var last = focusable[focusable.length - 1];
 
@@ -84,21 +88,20 @@
     }
   }
 
-  openButton.addEventListener('click', function () {
-    if (isOpen()) {
-      close();
-    } else {
-      open();
-    }
+  Array.prototype.forEach.call(openers, function (btn) {
+    btn.addEventListener('click', function () {
+      if (isOpen()) close();
+      else open(btn);
+    });
   });
 
-  Array.prototype.forEach.call(closeTriggers, function (el) {
+  Array.prototype.forEach.call(closers, function (el) {
     el.addEventListener('click', function () {
       close();
     });
   });
 
-  // 메뉴 링크로 이동할 때는 포커스를 햄버거 버튼으로 되돌리지 않음
+  // 링크로 이동할 때는 버튼으로 포커스를 되돌리지 않음
   Array.prototype.forEach.call(links, function (link) {
     link.addEventListener('click', function () {
       close({ restoreFocus: false });

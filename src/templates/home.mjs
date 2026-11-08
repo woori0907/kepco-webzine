@@ -1,0 +1,167 @@
+// 메인 — ‘이번 달 표지’로 열기
+//   SPOTLIGHT(표지: 키워드 · 호수 · 표지 아트/40초 영상 · 커버스토리)
+//   → KEPCO NOW · LIFE & CULTURE 등 섹션별 편집형 그리드
+//   → 참여(독자 설문 · 뉴스레터)   ※ 퀴즈는 별도 EVENT 페이지
+
+import { esc, flat, each, readLabel } from '../lib/html.mjs';
+import { img } from '../lib/image.mjs';
+import { asset, article } from '../lib/paths.mjs';
+import { icon } from './icons.mjs';
+
+function cover(issue, story) {
+  return `
+    <section class="cover" id="cover" aria-labelledby="cover-title" data-scene="base">
+      <div class="container cover__grid">
+        <div class="cover__text">
+          <h1 class="visually-hidden" id="cover-title">KEPCO 웹진 ${esc(issue.titleKo)} vol.${issue.vol}</h1>
+          <p class="cover__issue"><b>${esc(issue.titleEn)}</b> vol.${issue.vol}</p>
+          <div class="cover__keyword">
+            <p class="cover__keyword-label">이달의 키워드</p>
+            <p class="cover__keyword-word">${esc(issue.keyword)}</p>
+            <p class="cover__keyword-en" lang="en">${esc(issue.keywordEn)}</p>
+          </div>
+          <p class="cover__intro">${esc(issue.intro)}</p>
+          <a class="cover__story" href="${article(story.slug)}">
+            <span class="label">${esc(story.section.name)} · ${esc(story.corner)}</span>
+            <span class="cover__story-title">${esc(flat(story.title))}</span>
+            <span class="cover__story-meta">${esc(story.author.name)} · ${icon('clock')}${readLabel(story)}</span>
+            <span class="cover__story-go">${icon('right')}</span>
+          </a>
+        </div>
+
+        <figure class="cover__media">
+          <div class="cover__frame${issue.coverArt.art ? ` is-${issue.coverArt.art}` : ''}">
+            ${img(issue.coverArt, { eager: true, sizes: '(min-width: 1024px) 700px, 100vw', className: 'cover__art' })}
+            <video class="cover__video" muted loop playsinline hidden
+                   aria-label="${esc(issue.titleKo)} 40초 홍보영상"
+                   data-cover-video data-src="${esc(asset(issue.promoVideo))}"></video>
+            <button class="cover__toggle" type="button" hidden data-video-toggle aria-label="홍보영상 일시정지">
+              <span data-icon-pause>${icon('pause')}</span><span data-icon-play hidden>${icon('play')}</span>
+            </button>
+          </div>
+          <figcaption class="cover__caption">${esc(issue.coverArt.caption)}</figcaption>
+        </figure>
+      </div>
+    </section>`;
+}
+
+/**
+ * 카드
+ *   lg — 사진 16:9 위 + 글 아래 (대표 기사)
+ *   sm — 사진 4:5 왼쪽 + 글 오른쪽 (작은 가로형)
+ */
+function card(a, { size = 'lg', span = 4, rows = 1 }) {
+  const isLg = size === 'lg';
+  const sizes = isLg
+    ? `(min-width: 1024px) ${Math.round((1200 / 12) * span)}px, 100vw`
+    : '(min-width: 768px) 160px, 112px';
+  const style = rows > 1 ? ` style="grid-row: span ${rows}"` : '';
+  return `
+          <article class="card card--${size} span-${span}"${style} data-rise>
+            <a class="card__link" href="${article(a.slug)}">
+              <div class="card__media${a.hero.art ? ` is-${a.hero.art}` : ''}">${img(a.card || a.hero, { sizes })}</div>
+              <div class="card__body">
+                <p class="label">${esc(a.corner)}</p>
+                <h3 class="card__title">${esc(flat(a.title))}</h3>
+                <p class="card__summary">${esc(a.oneLine)}</p>
+                <p class="card__meta"><span>${esc(a.type.replace(/\s*\(.*\)$/, ''))}</span>${icon('clock')}${readLabel(a)}</p>
+              </div>
+            </a>
+          </article>`;
+}
+
+function section(s, bySlug, coverStory, index) {
+  const items = s.items.filter((item) => item.slug !== coverStory);
+  if (!items.length) return '';
+  return `
+    <section class="section home-section scene-${s.id}" id="${s.id}" aria-labelledby="${s.id}-title" data-scene="${s.id}">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-head__num">${String(index + 1).padStart(2, '0')}</p>
+            <h2 class="section-head__title" id="${s.id}-title">${esc(s.name)}</h2>
+            <p class="section-head__desc">${esc(s.desc)}</p>
+          </div>
+        </div>
+        <div class="grid home-grid">
+          ${each(items, (item) => card(bySlug[item.slug], {
+            size: item.size,
+            span: item.span,
+            rows: item.rows || 1,
+          }))}
+        </div>
+      </div>
+    </section>`;
+}
+
+function poll(p, articles) {
+  return `
+          <form class="panel poll span-12" aria-labelledby="poll-title" data-poll="${esc(p.id)}">
+            <p class="label">독자 설문</p>
+            <h3 class="panel__title" id="poll-title">${esc(p.title)}</h3>
+            <p class="panel__desc">${esc(p.desc)}</p>
+            <fieldset class="poll__fieldset">
+              <legend class="visually-hidden">${esc(p.title)}</legend>
+              <div class="choice-list">
+                ${each(articles, (a, i) => `
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-${esc(p.id)}" value="${a.slug}" required>
+                  <span class="choice__mark" aria-hidden="true">${i + 1}</span>
+                  <span><span class="poll__corner">${esc(a.corner)}</span>${esc(flat(a.title))}</span>
+                </label>`)}
+              </div>
+            </fieldset>
+            <button class="btn btn--primary poll__submit" type="submit">투표하기</button>
+            <p class="poll__done" role="status" data-poll-status></p>
+          </form>`;
+}
+
+function newsletter() {
+  return `
+          <section class="panel newsletter span-12" id="newsletter" aria-labelledby="newsletter-title">
+            <div class="newsletter__text">
+              <p class="label">Newsletter</p>
+              <h3 class="panel__title" id="newsletter-title">새 호가 나오면 메일로 알려드릴게요</h3>
+              <p class="panel__desc">매달 1일, 이번 호 기사를 한 통의 메일로 보내드려요.</p>
+            </div>
+            <form class="newsletter__form" novalidate data-newsletter>
+              <div class="field" data-field>
+                <label class="field__label" for="newsletter-email">이메일</label>
+                <input class="field__input" id="newsletter-email" name="email" type="email"
+                       placeholder="name@kepco.co.kr" autocomplete="email" required
+                       aria-describedby="newsletter-help">
+                <p class="field__helper" id="newsletter-help" aria-live="polite"></p>
+              </div>
+              <button class="btn btn--primary newsletter__submit" type="submit">구독하기</button>
+            </form>
+          </section>`;
+}
+
+function participate(issue, articles) {
+  return `
+    <section class="section section--surface" id="participate" aria-labelledby="participate-title" data-scene="surface">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-head__title" id="participate-title">참여</h2>
+            <p class="section-head__desc">이번 호 기사에 한 표를 던지고, 다음 호 소식을 받아 보세요.</p>
+          </div>
+        </div>
+        <div class="grid participate-grid">
+          ${poll(issue.poll, articles)}
+          ${newsletter()}
+        </div>
+      </div>
+    </section>`;
+}
+
+export function homeMain(issue, bySlug) {
+  const articles = issue.sections
+    .flatMap((s) => s.items.map((item) => bySlug[item.slug]))
+    .filter((a) => !a.draft);
+  return [
+    cover(issue, bySlug[issue.coverStory]),
+    `<div id="articles">${issue.sections.map((s, i) => section(s, bySlug, issue.coverStory, i)).join('')}</div>`,
+    participate(issue, articles),
+  ].join('\n');
+}

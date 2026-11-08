@@ -1,145 +1,159 @@
 /* ==========================================================================
-   Design tokens — Figma 변수(Variables)와 1:1 대응
-   Desktop(≥1024) · Tablet(768–1023) · Mobile(<768)
+   Design tokens — 인쇄본과 함께 쓰는 하나의 시스템
+   PC(≥1024) · Tablet(768–1023) · Mobile(<768)
+
+   ▸ 서체 2종   본문·UI = Pretendard / 제목 = 디스플레이 서체 1종
+   ▸ 타입 스케일 제목 40 · 부제 24 · 소제목 22 · 리드 19 · 본문 17 · 캡션 14 (PC)
+                모바일은 비율로 줄이되 본문은 16px 아래로 내리지 않음
+   ▸ 컬러       베이스(흰색·검정·회색 3단계) + 월별 키워드색 1개
+                코너별 색면은 쓰지 않음. 호가 바뀌면 '키워드색' 3줄만 교체
+   ▸ 간격       8px 배수
+   ▸ 그리드     PC 12단 · Tablet 8단 · Mobile 4단
+   ▸ 이미지     16:9(히어로) · 4:5(카드) · 1:1(인물)
    ========================================================================== */
 
 :root {
-  /* Font */
-  --font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
-    system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  /* ---- Font -------------------------------------------------------------- */
+  --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", serif;
 
-  /* Color — text */
-  --text-primary: #121416;
-  --text-secondary: #495057;
-  --text-tertiary: #868e96;
-  --text-link: #0f57d9;
-  --text-on-brand: #ffffff;
-  --text-error: #e5484d;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 
-  /* Color — background */
-  --bg-default: #ffffff;
-  --bg-subtle: #f8f9fa;
-  --bg-muted: #f1f3f5;
-  --bg-brand: #1a6dff;
-  --bg-brand-hover: #0f57d9;
-  --bg-brand-subtle: #ebf3ff;
-  --bg-overlay: rgba(18, 20, 22, 0.4);
+  /* ---- Color: base ------------------------------------------------------- */
+  --color-white: #ffffff;
+  --color-black: #141414;
+  --color-gray-1: #5a5a57;   /* 보조 텍스트 · 캡션 (흰 배경 대비 6.9:1) */
+  --color-gray-2: #dcdcd7;   /* 구분선 · 테두리 */
+  --color-gray-3: #f4f4f0;   /* 박스 · 면 */
 
-  /* Color — border */
-  --border-default: #e9ecef;
-  --border-strong: #adb5bd;
-  --border-brand: #1a6dff;
-  --border-error: #e5484d;
-  --border-width-default: 1px;
+  /* ---- Color: 월별 키워드색 (2026.10 ‘전환’) — 호마다 이 3줄만 바꿉니다 ---- */
+  --color-key: #b5a0c9;      /* 메인 컬러 — 면 · 막대 · 선 · 표지 아트 (흰 배경 글자에는 쓰지 않음) */
+  --color-key-ink: #634a80;  /* 같은 색상의 진한 톤 — 글자 · 링크 · 버튼 (흰 배경 대비 7.4:1) */
+  --color-key-tint: #f1ecf6; /* 옅은 강조 면 (진한 톤 글자 대비 6.4:1) */
 
-  /* Spacing */
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-3xl: 64px;
+  /* ---- Color: 섹션 배경 — 메인 컬러(#b5a0c9, H271)의 색상만 돌려 만든 옅은 톤 3가지 ----
+     세 톤 모두 본문 글자·보조 글자·진한 톤 글자와 대비 AA(4.5:1) 이상 */
+  --color-scene-spotlight: #e8e0f0; /* H271 · 메인 컬러 그대로 — 기획·칼럼 */
+  --color-scene-now: #e1e0f0;       /* H243 · 푸른 보라 — 회사 소식·기술 */
+  --color-scene-life: #f9eef4;      /* H325 · 파스텔 로즈 — 문화·여행·체험 */
 
-  /* Radius */
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  /* 섹션 썸네일 모노톤 색 — 같은 색조의 중간 톤 (S30% · L58%) */
+  --color-tone-spotlight: #9574b4;
+  --color-tone-now: #7774b4;
+  --color-tone-life: #b899ab;       /* 채도를 낮춘 로즈 그레이 */
 
-  /* Layout — Desktop */
-  --layout-columns: 12;
-  --layout-margin: 120px;
-  --layout-gutter: 24px;
-  --layout-section-padding: 120px;
-  --layout-max-width: 1200px;
+  /* ---- Color: 상태 (브랜드 색 아님, 폼 오류에만 사용) ---------------------- */
+  --color-error: #c8322b;
+
+  /* ---- Semantic aliases --------------------------------------------------- */
+  --text: var(--color-black);
+  --text-muted: var(--color-gray-1);
+  --text-on-dark: var(--color-white);
+  --bg: var(--color-white);
+  --surface: var(--color-gray-3);
+  --line: var(--color-gray-2);
+  --line-strong: var(--color-black);
+  --accent: var(--color-key);
+  --accent-ink: var(--color-key-ink);
+  --accent-tint: var(--color-key-tint);
+  --scrim: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.72) 100%);
+  --overlay: rgba(20, 20, 20, 0.48);
+
+  /* ---- Type scale (PC) ---------------------------------------------------- */
+  --fs-display: 88px;   /* 메인 표지 키워드 전용 */
+  --fs-title: 40px;     /* 기사 제목 */
+  --fs-subtitle: 24px;  /* 부제 · 섹션 제목 */
+  --fs-subhead: 22px;   /* 본문 소제목 · 대표 카드 제목 */
+  --fs-lead: 19px;      /* 리드문 · 카드 제목 */
+  --fs-body: 17px;      /* 본문 */
+  --fs-caption: 14px;   /* 캡션 · 메타 · 라벨 */
+
+  --lh-tight: 1.3;
+  --lh-snug: 1.45;
+  --lh-body: 1.75;
+
+  --tracking: -0.02em;                   /* 페이지 전체 자간 (디자인 툴 기준 -20) */
+  --tracking-display: var(--tracking);
+  --tracking-title: var(--tracking);
+  --tracking-label: 0.08em;              /* 예외: 작은 영문 대문자 라벨(COVER STORY 등) */
+
+  /* ---- Spacing: 8px 배수 -------------------------------------------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-15: 120px;
+
+  /* ---- Grid & layout ------------------------------------------------------ */
+  --grid-columns: 12;
+  --gutter: 24px;
+  --margin: 40px;
+  --content-max: 1200px;
+  --measure: 720px;        /* 본문 칼럼 (한 줄 35–45자) */
+  --measure-wide: 1040px;  /* 본문 안의 넓은 사진 */
+  --section-space: var(--space-15);
   --header-height: 72px;
+  --tabbar-height: 64px;
 
-  /* Typography — Desktop */
-  --font-size-display: 56px;
-  --line-height-display: 68px;
-  --letter-spacing-display: -1.12px;
+  /* ---- Image ratio --------------------------------------------------------- */
+  --ratio-hero: 16 / 9;
+  --ratio-card: 4 / 5;
+  --ratio-person: 1 / 1;
 
-  --font-size-h3: 24px;
-  --line-height-h3: 32px;
-  --letter-spacing-h3: -0.24px;
+  /* ---- Shape -------------------------------------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+  --border: 1px;
 
-  --font-size-h4: 20px;
-  --line-height-h4: 28px;
-  --letter-spacing-h4: -0.1px;
-
-  --font-size-body-lg: 18px;
-  --line-height-body-lg: 30px;
-
-  --font-size-body: 16px;
-  --line-height-body: 26px;
-
-  --font-size-caption: 14px;
-  --line-height-caption: 20px;
-
-  /* Logo */
-  --logo-width: 118.869px;
-  --logo-height: 28px;
-  --footer-logo-width: 118.869px;
-  --footer-logo-height: 28px;
-  --footer-gap: 14px;
-
-  /* Motion */
+  /* ---- Motion: 0.2–0.4초, 내용을 가리지 않는 짧은 움직임만 ------------------ */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 160ms;
-  --duration-base: 280ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
 }
 
-/* Tablet · 768 */
+/* ---- Tablet ------------------------------------------------------------- */
 @media (max-width: 1023px) {
   :root {
-    --layout-margin: 40px;
-    --layout-gutter: 20px;
-    --layout-section-padding: 88px;
+    --fs-display: 64px;
+    --fs-title: 36px;
+    --fs-subtitle: 22px;
+    --fs-subhead: 20px;
+    --fs-lead: 18px;
+    --fs-body: 17px;
+    --fs-caption: 14px;
 
-    --font-size-display: 44px;
-    --line-height-display: 54px;
-    --letter-spacing-display: -0.88px;
-
-    --font-size-h3: 22px;
-    --line-height-h3: 30px;
-    --letter-spacing-h3: -0.22px;
-
-    --font-size-h4: 18px;
-    --line-height-h4: 26px;
-    --letter-spacing-h4: -0.09px;
-
-    --font-size-caption: 13px;
-    --line-height-caption: 20px;
+    --grid-columns: 8;
+    --gutter: 24px;
+    --margin: 32px;
+    --section-space: var(--space-12);
   }
 }
 
-/* Mobile · 375 */
+/* ---- Mobile ------------------------------------------------------------- */
 @media (max-width: 767px) {
   :root {
-    --layout-margin: 20px;
-    --layout-gutter: 16px;
-    --layout-section-padding: 64px;
-    --header-height: 60px;
+    --fs-display: 48px;
+    --fs-title: 30px;
+    --fs-subtitle: 20px;
+    --fs-subhead: 19px;
+    --fs-lead: 17px;
+    --fs-body: 16px;      /* 최소값 — 이보다 작게 내리지 않음 */
+    --fs-caption: 13px;
 
-    --font-size-display: 36px;
-    --line-height-display: 44px;
-    --letter-spacing-display: -0.72px;
-
-    --font-size-h3: 20px;
-    --line-height-h3: 28px;
-    --letter-spacing-h3: -0.2px;
-
-    --font-size-body-lg: 17px;
-    --line-height-body-lg: 28px;
-
-    --font-size-body: 15px;
-    --line-height-body: 24px;
-
-    --font-size-caption: 13px;
-    --line-height-caption: 18px;
-
-    --logo-width: 85.701px;
-    --logo-height: 20.187px;
-    --footer-logo-width: 106.133px;
-    --footer-logo-height: 25px;
-    --footer-gap: 8px;
+    --grid-columns: 4;
+    --gutter: 16px;
+    --margin: 24px;
+    --section-space: var(--space-8);
+    --header-height: 56px;
   }
 }

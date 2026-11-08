@@ -2,170 +2,520 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KEPCO Web Magazine</title>
-  <meta name="description" content="KEPCO 웹진 2026 October vol.640">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KEPCO 웹진 2026년 10월호 · 전환</title>
+  <meta name="description" content="기억을, 지식을, 이제는 판단까지 기술에 맡기는 시대. 10월호는 ‘전환’ 앞에서 사람이 지켜야 할 자리와 고객·현장·지역에서 이미 시작된 변화를 담았습니다.">
+
+  <!-- 공유 미리보기: 뉴스레터·메신저용 절대경로 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KEPCO 웹진">
+  <meta property="og:title" content="KEPCO 웹진 2026년 10월호 · 전환">
+  <meta property="og:description" content="기억을, 지식을, 이제는 판단까지 기술에 맡기는 시대. 10월호는 ‘전환’ 앞에서 사람이 지켜야 할 자리와 고객·현장·지역에서 이미 시작된 변화를 담았습니다.">
+  <meta property="og:image" content="https://www.kepco.co.kr/KEPCO_FILE/html/2026_10/assets/images/2026-10/inception/hero.jpg">
+  <meta property="og:url" content="https://www.kepco.co.kr/KEPCO_FILE/html/2026_10/">
+  <meta name="theme-color" content="#ffffff">
 
   <link rel="stylesheet" href="assets/css/fonts.css">
-
-  <script>document.documentElement.classList.add('js');</script>
-
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/home.css">
 
+  <script>document.documentElement.classList.add('js');</script>
   <script src="assets/js/menu.js" defer></script>
-  <script src="assets/js/header.js" defer></script>
+  <script src="assets/js/scroll-ui.js" defer></script>
   <script src="assets/js/smooth-scroll.js" defer></script>
+  <script src="assets/js/rise.js" defer></script>
+  <script src="assets/js/scene-bg.js" defer></script>
+  <script src="assets/js/dir-hover.js" defer></script>
+  <script src="assets/js/cover-video.js" defer></script>
+  <script src="assets/js/participation.js" defer></script>
   <script src="assets/js/newsletter.js" defer></script>
-  <script src="assets/js/reveal.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
 
-  <!-- Header -->
   <header class="site-header" data-header>
     <div class="site-header__inner">
-      <p class="site-header__issue">2026 October vol.640</p>
-
-      <a class="site-header__logo" href="./" aria-label="KEPCO 웹진 홈">
-        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="119" height="28">
+      <p class="site-header__issue"><b>2026.10</b> <span>vol.640</span></p>
+      <a class="site-header__logo" href="index.html" aria-label="KEPCO 웹진 2026년 10월호 홈">
+        <img src="assets/images/logo-kepco.svg" alt="" width="119" height="28">
       </a>
-
-      <button class="menu-button" type="button"
-              aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-menu"
-              data-menu-open>
-        <span class="menu-button__line"></span>
-        <span class="menu-button__line"></span>
-        <span class="menu-button__line"></span>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>목차</span>
       </button>
     </div>
   </header>
 
-  <!-- Menu drawer -->
-  <div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-label="전체 메뉴" hidden data-menu>
+  <div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden data-menu>
     <div class="menu__overlay" data-menu-close></div>
-    <nav class="menu__panel" aria-label="주요 메뉴">
+    <div class="menu__panel">
       <div class="menu__head">
-        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="86" height="20">
-        <button class="menu__close" type="button" aria-label="메뉴 닫기" data-menu-close>
-          <span></span><span></span>
-        </button>
+        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="94" height="22">
+        <button class="menu__close" type="button" aria-label="목차 닫기" data-menu-close><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </div>
-      <ul class="menu__list">
-        <li><a class="menu__link" href="#articles">소개</a></li>
-        <li><a class="menu__link" href="#more">서비스</a></li>
-        <li><a class="menu__link" href="#newsletter">소식</a></li>
-        <li><a class="menu__link" href="#footer">고객센터</a></li>
-      </ul>
-      <p class="menu__issue">2026 October vol.640</p>
-    </nav>
+      <div class="menu__issue">
+        <p class="menu__issue-meta" id="menu-title">2026년 10월호 목차 · vol.640</p>
+        <p class="menu__keyword">전환<span>Transition</span></p>
+      </div>
+      <nav aria-label="이번 호 목차">
+        
+        <section class="menu__section" aria-labelledby="menu-spotlight">
+          <h2 class="menu__section-name" id="menu-spotlight">SPOTLIGHT</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="articles/inception.html">
+                <span class="menu__corner">INCEPTION</span>
+                <span class="menu__title">전환의 시대, 인간의 자리</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/theme-focus.html">
+                <span class="menu__corner">THEME FOCUS</span>
+                <span class="menu__title">익숙한 세계에 다른 가능성을 상상하다</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/perspective.html">
+                <span class="menu__corner">PERSPECTIVE</span>
+                <span class="menu__title">새로운 발견은 직관에서 시작될까, 경험에서 시작될까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/inside.html">
+                <span class="menu__corner">INSIDE</span>
+                <span class="menu__title">국내 최초 전압형 HVDC, 아직 정해지지 않은 길을 만들어 가는 사람들</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/review.html">
+                <span class="menu__corner">RE:VIEW</span>
+                <span class="menu__title">서울의 밤이 달라진 순간</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/scene.html">
+                <span class="menu__corner">SCENE</span>
+                <span class="menu__title">전력 데이터가 안부를 묻는 순간</span>
+              </a>
+            </li>
+            
+          </ol>
+        </section>
+        <section class="menu__section" aria-labelledby="menu-kepco-now">
+          <h2 class="menu__section-name" id="menu-kepco-now">KEPCO NOW</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="articles/issue-now.html">
+                <span class="menu__corner">ISSUE NOW</span>
+                <span class="menu__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/next-wave.html">
+                <span class="menu__corner">NEXT WAVE</span>
+                <span class="menu__title">재생에너지 시대, 배전계통을 더 스마트하게! ADMS</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/on-site.html">
+                <span class="menu__corner">ON SITE</span>
+                <span class="menu__title">갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/kepco-news.html">
+                <span class="menu__corner">KEPCO NEWS</span>
+                <span class="menu__title">이달의 한전 소식</span>
+              </a>
+            </li>
+            
+          </ol>
+        </section>
+        <section class="menu__section" aria-labelledby="menu-life">
+          <h2 class="menu__section-name" id="menu-life">LIFE &amp; CULTURE</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="articles/art-culture.html">
+                <span class="menu__corner">ART &amp; CULTURE</span>
+                <span class="menu__title">사람은 왜 풍경 속에 들어왔을까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/science-lab.html">
+                <span class="menu__corner">SCIENCE LAB</span>
+                <span class="menu__title">눈 오는 날에는 왜 주변이 더 조용하게 느껴질까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/green-life.html">
+                <span class="menu__corner">GREEN LIFE</span>
+                <span class="menu__title">겨울왕국에서 길을 잃다</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/travel-mate.html">
+                <span class="menu__corner">TRAVEL MATE</span>
+                <span class="menu__title">시간이 키운 가을, 안동</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="articles/refresh.html">
+                <span class="menu__corner">REFRESH</span>
+                <span class="menu__title">횡성지사 5인방 래프팅에 흠뻑 빠지다</span>
+              </a>
+            </li>
+            
+            <li class="menu__item">
+              <a class="menu__link" href="articles/event.html">
+                <span class="menu__corner">EVENT</span>
+                <span class="menu__title">10월호 읽고 푸는 퀴즈</span>
+              </a>
+            </li>
+          </ol>
+        </section>
+      </nav>
+      <div class="menu__extra">
+        <a class="btn btn--outline" href="index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>독자 설문</a>
+        <a class="btn btn--outline" href="index.html#newsletter"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>뉴스레터 신청</a>
+        <a class="btn btn--outline" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4"/></svg>지난 호 보기<span class="visually-hidden">(새 창)</span></a>
+      </div>
+    </div>
   </div>
 
-  <main id="main">
-    <!-- Hero -->
-    <section class="hero section" aria-labelledby="hero-title">
-      <div class="container hero__inner" data-reveal>
-        <p class="hero__eyebrow">WEB UI STARTER</p>
-        <h1 class="hero__title" id="hero-title">여기에 첫 화면 제목이 들어갑니다</h1>
-        <p class="hero__desc">프레임의 Responsive 모드(Desktop · Tablet · Mobile)에 따라 글자 크기, 여백, 컬럼 그리드가 함께 바뀝니다. 이 섹션은 확인용 샘플이니 지우고 시작하셔도 돼요.</p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#articles" data-scroll>시작하기</a>
-          <a class="btn btn--secondary" href="#more" data-scroll>더 알아보기</a>
+  <main id="main" tabindex="-1">
+
+    <section class="cover" id="cover" aria-labelledby="cover-title" data-scene="base">
+      <div class="container cover__grid">
+        <div class="cover__text">
+          <h1 class="visually-hidden" id="cover-title">KEPCO 웹진 2026년 10월호 vol.640</h1>
+          <p class="cover__issue"><b>2026 October</b> vol.640</p>
+          <div class="cover__keyword">
+            <p class="cover__keyword-label">이달의 키워드</p>
+            <p class="cover__keyword-word">전환</p>
+            <p class="cover__keyword-en" lang="en">Transition</p>
+          </div>
+          <p class="cover__intro">기억을, 지식을, 이제는 판단까지 기술에 맡기는 시대. 10월호는 ‘전환’ 앞에서 사람이 지켜야 할 자리와 고객·현장·지역에서 이미 시작된 변화를 담았습니다.</p>
+          <a class="cover__story" href="articles/inception.html">
+            <span class="label">SPOTLIGHT · INCEPTION</span>
+            <span class="cover__story-title">전환의 시대, 인간의 자리</span>
+            <span class="cover__story-meta">박영민 · <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</span>
+            <span class="cover__story-go"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+
+        <figure class="cover__media">
+          <div class="cover__frame is-matrix">
+            <img class="cover__art" src="assets/images/2026-10/inception/hero.jpg" srcset="assets/images/2026-10/inception/hero-800.jpg 800w, assets/images/2026-10/inception/hero.jpg 1000w" sizes="(min-width: 1024px) 700px, 100vw" width="1000" height="670" alt="0과 1이 세로로 흘러내리는 10월호 표지 아트" fetchpriority="high" decoding="async">
+            <video class="cover__video" muted loop playsinline hidden
+                   aria-label="2026년 10월호 40초 홍보영상"
+                   data-cover-video data-src="assets/video/promo-2026-10.mp4"></video>
+            <button class="cover__toggle" type="button" hidden data-video-toggle aria-label="홍보영상 일시정지">
+              <span data-icon-pause><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5.5v13M15 5.5v13"/></svg></span><span data-icon-play hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
+            </button>
+          </div>
+          <figcaption class="cover__caption">10월호 표지 아트 · 이 자리에서 40초 홍보영상이 재생됩니다</figcaption>
+        </figure>
+      </div>
+    </section>
+<div id="articles">
+    <section class="section home-section scene-spotlight" id="spotlight" aria-labelledby="spotlight-title" data-scene="spotlight">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-head__num">01</p>
+            <h2 class="section-head__title" id="spotlight-title">SPOTLIGHT</h2>
+            <p class="section-head__desc">이달의 키워드를 여러 시선으로 깊게 들여다봅니다.</p>
+          </div>
+        </div>
+        <div class="grid home-grid">
+          
+          <article class="card card--lg span-8" style="grid-row: span 2" data-rise>
+            <a class="card__link" href="articles/theme-focus.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">THEME FOCUS</p>
+                <h3 class="card__title">익숙한 세계에 다른 가능성을 상상하다</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>테마 기획 칼럼</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--sm span-4" data-rise>
+            <a class="card__link" href="articles/perspective.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">PERSPECTIVE</p>
+                <h3 class="card__title">새로운 발견은 직관에서 시작될까, 경험에서 시작될까?</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>독자 참여형 탐색 콘텐츠</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--sm span-4" data-rise>
+            <a class="card__link" href="articles/inside.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">INSIDE</p>
+                <h3 class="card__title">국내 최초 전압형 HVDC, 아직 정해지지 않은 길을 만들어 가는 사람들</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>직원 참여형 코너</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-6" data-rise>
+            <a class="card__link" href="articles/review.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">RE:VIEW</p>
+                <h3 class="card__title">서울의 밤이 달라진 순간</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>테마 기획 칼럼</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-6" data-rise>
+            <a class="card__link" href="articles/scene.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">SCENE</p>
+                <h3 class="card__title">전력 데이터가 안부를 묻는 순간</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>주요 사업·기술 현장</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
         </div>
       </div>
     </section>
-
-    <!-- Cards: 2 columns -->
-    <section class="section section--flush-top" id="articles" aria-label="주요 기사">
-      <div class="container grid grid--2">
-        <article class="card" data-reveal>
-          <a class="card__link" href="#">
-            <div class="card__image" aria-hidden="true"></div>
-            <div class="card__body">
-              <p class="card__category">카테고리</p>
-              <h2 class="card__title">카드 제목 1</h2>
-              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
-              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
-            </div>
-          </a>
-        </article>
-        <article class="card" data-reveal>
-          <a class="card__link" href="#">
-            <div class="card__image" aria-hidden="true"></div>
-            <div class="card__body">
-              <p class="card__category">카테고리</p>
-              <h2 class="card__title">카드 제목 2</h2>
-              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
-              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <!-- Cards: 3 columns -->
-    <section class="section section--flush-top" id="more" aria-label="더 많은 기사">
-      <div class="container grid grid--3">
-        <article class="card" data-reveal>
-          <a class="card__link" href="#">
-            <div class="card__image" aria-hidden="true"></div>
-            <div class="card__body">
-              <p class="card__category">카테고리</p>
-              <h2 class="card__title">카드 제목 1</h2>
-              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
-              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
-            </div>
-          </a>
-        </article>
-        <article class="card" data-reveal>
-          <a class="card__link" href="#">
-            <div class="card__image" aria-hidden="true"></div>
-            <div class="card__body">
-              <p class="card__category">카테고리</p>
-              <h2 class="card__title">카드 제목 2</h2>
-              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
-              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
-            </div>
-          </a>
-        </article>
-        <article class="card" data-reveal>
-          <a class="card__link" href="#">
-            <div class="card__image" aria-hidden="true"></div>
-            <div class="card__body">
-              <p class="card__category">카테고리</p>
-              <h2 class="card__title">카드 제목 3</h2>
-              <p class="card__desc">카드 설명은 두세 줄 정도로 짧게 요약해 주세요. 길어지면 높이가 자동으로 늘어납니다.</p>
-              <time class="card__date" datetime="2026-11-04">2026.11.04</time>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <!-- Newsletter (Tablet · Mobile 프레임 기준) -->
-    <section class="section section--flush-top newsletter" id="newsletter" aria-labelledby="newsletter-title">
-      <div class="container" data-reveal>
-        <h2 class="newsletter__title" id="newsletter-title">새 소식을 메일로 받아보세요</h2>
-        <form class="newsletter__form" novalidate data-newsletter>
-          <div class="field" data-field>
-            <label class="field__label" for="newsletter-email">이메일</label>
-            <input class="field__input" id="newsletter-email" name="email" type="email"
-                   placeholder="name@example.com" autocomplete="email" required
-                   aria-describedby="newsletter-help">
-            <p class="field__helper" id="newsletter-help" aria-live="polite"></p>
+    <section class="section home-section scene-kepco-now" id="kepco-now" aria-labelledby="kepco-now-title" data-scene="kepco-now">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-head__num">02</p>
+            <h2 class="section-head__title" id="kepco-now-title">KEPCO NOW</h2>
+            <p class="section-head__desc">지금 한전에서 일어나는 이슈 · 기술 · 현장</p>
           </div>
-          <button class="btn btn--primary newsletter__submit" type="submit">구독하기</button>
-        </form>
+        </div>
+        <div class="grid home-grid">
+          
+          <article class="card card--lg span-8" style="grid-row: span 3" data-rise>
+            <a class="card__link" href="articles/issue-now.html">
+              <div class="card__media"><img src="assets/images/2026-10/issue-now/hero.jpg" srcset="assets/images/2026-10/issue-now/hero-800.jpg 800w, assets/images/2026-10/issue-now/hero.jpg 1000w" sizes="(min-width: 1024px) 800px, 100vw" width="1000" height="670" alt="전사 고객서비스 혁신 워크숍에서 참석자들이 회의실 테이블에 둘러앉아 발표를 듣고 있다" loading="lazy" decoding="async" style="object-position:50% 40%"></div>
+              <div class="card__body">
+                <p class="label">ISSUE NOW</p>
+                <h3 class="card__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</h3>
+                <p class="card__summary">영업본부를 고객서비스혁신본부로 바꾼 한전, 9월 혁신 워크숍에서 공개한 비전과 실행 과제.</p>
+                <p class="card__meta"><span>한전 주요 이슈</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 3분</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--sm span-4" data-rise>
+            <a class="card__link" href="articles/next-wave.html">
+              <div class="card__media"><img src="assets/images/2026-10/next-wave/hero.jpg" srcset="assets/images/2026-10/next-wave/hero-800.jpg 800w, assets/images/2026-10/next-wave/hero.jpg 1200w" sizes="(min-width: 768px) 160px, 112px" width="1200" height="609" alt="전력망과 데이터를 뜻하는 아이콘들이 손 위에 떠 있는 디지털 그래픽" loading="lazy" decoding="async" style="object-position:50% 50%"></div>
+              <div class="card__body">
+                <p class="label">NEXT WAVE</p>
+                <h3 class="card__title">재생에너지 시대, 배전계통을 더 스마트하게! ADMS</h3>
+                <p class="card__summary">한전이 자체 개발해 전국에 구축한 ADMS, 보이지 않는 전기의 흐름을 읽고 내일의 계통을 준비한다.</p>
+                <p class="card__meta"><span>신기술·신사업</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 7분</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--sm span-4" data-rise>
+            <a class="card__link" href="articles/on-site.html">
+              <div class="card__media"><img src="assets/images/2026-10/on-site/hero.jpg" srcset="assets/images/2026-10/on-site/hero-800.jpg 800w, assets/images/2026-10/on-site/hero.jpg 1000w" sizes="(min-width: 768px) 160px, 112px" width="1000" height="670" alt="성송면 주민들과 한전 직원들이 현수막을 들고 한전 본사 앞에서 함께 사진을 찍고 있다" loading="lazy" decoding="async" style="object-position:50% 70%"></div>
+              <div class="card__body">
+                <p class="label">ON SITE</p>
+                <h3 class="card__title">갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</h3>
+                <p class="card__summary">반대 현수막 대신 ‘유치 확정’ 현수막이 걸리기까지, 22번의 설명회와 34개 마을의 만장일치.</p>
+                <p class="card__meta"><span>현장 스케치</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 5분</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--sm span-4" data-rise>
+            <a class="card__link" href="articles/kepco-news.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">KEPCO NEWS</p>
+                <h3 class="card__title">이달의 한전 소식</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>한전 뉴스</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section home-section scene-life" id="life" aria-labelledby="life-title" data-scene="life">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-head__num">03</p>
+            <h2 class="section-head__title" id="life-title">LIFE &amp; CULTURE</h2>
+            <p class="section-head__desc">일상을 넓히는 문화 · 과학 · 여행 · 체험</p>
+          </div>
+        </div>
+        <div class="grid home-grid">
+          
+          <article class="card card--lg span-4" data-rise>
+            <a class="card__link" href="articles/art-culture.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">ART &amp; CULTURE</p>
+                <h3 class="card__title">사람은 왜 풍경 속에 들어왔을까?</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>예술·문화</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-4" data-rise>
+            <a class="card__link" href="articles/science-lab.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">SCIENCE LAB</p>
+                <h3 class="card__title">눈 오는 날에는 왜 주변이 더 조용하게 느껴질까?</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>과학</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-4" data-rise>
+            <a class="card__link" href="articles/green-life.html">
+              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
+              <div class="card__body">
+                <p class="label">GREEN LIFE</p>
+                <h3 class="card__title">겨울왕국에서 길을 잃다</h3>
+                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                <p class="card__meta"><span>환경·교양</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-6" data-rise>
+            <a class="card__link" href="articles/travel-mate.html">
+              <div class="card__media"><img src="assets/images/2026-10/travel-mate/hero.jpg" srcset="assets/images/2026-10/travel-mate/hero-800.jpg 800w, assets/images/2026-10/travel-mate/hero.jpg 1000w" sizes="(min-width: 1024px) 600px, 100vw" width="1000" height="670" alt="노을이 물든 새벽, 물안개 낀 호수 위로 놓인 안동 월영교" loading="lazy" decoding="async" style="object-position:50% 60%"></div>
+              <div class="card__body">
+                <p class="label">TRAVEL MATE</p>
+                <h3 class="card__title">시간이 키운 가을, 안동</h3>
+                <p class="card__summary">고택의 마루, 서원의 볕, 강 위의 불씨. 오래 쌓인 시간 위에 요즘의 낭만이 포개진 안동의 가을.</p>
+                <p class="card__meta"><span>직원 참여형 코너</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 5분</p>
+              </div>
+            </a>
+          </article>
+          <article class="card card--lg span-6" data-rise>
+            <a class="card__link" href="articles/refresh.html">
+              <div class="card__media"><img src="assets/images/2026-10/refresh/hero.jpg" srcset="assets/images/2026-10/refresh/hero-800.jpg 800w, assets/images/2026-10/refresh/hero.jpg 1349w" sizes="(min-width: 1024px) 600px, 100vw" width="1349" height="918" alt="구명조끼와 헬멧을 쓴 직원들이 파란 래프팅 보트를 강으로 밀며 물을 튀기고 있다" loading="lazy" decoding="async" style="object-position:50% 55%"></div>
+              <div class="card__body">
+                <p class="label">REFRESH</p>
+                <h3 class="card__title">횡성지사 5인방 래프팅에 흠뻑 빠지다</h3>
+                <p class="card__summary">사무·배전·안전센터 직원이 한 배에 올랐다. 영월 동강 12㎞를 함께 저어 내려간 하루.</p>
+                <p class="card__meta"><span>직원 체험형 코너</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</p>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section></div>
+
+    <section class="section section--surface" id="participate" aria-labelledby="participate-title" data-scene="surface">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-head__title" id="participate-title">참여</h2>
+            <p class="section-head__desc">이번 호 기사에 한 표를 던지고, 다음 호 소식을 받아 보세요.</p>
+          </div>
+        </div>
+        <div class="grid participate-grid">
+          
+          <form class="panel poll span-12" aria-labelledby="poll-title" data-poll="2026-10">
+            <p class="label">독자 설문</p>
+            <h3 class="panel__title" id="poll-title">이번 호에서 가장 좋았던 기사는?</h3>
+            <p class="panel__desc">한 사람이 한 번 투표할 수 있어요. 결과는 다음 호에서 공개하고 기획에 반영해요.</p>
+            <fieldset class="poll__fieldset">
+              <legend class="visually-hidden">이번 호에서 가장 좋았던 기사는?</legend>
+              <div class="choice-list">
+                
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="inception" required>
+                  <span class="choice__mark" aria-hidden="true">1</span>
+                  <span><span class="poll__corner">INCEPTION</span>전환의 시대, 인간의 자리</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="issue-now" required>
+                  <span class="choice__mark" aria-hidden="true">2</span>
+                  <span><span class="poll__corner">ISSUE NOW</span>고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="next-wave" required>
+                  <span class="choice__mark" aria-hidden="true">3</span>
+                  <span><span class="poll__corner">NEXT WAVE</span>재생에너지 시대, 배전계통을 더 스마트하게! ADMS</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="on-site" required>
+                  <span class="choice__mark" aria-hidden="true">4</span>
+                  <span><span class="poll__corner">ON SITE</span>갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="travel-mate" required>
+                  <span class="choice__mark" aria-hidden="true">5</span>
+                  <span><span class="poll__corner">TRAVEL MATE</span>시간이 키운 가을, 안동</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="refresh" required>
+                  <span class="choice__mark" aria-hidden="true">6</span>
+                  <span><span class="poll__corner">REFRESH</span>횡성지사 5인방 래프팅에 흠뻑 빠지다</span>
+                </label>
+              </div>
+            </fieldset>
+            <button class="btn btn--primary poll__submit" type="submit">투표하기</button>
+            <p class="poll__done" role="status" data-poll-status></p>
+          </form>
+          
+          <section class="panel newsletter span-12" id="newsletter" aria-labelledby="newsletter-title">
+            <div class="newsletter__text">
+              <p class="label">Newsletter</p>
+              <h3 class="panel__title" id="newsletter-title">새 호가 나오면 메일로 알려드릴게요</h3>
+              <p class="panel__desc">매달 1일, 이번 호 기사를 한 통의 메일로 보내드려요.</p>
+            </div>
+            <form class="newsletter__form" novalidate data-newsletter>
+              <div class="field" data-field>
+                <label class="field__label" for="newsletter-email">이메일</label>
+                <input class="field__input" id="newsletter-email" name="email" type="email"
+                       placeholder="name@kepco.co.kr" autocomplete="email" required
+                       aria-describedby="newsletter-help">
+                <p class="field__helper" id="newsletter-help" aria-live="polite"></p>
+              </div>
+              <button class="btn btn--primary newsletter__submit" type="submit">구독하기</button>
+            </form>
+          </section>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer" id="footer">
-    <img class="site-footer__logo" src="assets/images/logo-kepco.svg" alt="KEPCO" width="119" height="28">
-    <p class="site-footer__copy">KEPCO Web Magazine © 2026 KEPCO. All Rights Reserved.</p>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="assets/images/logo-kepco.svg" alt="KEPCO" width="102" height="24">
+        <p class="site-footer__issue">웹진 2026년 10월호 · vol.640</p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="index.html#articles">이번 호 기사</a></li>
+        <li><a href="index.html#participate">참여</a></li>
+        <li><a href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener">지난 호<span class="visually-hidden">(새 창)</span></a></li>
+      </ul>
+      <p class="site-footer__copy">© 2026 KEPCO. All Rights Reserved.</p>
+    </div>
   </footer>
+
+  <nav class="tabbar" aria-label="빠른 이동" data-tabbar>
+    <button class="tabbar__item" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg>목차</button>
+    <a class="tabbar__item" href="index.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></svg>이번 호</a>
+    <a class="tabbar__item" href="index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>참여</a>
+    <button class="tabbar__item" type="button" data-scroll-top><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>위로</button>
+  </nav>
 </body>
 </html>

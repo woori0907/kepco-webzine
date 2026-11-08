@@ -1,21 +1,40 @@
 /* ==========================================================================
-   Components — Figma Components 페이지 기준
-   Button · Card · Input(Field)
+   Components — 메인·기사 템플릿이 함께 쓰는 공통 부품
+   Label · Button · Card · Field · Choice · Reaction
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Button — Style(Primary/Secondary/Ghost) × Size(Large/Medium) × State
+   Label — 코너명 · 섹션 라벨 (색면 대신 키워드색 글자로만 구분)
+   -------------------------------------------------------------------------- */
+.label {
+  display: inline-block;
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.label--on-dark {
+  color: var(--text-on-dark);
+}
+
+/* --------------------------------------------------------------------------
+   Button — Primary(검정) · Outline · Key(키워드색)
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: var(--border-width-default) solid transparent;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  font-weight: 700;
+  gap: var(--space-1);
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  border: var(--border) solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-caption);
+  line-height: 1;
+  font-weight: var(--weight-bold);
   white-space: nowrap;
   transition:
     background-color var(--duration-fast) ease,
@@ -23,184 +42,237 @@
     color var(--duration-fast) ease;
 }
 
-/* Primary 버튼은 테두리가 없어 Secondary보다 2px 낮습니다(Figma 50px / 52px). */
 .btn--primary {
-  border: 0;
-  background: var(--bg-brand);
-  color: var(--text-on-brand);
+  background: var(--color-black);
+  color: var(--text-on-dark);
 }
 
 .btn--primary:hover {
-  background: var(--bg-brand-hover);
+  background: var(--accent-ink);
 }
 
-.btn--secondary {
-  background: var(--bg-default);
-  border-color: var(--border-strong);
-  color: var(--text-primary);
+.btn--outline {
+  border-color: var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
 }
 
-.btn--secondary:hover {
-  background: var(--bg-subtle);
+.btn--outline:hover {
+  background: var(--surface);
 }
 
-.btn--ghost {
-  background: transparent;
-  color: var(--text-link);
+.btn--key {
+  background: var(--accent-ink);
+  color: var(--text-on-dark);
 }
 
-.btn--ghost:hover {
-  background: var(--bg-brand-subtle);
-}
-
-.btn--medium {
-  padding: var(--spacing-xs) var(--spacing-md);
+.btn--key:hover {
+  background: var(--color-black);
 }
 
 .btn:disabled,
 .btn[aria-disabled="true"] {
   cursor: not-allowed;
-  background: var(--bg-muted);
-  color: var(--text-tertiary);
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--text-muted);
 }
 
-.btn--secondary:disabled {
-  background: var(--bg-default);
-  border-color: var(--border-default);
+.btn .icon {
+  width: 18px;
+  height: 18px;
 }
 
-.btn--ghost:disabled {
-  background: transparent;
+/* 텍스트 링크형 버튼 */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-bold);
+  color: var(--text);
+  border-bottom: var(--border) solid currentColor;
+  padding-bottom: 2px;
+  transition: color var(--duration-fast) ease;
+}
+
+.link-arrow:hover {
+  color: var(--accent-ink);
+}
+
+.link-arrow .icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* --------------------------------------------------------------------------
-   Card
+   Card — 코너명 · 제목 · 한 줄 요약 · 읽는 시간
+   card--lg: 사진 16:9 위 + 글 아래 / card--sm: 사진 4:5 왼쪽 + 글 오른쪽
    -------------------------------------------------------------------------- */
 .card {
   min-width: 0;
-  background: var(--bg-default);
-  border: var(--border-width-default) solid var(--border-default);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition:
-    transform var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) ease;
-}
-
-.card:hover,
-.card:focus-within {
-  transform: translateY(-4px);
-  border-color: var(--border-strong);
-  box-shadow: 0 12px 32px -12px rgba(18, 20, 22, 0.16);
 }
 
 .card__link {
   display: flex;
   flex-direction: column;
+  gap: var(--space-2);
   height: 100%;
 }
 
-.card__link:focus-visible {
-  outline-offset: -2px;
-  border-radius: var(--radius-lg);
+.card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  aspect-ratio: var(--ratio-card);
 }
 
-.card__image {
-  height: 216px;
-  background: var(--bg-muted);
-  background-size: cover;
-  background-position: center;
+.card--lg .card__media {
+  aspect-ratio: var(--ratio-hero);
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.card__link:hover .card__media img {
+  transform: scale(1.03);
 }
 
 .card__body {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-lg);
-}
-
-.card__category {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
-  color: var(--text-link);
+  gap: var(--space-1);
 }
 
 .card__title {
-  font-size: var(--font-size-h4);
-  line-height: var(--line-height-h4);
-  letter-spacing: var(--letter-spacing-h4);
-  font-weight: 600;
-  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-bold);
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.card--lg .card__title {
+  font-size: var(--fs-subtitle);
+  line-height: var(--lh-tight);
 }
 
 .card__link:hover .card__title {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
-.card__desc {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--text-secondary);
+.card__summary {
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 
-.card__date {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
-  color: var(--text-tertiary);
+.card--lg .card__summary {
+  font-size: var(--fs-body);
+}
+
+.card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+}
+
+.card__meta .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* 작은 가로형 카드(sm) — 4:5 썸네일 왼쪽, 글 오른쪽 */
+.card--sm .card__link {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.card--sm .card__media {
+  flex: 0 0 160px;
+}
+
+.card--sm .card__summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__meta span {
+  margin-right: var(--space-1);
+  padding-right: var(--space-1);
+  border-right: var(--border) solid var(--line);
+}
+
+@media (max-width: 767px) {
+  .card--sm .card__link {
+    gap: var(--space-2);
+  }
+
+  .card--sm .card__media {
+    flex-basis: 112px;
+  }
+
+  .card--sm .card__summary {
+    -webkit-line-clamp: 2;
+  }
 }
 
 /* --------------------------------------------------------------------------
-   Input(Field) — State(Default/Focus/Error/Disabled)
+   Field — 입력창
    -------------------------------------------------------------------------- */
 .field {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--space-1);
 }
 
 .field__label {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
 }
 
 .field__input {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--text-primary);
-  background: var(--bg-default);
-  border: var(--border-width-default) solid var(--border-default);
-  border-radius: var(--radius-md);
+  min-height: 48px;
+  padding: 0 var(--space-2);
+  font-size: var(--fs-body);
+  color: var(--text);
+  background: var(--bg);
+  border: var(--border) solid var(--line);
+  border-bottom-color: var(--line-strong);
+  border-radius: var(--radius-sm);
   outline: none;
-  transition:
-    border-color var(--duration-fast) ease,
-    box-shadow var(--duration-fast) ease;
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
 .field__input::placeholder {
-  color: var(--text-tertiary);
+  color: var(--text-muted);
 }
 
 .field__input:focus {
-  border-color: var(--border-brand);
-  box-shadow: 0 0 0 3px var(--bg-brand-subtle);
-}
-
-.field__input:disabled {
-  background: var(--bg-muted);
-  color: var(--text-tertiary);
-  cursor: not-allowed;
+  border-color: var(--accent-ink);
+  box-shadow: 0 0 0 3px var(--accent-tint);
 }
 
 .field__helper {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
-  color: var(--text-secondary);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
 }
 
 .field__helper:empty {
@@ -208,14 +280,180 @@
 }
 
 .field.is-error .field__input {
-  border-color: var(--border-error);
+  border-color: var(--color-error);
   box-shadow: none;
 }
 
 .field.is-error .field__helper {
-  color: var(--text-error);
+  color: var(--color-error);
 }
 
 .field.is-success .field__helper {
-  color: var(--text-link);
+  color: var(--accent-ink);
+  font-weight: var(--weight-semibold);
+}
+
+/* --------------------------------------------------------------------------
+   Choice — 퀴즈 보기 · 설문 항목
+   -------------------------------------------------------------------------- */
+.choice-list {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  text-align: left;
+  font-size: var(--fs-body);
+  line-height: var(--lh-snug);
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.choice:hover:not(:disabled) {
+  border-color: var(--line-strong);
+}
+
+.choice__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  height: 24px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+}
+
+.choice[aria-pressed="true"],
+.choice[aria-checked="true"] {
+  border-color: var(--line-strong);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.choice[aria-checked="true"] .choice__mark {
+  background: var(--color-black);
+  color: var(--text-on-dark);
+}
+
+.choice.is-correct {
+  border-color: var(--accent-ink);
+  background: var(--accent-tint);
+  box-shadow: inset 0 0 0 1px var(--accent-ink);
+}
+
+.choice.is-correct .choice__mark {
+  border-color: var(--accent-ink);
+  background: var(--accent-ink);
+  color: var(--text-on-dark);
+}
+
+.choice.is-wrong {
+  border-color: var(--color-error);
+  box-shadow: inset 0 0 0 1px var(--color-error);
+}
+
+.choice.is-wrong .choice__mark {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.choice:disabled {
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Reaction — 공감 버튼
+   -------------------------------------------------------------------------- */
+.reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 48px;
+  padding: 0 var(--space-3) 0 var(--space-2);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-semibold);
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.reaction:hover {
+  border-color: var(--line-strong);
+}
+
+.reaction[aria-pressed="true"] {
+  border-color: var(--accent-ink);
+  background: var(--accent-ink);
+  color: var(--text-on-dark);
+}
+
+/* --------------------------------------------------------------------------
+   표지 아트 처리 — 흑백 원화를 키워드색 매트릭스로 (메인 표지 · 커버스토리 공통)
+   -------------------------------------------------------------------------- */
+/* 클래스를 두 번 써서 각 미디어 박스의 기본 배경보다 우선하게 함 */
+.is-matrix.is-matrix {
+  background: var(--color-key);
+}
+
+.is-matrix.is-matrix img {
+  filter: invert(1) grayscale(1) contrast(1.1);
+  mix-blend-mode: multiply;
+}
+
+/* --------------------------------------------------------------------------
+   Panel — 흰 바탕 박스 (설문 · 뉴스레터 · 퀴즈)
+   -------------------------------------------------------------------------- */
+.panel {
+  padding: var(--space-5);
+  background: var(--bg);
+  border: var(--border) solid var(--line);
+}
+
+.panel__title {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--fs-subtitle);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-bold);
+}
+
+.panel__desc {
+  margin-top: var(--space-1);
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+@media (max-width: 767px) {
+  .panel {
+    padding: var(--space-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   이미지 자리 — 사진이 아직 없을 때 회색 박스 (각 미디어 박스의 비율을 그대로 채움)
+   -------------------------------------------------------------------------- */
+.ph {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  /* 반투명 회색: 흰 바탕에서도, 섹션 배경색 위에서도 보이도록 */
+  background: rgba(20, 20, 20, 0.12);
+}
+
+.card__meta {
+  flex-wrap: wrap;
+  white-space: nowrap;
 }
