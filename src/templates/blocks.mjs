@@ -6,8 +6,8 @@
 //   h2          소제목(목차에 들어감)  소제목
 //   h3          작은 소제목            중제목
 //   quote       풀쿼트                 인용구(발췌)
-//   figure      사진 + 캡션            사진·캡션
-//   gallery     사진 2~3장 묶음        사진 조판
+//   images      이미지 박스 1·2·3칸    사진 조판 (1단·2단·3단)
+//   figure      사진 1장 (도표·원본비율) 도표·인포그래픽
 //   data        데이터 박스            숫자 강조 박스
 //   glossary    용어 박스              용어 해설
 //   people      인물 + 한마디(1:1)     미니 인터뷰
@@ -51,17 +51,36 @@ const renderers = {
       ${when(b.caption, () => `<figcaption>${esc(b.caption)}</figcaption>`)}
     </figure>`,
 
-  gallery: (b) => `
-    <figure class="b-gallery is-wide cols-${b.items.length}">
-      <div class="b-gallery__grid">
-        ${each(b.items, (item) => `
-        <figure class="b-gallery__item ${ratioClass(item.ratio || b.ratio || '4:5')}">
-          <div class="b-figure__media">${img(item, { sizes: '(min-width: 768px) 520px, 100vw' })}</div>
+  // 이미지 박스 — 1칸 · 2칸 · 3칸 템플릿 (사용법: guide/index.html)
+  //   cols     1 | 2 | 3                 (기본: 사진 개수)
+  //   ratio    '16:9' | '4:5' | '1:1' | 'natural'   (기본: 1칸 16:9, 2·3칸 4:5)
+  //   wide     true면 본문보다 넓게 1040px  (기본: 1칸 false, 2·3칸 true)
+  //   items    [{ src, alt, caption?, position?, ratio? }]  — src가 없으면 회색 박스
+  //   caption  사진 묶음 전체에 붙는 공통 캡션
+  images: (b) => {
+    const items = b.items || [];
+    const cols = b.cols || Math.min(items.length, 3) || 1;
+    if (![1, 2, 3].includes(cols)) throw new Error(`images: cols는 1·2·3 중 하나여야 합니다 (${cols})`);
+    const ratio = b.ratio || (cols === 1 ? '16:9' : '4:5');
+    const wide = b.wide ?? cols > 1;
+    const width = wide ? 1040 : 720;
+    const sizes = cols === 1
+      ? (wide ? WIDE_SIZES : BODY_SIZES)
+      : `(min-width: 768px) ${Math.round(width / cols)}px, 50vw`;
+    // 칸 수보다 사진이 적으면 남은 칸은 회색 박스로 자리만 잡음
+    const filled = items.concat(Array.from({ length: Math.max(0, cols - items.length) }, () => ({})));
+    return `
+    <figure class="b-images cols-${cols}${wide ? ' is-wide' : ''}">
+      <div class="b-images__grid">
+        ${each(filled, (item) => `
+        <figure class="b-images__item ${ratioClass(item.ratio || ratio)}">
+          <div class="b-figure__media">${img(item, { sizes })}</div>
           ${when(item.caption, () => `<figcaption>${esc(item.caption)}</figcaption>`)}
         </figure>`)}
       </div>
-      ${when(b.caption, () => `<figcaption>${esc(b.caption)}</figcaption>`)}
-    </figure>`,
+      ${when(b.caption, () => `<figcaption class="b-images__caption">${esc(b.caption)}</figcaption>`)}
+    </figure>`;
+  },
 
   data: (b) => `
     <aside class="b-data" aria-label="${esc(b.title)}">

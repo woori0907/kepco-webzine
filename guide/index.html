@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>컴포넌트 가이드 · 이미지 박스 | KEPCO 웹진</title>
+  <meta name="description" content="기사 본문 이미지 박스(1·2·3칸) 사용법">
+
+  <!-- 공유 미리보기: 뉴스레터·메신저용 절대경로 -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="KEPCO 웹진">
+  <meta property="og:title" content="컴포넌트 가이드 · 이미지 박스 | KEPCO 웹진">
+  <meta property="og:description" content="기사 본문 이미지 박스(1·2·3칸) 사용법">
+  <meta property="og:image" content="https://www.kepco.co.kr/KEPCO_FILE/html/2026_10/assets/images/2026-10/inception/hero.jpg">
+  <meta property="og:url" content="https://www.kepco.co.kr/KEPCO_FILE/html/2026_10/guide/index.html">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/article.css">
+  <link rel="stylesheet" href="../assets/css/guide.css">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="../assets/js/menu.js" defer></script>
+  <script src="../assets/js/scroll-ui.js" defer></script>
+  <script src="../assets/js/smooth-scroll.js" defer></script>
+  <script src="../assets/js/lightbox.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <p class="site-header__issue"><b>2026.10</b> <span>vol.640</span></p>
+      <a class="site-header__logo" href="../index.html" aria-label="KEPCO 웹진 2026년 10월호 홈">
+        <img src="../assets/images/logo-kepco.svg" alt="" width="119" height="28">
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>목차</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden data-menu>
+    <div class="menu__overlay" data-menu-close></div>
+    <div class="menu__panel">
+      <div class="menu__head">
+        <img src="../assets/images/logo-kepco.svg" alt="KEPCO" width="94" height="22">
+        <button class="menu__close" type="button" aria-label="목차 닫기" data-menu-close><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="menu__issue">
+        <p class="menu__issue-meta" id="menu-title">2026년 10월호 목차 · vol.640</p>
+        <p class="menu__keyword">전환<span>Transition</span></p>
+      </div>
+      <nav aria-label="이번 호 목차">
+        
+        <section class="menu__section" aria-labelledby="menu-spotlight">
+          <h2 class="menu__section-name" id="menu-spotlight">SPOTLIGHT</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/inception.html">
+                <span class="menu__corner">INCEPTION</span>
+                <span class="visually-hidden">: 전환의 시대, 인간의 자리</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/theme-focus.html">
+                <span class="menu__corner">THEME FOCUS</span>
+                <span class="visually-hidden">: 익숙한 세계에 다른 가능성을 상상하다</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/perspective.html">
+                <span class="menu__corner">PERSPECTIVE</span>
+                <span class="visually-hidden">: 새로운 발견은 직관에서 시작될까, 경험에서 시작될까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/inside.html">
+                <span class="menu__corner">INSIDE</span>
+                <span class="visually-hidden">: 국내 최초 전압형 HVDC, 아직 정해지지 않은 길을 만들어 가는 사람들</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/review.html">
+                <span class="menu__corner">RE:VIEW</span>
+                <span class="visually-hidden">: 서울의 밤이 달라진 순간</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/scene.html">
+                <span class="menu__corner">SCENE</span>
+                <span class="visually-hidden">: 전력 데이터가 안부를 묻는 순간</span>
+              </a>
+            </li>
+            
+          </ol>
+        </section>
+        <section class="menu__section" aria-labelledby="menu-kepco-now">
+          <h2 class="menu__section-name" id="menu-kepco-now">KEPCO NOW</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/issue-now.html">
+                <span class="menu__corner">ISSUE NOW</span>
+                <span class="visually-hidden">: 고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/next-wave.html">
+                <span class="menu__corner">NEXT WAVE</span>
+                <span class="visually-hidden">: 재생에너지 시대, 배전계통을 더 스마트하게! ADMS</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/on-site.html">
+                <span class="menu__corner">ON SITE</span>
+                <span class="visually-hidden">: 갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/kepco-news.html">
+                <span class="menu__corner">KEPCO NEWS</span>
+                <span class="visually-hidden">: 이달의 한전 소식</span>
+              </a>
+            </li>
+            
+          </ol>
+        </section>
+        <section class="menu__section" aria-labelledby="menu-life">
+          <h2 class="menu__section-name" id="menu-life">LIFE &amp; CULTURE</h2>
+          <ol class="menu__list">
+            
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/art-culture.html">
+                <span class="menu__corner">ART &amp; CULTURE</span>
+                <span class="visually-hidden">: 사람은 왜 풍경 속에 들어왔을까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/science-lab.html">
+                <span class="menu__corner">SCIENCE LAB</span>
+                <span class="visually-hidden">: 눈 오는 날에는 왜 주변이 더 조용하게 느껴질까?</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/green-life.html">
+                <span class="menu__corner">GREEN LIFE</span>
+                <span class="visually-hidden">: 겨울왕국에서 길을 잃다</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/travel-mate.html">
+                <span class="menu__corner">TRAVEL MATE</span>
+                <span class="visually-hidden">: 시간이 키운 가을, 안동</span>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/refresh.html">
+                <span class="menu__corner">REFRESH</span>
+                <span class="visually-hidden">: 횡성지사 5인방 래프팅에 흠뻑 빠지다</span>
+              </a>
+            </li>
+            
+            <li class="menu__item">
+              <a class="menu__link" href="../articles/event.html">
+                <span class="menu__corner">EVENT</span>
+                <span class="visually-hidden">: 10월호 읽고 푸는 퀴즈</span>
+              </a>
+            </li>
+          </ol>
+        </section>
+      </nav>
+      <div class="menu__extra">
+        <a class="btn btn--outline" href="../index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>독자 설문</a>
+        <a class="btn btn--outline" href="../index.html#newsletter"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>뉴스레터 신청</a>
+        <a class="btn btn--outline" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5M19 5l-8 8M18 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4"/></svg>지난 호 보기<span class="visually-hidden">(새 창)</span></a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+
+  <div class="guide">
+    <header class="guide__head container">
+      <p class="label">Component Guide</p>
+      <h1 class="guide__title">이미지 박스 — 1칸 · 2칸 · 3칸</h1>
+      <p class="guide__desc">기사 원고 파일(<code>src/content/articles/코너.mjs</code>)의 <code>body</code> 배열에 아래 코드를 붙여 넣고 <code>node src/build.mjs</code>를 실행하면 됩니다. 사진은 <code>assets/images/2026-10/</code>에 넣고, 원본은 <code>tools/optimize-images.ps1</code>로 줄여 주세요.</p>
+    </header>
+
+    <section class="guide__options container" aria-labelledby="guide-options">
+      <h2 class="guide__h2" id="guide-options">옵션</h2>
+      <div class="guide__table-wrap">
+        <table class="guide__table">
+          <thead><tr><th scope="col">이름</th><th scope="col">값</th><th scope="col">설명</th></tr></thead>
+          <tbody>
+            <tr><td><code>type</code></td><td><code>&#39;images&#39;</code></td><td>이미지 박스 블록</td></tr><tr><td><code>cols</code></td><td><code>1 · 2 · 3</code></td><td>칸 수. 생략하면 사진 개수</td></tr><tr><td><code>ratio</code></td><td><code>&#39;16:9&#39; · &#39;4:5&#39; · &#39;1:1&#39; · &#39;natural&#39;</code></td><td>사진 비율. 생략하면 1칸 16:9, 2·3칸 4:5</td></tr><tr><td><code>wide</code></td><td><code>true · false</code></td><td>본문(720px)보다 넓게(1040px). 생략하면 1칸 false, 2·3칸 true</td></tr><tr><td><code>items[].src</code></td><td><code>&#39;폴더/파일이름&#39;</code></td><td>assets/images/2026-10/ 아래 경로, 확장자(.jpg) 없이. 없으면 회색 박스</td></tr><tr><td><code>items[].alt</code></td><td><code>&#39;사진 설명&#39;</code></td><td>화면낭독기용 설명. src가 있으면 꼭 적어야 빌드됩니다</td></tr><tr><td><code>items[].caption</code></td><td><code>&#39;캡션&#39;</code></td><td>사진 아래 캡션 (선택)</td></tr><tr><td><code>items[].position</code></td><td><code>&#39;50% 30%&#39;</code></td><td>잘릴 때 보여줄 위치 (선택, 가로% 세로%)</td></tr><tr><td><code>items[].ratio</code></td><td><code>위와 같음</code></td><td>이 사진만 다른 비율로 (선택)</td></tr><tr><td><code>caption</code></td><td><code>&#39;공통 캡션&#39;</code></td><td>사진 묶음 전체 아래에 붙는 캡션 (선택)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    
+    <section class="guide__example" aria-labelledby="guide-ex-1">
+      <div class="container guide__example-head">
+        <p class="guide__num">01</p>
+        <h2 class="guide__h2" id="guide-ex-1">1칸 · 본문 폭 · 16:9</h2>
+        <p class="guide__note">가장 기본형. cols와 ratio를 생략하면 이 모양이 됩니다.</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-1">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-hero">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/on-site/committee.jpg" width="900" height="503" alt="입지선정위원회 회의장에서 위원들이 회의 테이블에 둘러앉아 있다" loading="lazy" decoding="async"></div>
+          <figcaption>사진 한 장에 붙는 캡션.</figcaption>
+        </figure>
+      </div>
+      
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 1,
+  items: [
+    {
+      src: &#39;on-site/committee&#39;,
+      alt: &#39;입지선정위원회 회의장에서 위원들이 회의 테이블에 둘러앉아 있다&#39;,
+      caption: &#39;사진 한 장에 붙는 캡션.&#39;,
+    },
+  ],
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-2">
+      <div class="container guide__example-head">
+        <p class="guide__num">02</p>
+        <h2 class="guide__h2" id="guide-ex-2">1칸 · 넓게(1040px)</h2>
+        <p class="guide__note">현장감 있는 풍경·행사 사진을 크게 보여줄 때. wide: true</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-1 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-hero">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/julbul.jpg" width="794" height="446" alt="밤하늘 아래 부용대 절벽을 따라 붉은 불씨가 흩날린다" loading="lazy" decoding="async"></div>
+          <figcaption>넓은 사진의 캡션.</figcaption>
+        </figure>
+      </div>
+      
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 1,
+  wide: true,
+  items: [
+    { src: &#39;travel-mate/julbul&#39;, alt: &#39;밤하늘 아래 부용대 절벽을 따라 붉은 불씨가 흩날린다&#39;, caption: &#39;넓은 사진의 캡션.&#39; },
+  ],
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-3">
+      <div class="container guide__example-head">
+        <p class="guide__num">03</p>
+        <h2 class="guide__h2" id="guide-ex-3">1칸 · 원본 비율</h2>
+        <p class="guide__note">도표·인포그래픽처럼 잘리면 안 되는 이미지. ratio: &#39;natural&#39;</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-1">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-natural">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/next-wave/platform.jpg" width="712" height="821" alt="ADMS 오픈 플랫폼과 연결된 업무 서비스 도식" loading="lazy" decoding="async"></div>
+          <figcaption>도표는 원본 비율 그대로.</figcaption>
+        </figure>
+      </div>
+      
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 1,
+  ratio: &#39;natural&#39;,
+  items: [
+    { src: &#39;next-wave/platform&#39;, alt: &#39;ADMS 오픈 플랫폼과 연결된 업무 서비스 도식&#39;, caption: &#39;도표는 원본 비율 그대로.&#39; },
+  ],
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-4">
+      <div class="container guide__example-head">
+        <p class="guide__num">04</p>
+        <h2 class="guide__h2" id="guide-ex-4">2칸 · 4:5</h2>
+        <p class="guide__note">2칸 기본형. 자동으로 넓게(1040px) 배치됩니다. 사진마다 캡션을 달 수 있습니다.</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-2 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/refresh/paddle.jpg" srcset="../assets/images/2026-10/refresh/paddle-800.jpg 800w, ../assets/images/2026-10/refresh/paddle.jpg 995w" sizes="(min-width: 768px) 520px, 50vw" width="995" height="1009" alt="보트 위의 직원들이 급류 앞에서 노를 젓고 있다" loading="lazy" decoding="async"></div>
+          <figcaption>왼쪽 사진 캡션.</figcaption>
+        </figure>
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/refresh/swim.jpg" srcset="../assets/images/2026-10/refresh/swim-800.jpg 800w, ../assets/images/2026-10/refresh/swim.jpg 996w" sizes="(min-width: 768px) 520px, 50vw" width="996" height="676" alt="구명조끼를 입은 직원들이 강물에 나란히 떠 있다" loading="lazy" decoding="async"></div>
+          <figcaption>오른쪽 사진 캡션.</figcaption>
+        </figure>
+      </div>
+      
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 2,
+  items: [
+    { src: &#39;refresh/paddle&#39;, alt: &#39;보트 위의 직원들이 급류 앞에서 노를 젓고 있다&#39;, caption: &#39;왼쪽 사진 캡션.&#39; },
+    { src: &#39;refresh/swim&#39;, alt: &#39;구명조끼를 입은 직원들이 강물에 나란히 떠 있다&#39;, caption: &#39;오른쪽 사진 캡션.&#39; },
+  ],
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-5">
+      <div class="container guide__example-head">
+        <p class="guide__num">05</p>
+        <h2 class="guide__h2" id="guide-ex-5">2칸 · 1:1 · 공통 캡션</h2>
+        <p class="guide__note">정사각형으로 맞추고, 두 장을 묶는 캡션 하나만 달 때. ratio: &#39;1:1&#39; + caption</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-2 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-person">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/issue-now/oath.jpg" width="700" height="599" alt="직원 대표들이 고객서비스 혁신 다짐 선서문을 읽고 있다" loading="lazy" decoding="async"></div>
+          
+        </figure>
+        <figure class="b-images__item is-person">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/issue-now/session.jpg" width="800" height="558" alt="워크숍 화면 앞에서 참석자들이 발표를 듣고 있다" loading="lazy" decoding="async"></div>
+          
+        </figure>
+      </div>
+      <figcaption class="b-images__caption">두 장을 묶는 공통 캡션.</figcaption>
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 2,
+  ratio: &#39;1:1&#39;,
+  items: [
+    { src: &#39;issue-now/oath&#39;, alt: &#39;직원 대표들이 고객서비스 혁신 다짐 선서문을 읽고 있다&#39; },
+    { src: &#39;issue-now/session&#39;, alt: &#39;워크숍 화면 앞에서 참석자들이 발표를 듣고 있다&#39; },
+  ],
+  caption: &#39;두 장을 묶는 공통 캡션.&#39;,
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-6">
+      <div class="container guide__example-head">
+        <p class="guide__num">06</p>
+        <h2 class="guide__h2" id="guide-ex-6">3칸 · 4:5</h2>
+        <p class="guide__note">3칸 기본형. 모바일에서는 첫 장이 16:9로 크게, 나머지 두 장이 나란히 놓입니다.</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-3 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/manhyujeong.jpg" width="600" height="370" alt="단풍 든 숲속 정자로 이어지는 외나무다리" loading="lazy" decoding="async" style="object-position:60% 50%"></div>
+          <figcaption>첫째 캡션.</figcaption>
+        </figure>
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/nongam.jpg" width="600" height="547" alt="가을빛 산자락 아래 강물과 마주한 바위 절벽" loading="lazy" decoding="async"></div>
+          <figcaption>둘째 캡션.</figcaption>
+        </figure>
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/cheongnyang.jpg" width="600" height="547" alt="전망대에서 단풍 든 청량산을 바라보는 여행자" loading="lazy" decoding="async"></div>
+          <figcaption>셋째 캡션.</figcaption>
+        </figure>
+      </div>
+      
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 3,
+  items: [
+    {
+      src: &#39;travel-mate/manhyujeong&#39;,
+      alt: &#39;단풍 든 숲속 정자로 이어지는 외나무다리&#39;,
+      caption: &#39;첫째 캡션.&#39;,
+      position: &#39;60% 50%&#39;,
+    },
+    { src: &#39;travel-mate/nongam&#39;, alt: &#39;가을빛 산자락 아래 강물과 마주한 바위 절벽&#39;, caption: &#39;둘째 캡션.&#39; },
+    { src: &#39;travel-mate/cheongnyang&#39;, alt: &#39;전망대에서 단풍 든 청량산을 바라보는 여행자&#39;, caption: &#39;셋째 캡션.&#39; },
+  ],
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-7">
+      <div class="container guide__example-head">
+        <p class="guide__num">07</p>
+        <h2 class="guide__h2" id="guide-ex-7">3칸 · 16:9 · 공통 캡션</h2>
+        <p class="guide__note">가로 사진 세 장을 한 줄로. ratio: &#39;16:9&#39;</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-3 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-hero">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/dosan.jpg" srcset="../assets/images/2026-10/travel-mate/dosan-800.jpg 800w, ../assets/images/2026-10/travel-mate/dosan.jpg 1200w" sizes="(min-width: 768px) 347px, 50vw" width="1200" height="877" alt="단풍 든 나무 사이로 기와지붕이 늘어선 도산서원" loading="lazy" decoding="async"></div>
+          
+        </figure>
+        <figure class="b-images__item is-hero">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/hero.jpg" srcset="../assets/images/2026-10/travel-mate/hero-800.jpg 800w, ../assets/images/2026-10/travel-mate/hero.jpg 1000w" sizes="(min-width: 768px) 347px, 50vw" width="1000" height="670" alt="물안개 낀 호수 위로 놓인 월영교" loading="lazy" decoding="async"></div>
+          
+        </figure>
+        <figure class="b-images__item is-hero">
+          <div class="b-figure__media"><img src="../assets/images/2026-10/travel-mate/julbul.jpg" width="794" height="446" alt="부용대 절벽을 따라 흩날리는 선유줄불놀이 불씨" loading="lazy" decoding="async"></div>
+          
+        </figure>
+      </div>
+      <figcaption class="b-images__caption">세 장을 묶는 공통 캡션.</figcaption>
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{
+  type: &#39;images&#39;,
+  cols: 3,
+  ratio: &#39;16:9&#39;,
+  items: [
+    { src: &#39;travel-mate/dosan&#39;, alt: &#39;단풍 든 나무 사이로 기와지붕이 늘어선 도산서원&#39; },
+    { src: &#39;travel-mate/hero&#39;, alt: &#39;물안개 낀 호수 위로 놓인 월영교&#39; },
+    { src: &#39;travel-mate/julbul&#39;, alt: &#39;부용대 절벽을 따라 흩날리는 선유줄불놀이 불씨&#39; },
+  ],
+  caption: &#39;세 장을 묶는 공통 캡션.&#39;,
+},</code></pre>
+      </div>
+    </section>
+    <section class="guide__example" aria-labelledby="guide-ex-8">
+      <div class="container guide__example-head">
+        <p class="guide__num">08</p>
+        <h2 class="guide__h2" id="guide-ex-8">자리 잡기 · 사진 없이</h2>
+        <p class="guide__note">사진이 아직 없을 때. items를 비우거나 src를 빼면 칸 수만큼 회색 박스가 놓입니다.</p>
+      </div>
+      <div class="a-body guide__preview">
+        
+    <figure class="b-images cols-3 is-wide">
+      <div class="b-images__grid">
+        
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><span class="ph" aria-hidden="true"></span></div>
+          
+        </figure>
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><span class="ph" aria-hidden="true"></span></div>
+          
+        </figure>
+        <figure class="b-images__item is-card">
+          <div class="b-figure__media"><span class="ph" aria-hidden="true"></span></div>
+          
+        </figure>
+      </div>
+      <figcaption class="b-images__caption">사진이 들어오면 items에 src와 alt를 채웁니다.</figcaption>
+    </figure>
+      </div>
+      <div class="container">
+        <pre class="guide__code"><code>{ type: &#39;images&#39;, cols: 3, caption: &#39;사진이 들어오면 items에 src와 alt를 채웁니다.&#39; },</code></pre>
+      </div>
+    </section>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="../assets/images/logo-kepco.svg" alt="KEPCO" width="102" height="24">
+        <p class="site-footer__issue">웹진 2026년 10월호 · vol.640</p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="../index.html#articles">이번 호 기사</a></li>
+        <li><a href="../index.html#participate">참여</a></li>
+        <li><a href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener">지난 호<span class="visually-hidden">(새 창)</span></a></li>
+      </ul>
+      <p class="site-footer__copy">© 2026 KEPCO. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <nav class="tabbar" aria-label="빠른 이동" data-tabbar>
+    <button class="tabbar__item" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg>목차</button>
+    <a class="tabbar__item" href="../index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></svg>이번 호</a>
+    <a class="tabbar__item" href="../index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>참여</a>
+    <button class="tabbar__item" type="button" data-scroll-top><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>위로</button>
+  </nav>
+</body>
+</html>

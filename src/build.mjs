@@ -20,6 +20,7 @@ import { page } from './templates/layout.mjs';
 import { homeMain } from './templates/home.mjs';
 import { articleMain } from './templates/article.mjs';
 import { eventMain } from './templates/event.mjs';
+import { guideMain } from './templates/guide.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 configureImages({ root: ROOT, dir: `assets/images/${issue.imageFolder}` });
@@ -60,11 +61,12 @@ function withDraftDefaults(a) {
       { ...h2 },
       { type: 'skeleton', lines: 5 },
       { type: 'skeleton', lines: 4 },
-      { type: 'figure', alt: '', caption: '사진 설명이 들어갈 자리' },
+      { type: 'images', cols: 1, items: [{ caption: '사진 설명이 들어갈 자리' }] },
       { type: 'skeleton', lines: 5 },
       { type: 'quote', text: '본문에서 고른 인용구가 들어갈 자리' },
       { ...h2 },
       { type: 'skeleton', lines: 6 },
+      { type: 'images', cols: 2, caption: '사진 2장 묶음에 붙는 공통 캡션 자리' },
       { type: 'skeleton', lines: 3 },
     ],
     ...a,
@@ -138,7 +140,7 @@ articles.forEach((a, i) => {
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
     styles: ['article.css'],
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'participation.js'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'participation.js'],
     main: articleMain(a, next, issue),
   }));
 });
@@ -152,8 +154,22 @@ write(articleFile(EVENT_SLUG), page({
   description: issue.quiz.desc,
   ogImage: issue.coverArt.src,
   styles: ['event.css'],
-  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'participation.js'],
+  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'event-entry.js', 'participation.js'], // event-entry가 먼저: ?reset 초기화 뒤에 퀴즈가 읽도록
   main: eventMain(issue, bySlug),
+}));
+
+// 퍼블리셔용 컴포넌트 가이드 (목차에는 넣지 않음)
+mkdirSync(path.join(ROOT, 'guide'), { recursive: true });
+setRoot('../');
+write('guide/index.html', page({
+  ...common,
+  file: 'guide/index.html',
+  title: `컴포넌트 가이드 · 이미지 박스 | KEPCO 웹진`,
+  description: '기사 본문 이미지 박스(1·2·3칸) 사용법',
+  ogImage: issue.coverArt.src,
+  styles: ['article.css', 'guide.css'],
+  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'lightbox.js'],
+  main: guideMain(issue),
 }));
 
 console.log(`완료: ${written.length}개 페이지`);
@@ -165,3 +181,4 @@ for (const s of issue.sections) {
   }
 }
 console.log(`    ${articleFile(EVENT_SLUG)}  ${issue.quiz.corner}`);
+console.log('  guide/index.html  컴포넌트 가이드');

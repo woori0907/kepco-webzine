@@ -1,6 +1,6 @@
 /* ==========================================================================
    Components — 메인·기사 템플릿이 함께 쓰는 공통 부품
-   Label · Button · Card · Field · Choice · Reaction
+   Label · Button · Card · Field · Choice · Reaction · Panel · 이미지 자리(.ph)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -16,12 +16,8 @@
   color: var(--accent-ink);
 }
 
-.label--on-dark {
-  color: var(--text-on-dark);
-}
-
 /* --------------------------------------------------------------------------
-   Button — Primary(검정) · Outline · Key(키워드색)
+   Button — Primary(검정) · Outline
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -61,15 +57,6 @@
   background: var(--surface);
 }
 
-.btn--key {
-  background: var(--accent-ink);
-  color: var(--text-on-dark);
-}
-
-.btn--key:hover {
-  background: var(--color-black);
-}
-
 .btn:disabled,
 .btn[aria-disabled="true"] {
   cursor: not-allowed;
@@ -81,28 +68,6 @@
 .btn .icon {
   width: 18px;
   height: 18px;
-}
-
-/* 텍스트 링크형 버튼 */
-.link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: var(--fs-caption);
-  font-weight: var(--weight-bold);
-  color: var(--text);
-  border-bottom: var(--border) solid currentColor;
-  padding-bottom: 2px;
-  transition: color var(--duration-fast) ease;
-}
-
-.link-arrow:hover {
-  color: var(--accent-ink);
-}
-
-.link-arrow .icon {
-  width: 16px;
-  height: 16px;
 }
 
 /* --------------------------------------------------------------------------
@@ -421,7 +386,6 @@
 
 .panel__title {
   margin-top: var(--space-1);
-  font-family: var(--font-display);
   font-size: var(--fs-subtitle);
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-title);

@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Component guide — guide/index.html (퍼블리셔용, 목차에는 없음)
+   ========================================================================== */
+
+.guide {
+  padding-bottom: var(--space-12);
+}
+
+.guide__head {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-5);
+}
+
+.guide__title {
+  margin-top: var(--space-1);
+  font-size: var(--fs-title);
+  line-height: var(--lh-tight);
+  font-weight: var(--weight-bold);
+}
+
+.guide__desc {
+  margin-top: var(--space-2);
+  max-width: var(--measure);
+  color: var(--text-muted);
+}
+
+.guide code {
+  font-family: Consolas, "D2Coding", "Courier New", monospace;
+  font-size: 0.9em;
+  letter-spacing: 0;
+}
+
+.guide__desc code,
+.guide__table code {
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.guide__h2 {
+  font-size: var(--fs-subtitle);
+  line-height: var(--lh-tight);
+  font-weight: var(--weight-bold);
+}
+
+.guide__options {
+  padding-bottom: var(--space-8);
+}
+
+.guide__table-wrap {
+  margin-top: var(--space-3);
+  overflow-x: auto;
+}
+
+.guide__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-caption);
+  line-height: 1.55;
+}
+
+.guide__table th,
+.guide__table td {
+  padding: var(--space-1) var(--space-2) var(--space-1) 0;
+  border-bottom: var(--border) solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guide__table th {
+  border-bottom-color: var(--line-strong);
+  font-weight: var(--weight-bold);
+}
+
+.guide__table td:first-child,
+.guide__table td:nth-child(2) {
+  white-space: nowrap;
+}
+
+.guide__example {
+  padding-block: var(--space-8);
+  border-top: var(--border) solid var(--line);
+}
+
+.guide__num {
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-bold);
+  color: var(--accent-ink);
+}
+
+.guide__note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+
+.guide__preview {
+  padding-block: var(--space-4) var(--space-4);
+}
+
+.guide__preview > :first-child {
+  margin-top: 0 !important;
+}
+
+.guide__code {
+  margin: 0 auto;
+  max-width: var(--measure-wide);
+  padding: var(--space-3);
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  background: var(--color-black);
+  color: #f1ecf6;
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  tab-size: 2;
+}

@@ -35,7 +35,8 @@
 
   // ---- 퀴즈 ----------------------------------------------------------------
   each(document.querySelectorAll('[data-quiz]'), function (quiz) {
-    var id = 'quiz:' + quiz.getAttribute('data-quiz');
+    var quizId = quiz.getAttribute('data-quiz');
+    var id = 'quiz:' + quizId;
     var items = quiz.querySelectorAll('[data-quiz-item]');
     var result = quiz.querySelector('[data-quiz-result]');
     var score = quiz.querySelector('[data-score]');
@@ -73,13 +74,14 @@
       each(items, function (item, i) {
         if (answers[i] === Number(item.getAttribute('data-answer'))) correct += 1;
       });
-      var state = load(id) || {};
+      // 응모 여부는 응모 폼(event-entry.js)이 남긴 기록으로 판단
+      var entered = !!load('entry:' + quizId);
       result.hidden = false;
-      if (state.entered) {
+      if (entered && correct === total) {
         score.textContent = total + '문제 모두 정답! 응모가 접수되었어요.';
         enter.hidden = true;
       } else if (correct === total) {
-        score.textContent = total + '문제 모두 정답이에요. 응모해 보세요!';
+        score.textContent = total + '문제 모두 정답이에요. 아래 응모 폼을 작성해 주세요!';
         enter.hidden = false;
       } else {
         score.textContent = total + '문제 중 ' + correct + '문제를 맞혔어요. 다시 풀어 볼까요?';
@@ -101,12 +103,8 @@
       if (answers[i] !== undefined) mark(item, i, answers[i]);
     });
 
-    enter.addEventListener('click', function () {
-      save(id, { answers: answers, entered: true });
-      summary();
-      score.setAttribute('tabindex', '-1');
-      score.focus();
-    });
+    // 응모가 접수되면 결과 문구를 다시 계산
+    window.addEventListener('webzine:entry', summary);
 
     reset.addEventListener('click', function () {
       answers = {};

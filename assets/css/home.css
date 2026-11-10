@@ -56,7 +56,6 @@
 
 .cover__keyword-word {
   margin-top: var(--space-1);
-  font-family: var(--font-display);
   font-size: var(--fs-display);
   line-height: 1;
   letter-spacing: var(--tracking-display);

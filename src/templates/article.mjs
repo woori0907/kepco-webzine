@@ -13,13 +13,14 @@ function hero(a) {
   return `
     <header class="a-hero">
       <div class="a-hero__media${art}">
-        ${img(a.hero, { eager: true, sizes: '(min-width: 1280px) 1200px, 100vw' })}
+        ${img(a.hero, { eager: true, sizes: '100vw' })}
       </div>
       <div class="a-hero__text">
         <p class="label a-hero__label">${esc(a.section.name)} · ${esc(a.corner)}</p>
         <h1 class="a-hero__title">${lines(a.title)}</h1>
         ${when(a.dek, () => `<p class="a-hero__dek">${esc(a.dek)}</p>`)}
       </div>
+      <a class="a-hero__scroll" href="#article-body" data-scroll-duration="1100" aria-label="본문으로 이동">${icon('down')}</a>
     </header>`;
 }
 
@@ -49,11 +50,13 @@ function summary(a) {
 function toc(a) {
   if (a.sections.length < 3) return '';
   return `
-    <nav class="a-toc" aria-labelledby="toc-title">
-      <h2 class="b-box-label" id="toc-title">이 기사의 순서</h2>
-      <ol>
-        ${each(a.sections, (s) => `<li><a href="#${s.id}">${esc(s.text)}</a></li>`)}
-      </ol>
+    <nav class="a-toc" aria-labelledby="toc-title" data-toc>
+      <div class="a-toc__inner">
+        <h2 class="b-box-label" id="toc-title">이 기사의 순서</h2>
+        <ol>
+          ${each(a.sections, (s) => `<li><a href="#${s.id}">${esc(s.text)}</a></li>`)}
+        </ol>
+      </div>
     </nav>`;
 }
 
@@ -134,7 +137,7 @@ export function articleMain(a, next, issue) {
   <div class="progress" aria-hidden="true"><div class="progress__bar" data-progress></div></div>
   <article class="article" data-article>
     ${hero(a)}
-    <div class="a-body">
+    <div class="a-body" id="article-body">
       ${meta(a, issue)}
       ${summary(a)}
       ${toc(a)}

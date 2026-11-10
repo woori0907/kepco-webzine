@@ -25,7 +25,7 @@ function menuItem(a, currentSlug) {
             <li class="menu__item">
               <a class="menu__link" href="${article(a.slug)}"${a.slug === currentSlug ? ' aria-current="page"' : ''}>
                 <span class="menu__corner">${esc(a.corner)}</span>
-                <span class="menu__title">${esc(flat(a.title))}</span>
+                <span class="visually-hidden">: ${esc(flat(a.title))}</span>
               </a>
             </li>`;
 }
