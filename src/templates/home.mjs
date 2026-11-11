@@ -70,9 +70,72 @@ function card(a, { size = 'lg', span = 4, rows = 1 }) {
           </article>`;
 }
 
+/**
+ * 캐러셀 (섹션의 layout: 'carousel')
+ *   위: 큰 기사 하나 (slick fade로 자동 전환)
+ *   아래: 섹션의 모든 기사 썸네일 — 지금 보이는 기사는 원래 색 + 진행 막대, 누르면 그 기사로 전환
+ *   동작은 assets/js/now-carousel.js. 스크립트가 없으면 첫 기사만 크게 보이고 썸네일은 기사 링크로 동작합니다.
+ */
+function carousel(s, articles) {
+  const n = articles.length;
+  return `
+        <div class="now" data-now aria-roledescription="carousel" aria-label="${esc(s.name)} 기사">
+          <div class="now__stage" data-now-stage>
+            ${each(articles, (a, i) => `
+            <article class="now-feature" aria-roledescription="slide" aria-label="${i + 1} / ${n}">
+              <a class="now-feature__link" href="${article(a.slug)}">
+                <div class="now-feature__media">${img(a.card || a.hero, { sizes: '(min-width: 1024px) 800px, 100vw', eager: i === 0 })}</div>
+                <div class="now-feature__body">
+                  <p class="label">${esc(a.corner)}</p>
+                  <h3 class="now-feature__title">${esc(flat(a.title))}</h3>
+                  <p class="now-feature__summary">${esc(a.oneLine)}</p>
+                  <p class="card__meta"><span>${esc(a.type.replace(/\s*\(.*\)$/, ''))}</span>${icon('clock')}${readLabel(a)}</p>
+                  <span class="now-feature__go">기사 읽기${icon('right')}</span>
+                </div>
+              </a>
+            </article>`)}
+          </div>
+
+          <div class="now__bar">
+            <p class="now__count" aria-hidden="true"><b data-now-current>1</b> / ${n}</p>
+            <div class="now__controls" hidden data-now-controls>
+              <button class="now__btn" type="button" data-now-prev aria-label="이전 기사">${icon('left')}</button>
+              <button class="now__btn" type="button" data-now-toggle aria-label="자동 넘김 멈춤">
+                <span data-icon-pause>${icon('pause')}</span><span data-icon-play hidden>${icon('play')}</span>
+              </button>
+              <button class="now__btn" type="button" data-now-next aria-label="다음 기사">${icon('right')}</button>
+            </div>
+          </div>
+
+          <ol class="now__thumbs" data-now-thumbs>
+            ${each(articles, (a, i) => `
+            <li class="now-thumb${i === 0 ? ' is-active' : ''}">
+              <a class="now-thumb__link" href="${article(a.slug)}" data-now-go="${i}"${i === 0 ? ' aria-current="true"' : ''}>
+                <span class="now-thumb__media">${img(a.card || a.hero, { sizes: '(min-width: 768px) 120px, 96px' })}</span>
+                <span class="now-thumb__body">
+                  <span class="label">${esc(a.corner)}</span>
+                  <span class="now-thumb__title">${esc(flat(a.title))}</span>
+                </span>
+                <span class="now-thumb__progress" aria-hidden="true"></span>
+              </a>
+            </li>`)}
+          </ol>
+        </div>`;
+}
+
 function section(s, bySlug, coverStory, index) {
   const items = s.items.filter((item) => item.slug !== coverStory);
   if (!items.length) return '';
+  const body = s.layout === 'carousel'
+    ? carousel(s, items.map((item) => bySlug[item.slug]))
+    : `
+        <div class="grid home-grid">
+          ${each(items, (item) => card(bySlug[item.slug], {
+            size: item.size,
+            span: item.span,
+            rows: item.rows || 1,
+          }))}
+        </div>`;
   return `
     <section class="section home-section scene-${s.id}" id="${s.id}" aria-labelledby="${s.id}-title" data-scene="${s.id}">
       <div class="container">
@@ -82,14 +145,7 @@ function section(s, bySlug, coverStory, index) {
             <h2 class="section-head__title" id="${s.id}-title">${esc(s.name)}</h2>
             <p class="section-head__desc">${esc(s.desc)}</p>
           </div>
-        </div>
-        <div class="grid home-grid">
-          ${each(items, (item) => card(bySlug[item.slug], {
-            size: item.size,
-            span: item.span,
-            rows: item.rows || 1,
-          }))}
-        </div>
+        </div>${body}
       </div>
     </section>`;
 }

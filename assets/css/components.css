@@ -336,33 +336,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Reaction — 공감 버튼
-   -------------------------------------------------------------------------- */
-.reaction {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  min-height: 48px;
-  padding: 0 var(--space-3) 0 var(--space-2);
-  border: var(--border) solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--bg);
-  font-size: var(--fs-caption);
-  font-weight: var(--weight-semibold);
-  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease, color var(--duration-fast) ease;
-}
-
-.reaction:hover {
-  border-color: var(--line-strong);
-}
-
-.reaction[aria-pressed="true"] {
-  border-color: var(--accent-ink);
-  background: var(--accent-ink);
-  color: var(--text-on-dark);
-}
-
-/* --------------------------------------------------------------------------
    표지 아트 처리 — 흑백 원화를 키워드색 매트릭스로 (메인 표지 · 커버스토리 공통)
    -------------------------------------------------------------------------- */
 /* 클래스를 두 번 써서 각 미디어 박스의 기본 배경보다 우선하게 함 */

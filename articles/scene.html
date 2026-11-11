@@ -30,7 +30,6 @@
   <script src="../assets/js/progress.js" defer></script>
   <script src="../assets/js/toc-spy.js" defer></script>
   <script src="../assets/js/lightbox.js" defer></script>
-  <script src="../assets/js/participation.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -41,8 +40,8 @@
       <a class="site-header__logo" href="../index.html" aria-label="KEPCO 웹진 2026년 10월호 홈">
         <img src="../assets/images/logo-kepco.svg" alt="" width="119" height="28">
       </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>목차</span>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open aria-label="목차">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
       </button>
     </div>
   </header>
@@ -287,49 +286,6 @@
       
     </div>
   </article>
-
-  <section class="a-end" aria-label="기사를 다 읽었다면">
-    <div class="container a-end__inner">
-      
-    <section class="a-react" aria-labelledby="react-title" data-reactions="scene">
-      <h2 class="a-end__title" id="react-title">이 기사, 어땠나요?</h2>
-      <p class="a-end__desc">공감은 익명으로 모여 매달 코너별 반응 리포트에 반영돼요.</p>
-      <div class="a-react__buttons">
-        <button class="reaction" type="button" aria-pressed="false" data-reaction="like"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/></svg>공감돼요</button>
-        <button class="reaction" type="button" aria-pressed="false" data-reaction="useful"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg>유익해요</button>
-        <button class="reaction" type="button" aria-pressed="false" data-reaction="cheer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 11v9H4v-9zM7 11l4-8a2 2 0 0 1 2 2v4h5.4a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.2 20H7"/></svg>응원해요</button>
-        <button class="reaction a-react__copy" type="button" data-copy-link><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg>링크 복사</button>
-      </div>
-      <p class="a-react__status" role="status" data-react-status></p>
-    </section>
-      
-    <nav class="a-next" aria-label="다음 기사">
-      <a class="a-next__link" href="../articles/issue-now.html">
-        <div class="a-next__media"><img src="../assets/images/2026-10/issue-now/hero.jpg" srcset="../assets/images/2026-10/issue-now/hero-800.jpg 800w, ../assets/images/2026-10/issue-now/hero.jpg 1000w" sizes="(min-width: 768px) 560px, 100vw" width="1000" height="670" alt="전사 고객서비스 혁신 워크숍에서 참석자들이 회의실 테이블에 둘러앉아 발표를 듣고 있다" loading="lazy" decoding="async" style="object-position:50% 40%"></div>
-        <div class="a-next__text">
-          <p class="a-next__kicker">다음 기사 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p>
-          <p class="label">ISSUE NOW</p>
-          <p class="a-next__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</p>
-          <p class="a-next__summary">영업본부를 고객서비스혁신본부로 바꾼 한전, 9월 혁신 워크숍에서 공개한 비전과 실행 과제.</p>
-          <p class="card__meta"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 3분</p>
-        </div>
-      </a>
-    </nav>
-      <div class="a-end__more">
-        
-        
-    <a class="a-quiz" href="../articles/event.html">
-      <span class="a-quiz__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.5v.7M12 17.2v.1"/></svg></span>
-      <span class="a-quiz__text">
-        <span class="label">EVENT</span>
-        <span class="a-quiz__title">10월호 읽고 푸는 퀴즈</span>
-        <span class="a-quiz__desc">이번 호 기사 속에 정답이 있어요. 풀고 응모해 보세요.</span>
-      </span>
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-      </div>
-    </div>
-  </section>
   </main>
 
   <footer class="site-footer">
@@ -352,6 +308,15 @@
     <a class="tabbar__item" href="../index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></svg>이번 호</a>
     <a class="tabbar__item" href="../index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>참여</a>
     <button class="tabbar__item" type="button" data-scroll-top><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>위로</button>
+  </nav>
+
+  <nav class="remote" aria-label="리모컨" data-remote>
+    <ul>
+      <li><a class="remote__btn" href="../articles/issue-now.html" aria-label="다음 기사: ISSUE NOW 고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’" data-tip="다음 · ISSUE NOW"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="../articles/review.html" aria-label="이전 기사: RE:VIEW 서울의 밤이 달라진 순간" data-tip="이전 · RE:VIEW"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a></li>
+      <li><button class="remote__btn" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></li>
+    </ul>
   </nav>
 </body>
 </html>

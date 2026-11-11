@@ -1,5 +1,5 @@
 /**
- * 참여 기능 — 퀴즈 · 설문 · 공감 · 링크 복사
+ * 참여 기능 — 퀴즈 · 설문
  *
  * 서버 없이도 화면과 인터랙션이 모두 동작하도록 만들었습니다.
  * 응답은 지금은 이 브라우저(localStorage)에만 저장됩니다.
@@ -163,55 +163,5 @@
       save(id, { vote: picked.value });
       lock(picked.value);
     });
-  });
-
-  // ---- 공감 ----------------------------------------------------------------
-  each(document.querySelectorAll('[data-reactions]'), function (box) {
-    var id = 'react:' + box.getAttribute('data-reactions');
-    var status = box.querySelector('[data-react-status]');
-    var picked = load(id) || {};
-    var LABEL = { like: '공감돼요', useful: '유익해요', cheer: '응원해요' };
-
-    each(box.querySelectorAll('[data-reaction]'), function (btn) {
-      var key = btn.getAttribute('data-reaction');
-      btn.setAttribute('aria-pressed', picked[key] ? 'true' : 'false');
-
-      btn.addEventListener('click', function () {
-        picked[key] = !picked[key];
-        btn.setAttribute('aria-pressed', picked[key] ? 'true' : 'false');
-        save(id, picked);
-        status.textContent = picked[key] ? '‘' + LABEL[key] + '’를 남겼어요. 고마워요!' : '‘' + LABEL[key] + '’를 취소했어요.';
-      });
-    });
-
-    // ---- 링크 복사 (외부 공유 서비스 없이 사내에서도 동작) ----
-    var copy = box.querySelector('[data-copy-link]');
-    if (copy) {
-      copy.addEventListener('click', function () {
-        var url = window.location.href.split('#')[0];
-        var done = function () { status.textContent = '기사 링크를 복사했어요.'; };
-        var fail = function () { status.textContent = '복사하지 못했어요. 주소창의 링크를 이용해 주세요.'; };
-
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(url).then(done, fail);
-          return;
-        }
-        // 구형 브라우저·file:// 환경 대비
-        var field = document.createElement('textarea');
-        field.value = url;
-        field.setAttribute('readonly', '');
-        field.style.position = 'fixed';
-        field.style.opacity = '0';
-        document.body.appendChild(field);
-        field.select();
-        try {
-          if (document.execCommand('copy')) done();
-          else fail();
-        } catch (e) {
-          fail();
-        }
-        document.body.removeChild(field);
-      });
-    }
   });
 })();

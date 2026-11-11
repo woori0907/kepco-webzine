@@ -124,13 +124,12 @@ write('index.html', page({
   title: `KEPCO 웹진 ${issue.titleKo} · ${issue.keyword}`,
   description: issue.intro,
   ogImage: issue.coverArt.src,
-  styles: ['home.css'],
-  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dir-hover.js', 'cover-video.js', 'participation.js', 'newsletter.js'],
+  styles: ['vendor/slick/slick.css', 'home.css'],
+  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dir-hover.js', 'vendor/jquery/jquery.min.js', 'vendor/slick/slick.min.js', 'now-carousel.js', 'cover-video.js', 'participation.js', 'newsletter.js'],
   main: homeMain(issue, bySlug),
 }));
 
-articles.forEach((a, i) => {
-  const next = articles[(i + 1) % articles.length];
+articles.forEach((a) => {
   setRoot('../');
   write(articleFile(a.slug), page({
     ...common,
@@ -140,8 +139,8 @@ articles.forEach((a, i) => {
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
     styles: ['article.css'],
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'participation.js'],
-    main: articleMain(a, next, issue),
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js'],
+    main: articleMain(a, issue),
   }));
 });
 

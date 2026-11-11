@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/vendor/slick/slick.css">
   <link rel="stylesheet" href="assets/css/home.css">
 
   <script>document.documentElement.classList.add('js');</script>
@@ -29,6 +30,9 @@
   <script src="assets/js/rise.js" defer></script>
   <script src="assets/js/scene-bg.js" defer></script>
   <script src="assets/js/dir-hover.js" defer></script>
+  <script src="assets/vendor/jquery/jquery.min.js" defer></script>
+  <script src="assets/vendor/slick/slick.min.js" defer></script>
+  <script src="assets/js/now-carousel.js" defer></script>
   <script src="assets/js/cover-video.js" defer></script>
   <script src="assets/js/participation.js" defer></script>
   <script src="assets/js/newsletter.js" defer></script>
@@ -42,8 +46,8 @@
       <a class="site-header__logo" href="index.html" aria-label="KEPCO 웹진 2026년 10월호 홈">
         <img src="assets/images/logo-kepco.svg" alt="" width="119" height="28">
       </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>목차</span>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open aria-label="목차">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
       </button>
     </div>
   </header>
@@ -301,52 +305,113 @@
             <p class="section-head__desc">지금 한전에서 일어나는 이슈 · 기술 · 현장</p>
           </div>
         </div>
-        <div class="grid home-grid">
-          
-          <article class="card card--lg span-8" style="grid-row: span 3" data-rise>
-            <a class="card__link" href="articles/issue-now.html">
-              <div class="card__media"><img src="assets/images/2026-10/issue-now/hero.jpg" srcset="assets/images/2026-10/issue-now/hero-800.jpg 800w, assets/images/2026-10/issue-now/hero.jpg 1000w" sizes="(min-width: 1024px) 800px, 100vw" width="1000" height="670" alt="전사 고객서비스 혁신 워크숍에서 참석자들이 회의실 테이블에 둘러앉아 발표를 듣고 있다" loading="lazy" decoding="async" style="object-position:50% 40%"></div>
-              <div class="card__body">
-                <p class="label">ISSUE NOW</p>
-                <h3 class="card__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</h3>
-                <p class="card__summary">영업본부를 고객서비스혁신본부로 바꾼 한전, 9월 혁신 워크숍에서 공개한 비전과 실행 과제.</p>
-                <p class="card__meta"><span>한전 주요 이슈</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 3분</p>
-              </div>
-            </a>
-          </article>
-          <article class="card card--sm span-4" data-rise>
-            <a class="card__link" href="articles/next-wave.html">
-              <div class="card__media"><img src="assets/images/2026-10/next-wave/hero.jpg" srcset="assets/images/2026-10/next-wave/hero-800.jpg 800w, assets/images/2026-10/next-wave/hero.jpg 1200w" sizes="(min-width: 768px) 160px, 112px" width="1200" height="609" alt="전력망과 데이터를 뜻하는 아이콘들이 손 위에 떠 있는 디지털 그래픽" loading="lazy" decoding="async" style="object-position:50% 50%"></div>
-              <div class="card__body">
-                <p class="label">NEXT WAVE</p>
-                <h3 class="card__title">재생에너지 시대, 배전계통을 더 스마트하게! ADMS</h3>
-                <p class="card__summary">한전이 자체 개발해 전국에 구축한 ADMS, 보이지 않는 전기의 흐름을 읽고 내일의 계통을 준비한다.</p>
-                <p class="card__meta"><span>신기술·신사업</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 7분</p>
-              </div>
-            </a>
-          </article>
-          <article class="card card--sm span-4" data-rise>
-            <a class="card__link" href="articles/on-site.html">
-              <div class="card__media"><img src="assets/images/2026-10/on-site/hero.jpg" srcset="assets/images/2026-10/on-site/hero-800.jpg 800w, assets/images/2026-10/on-site/hero.jpg 1000w" sizes="(min-width: 768px) 160px, 112px" width="1000" height="670" alt="성송면 주민들과 한전 직원들이 현수막을 들고 한전 본사 앞에서 함께 사진을 찍고 있다" loading="lazy" decoding="async" style="object-position:50% 70%"></div>
-              <div class="card__body">
-                <p class="label">ON SITE</p>
-                <h3 class="card__title">갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</h3>
-                <p class="card__summary">반대 현수막 대신 ‘유치 확정’ 현수막이 걸리기까지, 22번의 설명회와 34개 마을의 만장일치.</p>
-                <p class="card__meta"><span>현장 스케치</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 5분</p>
-              </div>
-            </a>
-          </article>
-          <article class="card card--sm span-4" data-rise>
-            <a class="card__link" href="articles/kepco-news.html">
-              <div class="card__media"><span class="ph" aria-hidden="true"></span></div>
-              <div class="card__body">
-                <p class="label">KEPCO NEWS</p>
-                <h3 class="card__title">이달의 한전 소식</h3>
-                <p class="card__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
-                <p class="card__meta"><span>한전 뉴스</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
-              </div>
-            </a>
-          </article>
+        <div class="now" data-now aria-roledescription="carousel" aria-label="KEPCO NOW 기사">
+          <div class="now__stage" data-now-stage>
+            
+            <article class="now-feature" aria-roledescription="slide" aria-label="1 / 4">
+              <a class="now-feature__link" href="articles/issue-now.html">
+                <div class="now-feature__media"><img src="assets/images/2026-10/issue-now/hero.jpg" srcset="assets/images/2026-10/issue-now/hero-800.jpg 800w, assets/images/2026-10/issue-now/hero.jpg 1000w" sizes="(min-width: 1024px) 800px, 100vw" width="1000" height="670" alt="전사 고객서비스 혁신 워크숍에서 참석자들이 회의실 테이블에 둘러앉아 발표를 듣고 있다" fetchpriority="high" decoding="async" style="object-position:50% 40%"></div>
+                <div class="now-feature__body">
+                  <p class="label">ISSUE NOW</p>
+                  <h3 class="now-feature__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</h3>
+                  <p class="now-feature__summary">영업본부를 고객서비스혁신본부로 바꾼 한전, 9월 혁신 워크숍에서 공개한 비전과 실행 과제.</p>
+                  <p class="card__meta"><span>한전 주요 이슈</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 3분</p>
+                  <span class="now-feature__go">기사 읽기<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </div>
+              </a>
+            </article>
+            <article class="now-feature" aria-roledescription="slide" aria-label="2 / 4">
+              <a class="now-feature__link" href="articles/next-wave.html">
+                <div class="now-feature__media"><img src="assets/images/2026-10/next-wave/hero.jpg" srcset="assets/images/2026-10/next-wave/hero-800.jpg 800w, assets/images/2026-10/next-wave/hero.jpg 1200w" sizes="(min-width: 1024px) 800px, 100vw" width="1200" height="609" alt="전력망과 데이터를 뜻하는 아이콘들이 손 위에 떠 있는 디지털 그래픽" loading="lazy" decoding="async" style="object-position:50% 50%"></div>
+                <div class="now-feature__body">
+                  <p class="label">NEXT WAVE</p>
+                  <h3 class="now-feature__title">재생에너지 시대, 배전계통을 더 스마트하게! ADMS</h3>
+                  <p class="now-feature__summary">한전이 자체 개발해 전국에 구축한 ADMS, 보이지 않는 전기의 흐름을 읽고 내일의 계통을 준비한다.</p>
+                  <p class="card__meta"><span>신기술·신사업</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 7분</p>
+                  <span class="now-feature__go">기사 읽기<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </div>
+              </a>
+            </article>
+            <article class="now-feature" aria-roledescription="slide" aria-label="3 / 4">
+              <a class="now-feature__link" href="articles/on-site.html">
+                <div class="now-feature__media"><img src="assets/images/2026-10/on-site/hero.jpg" srcset="assets/images/2026-10/on-site/hero-800.jpg 800w, assets/images/2026-10/on-site/hero.jpg 1000w" sizes="(min-width: 1024px) 800px, 100vw" width="1000" height="670" alt="성송면 주민들과 한전 직원들이 현수막을 들고 한전 본사 앞에서 함께 사진을 찍고 있다" loading="lazy" decoding="async" style="object-position:50% 70%"></div>
+                <div class="now-feature__body">
+                  <p class="label">ON SITE</p>
+                  <h3 class="now-feature__title">갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</h3>
+                  <p class="now-feature__summary">반대 현수막 대신 ‘유치 확정’ 현수막이 걸리기까지, 22번의 설명회와 34개 마을의 만장일치.</p>
+                  <p class="card__meta"><span>현장 스케치</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 5분</p>
+                  <span class="now-feature__go">기사 읽기<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </div>
+              </a>
+            </article>
+            <article class="now-feature" aria-roledescription="slide" aria-label="4 / 4">
+              <a class="now-feature__link" href="articles/kepco-news.html">
+                <div class="now-feature__media"><span class="ph" aria-hidden="true"></span></div>
+                <div class="now-feature__body">
+                  <p class="label">KEPCO NEWS</p>
+                  <h3 class="now-feature__title">이달의 한전 소식</h3>
+                  <p class="now-feature__summary">원고가 들어오면 한 줄 요약이 들어갑니다.</p>
+                  <p class="card__meta"><span>한전 뉴스</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</p>
+                  <span class="now-feature__go">기사 읽기<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="now__bar">
+            <p class="now__count" aria-hidden="true"><b data-now-current>1</b> / 4</p>
+            <div class="now__controls" hidden data-now-controls>
+              <button class="now__btn" type="button" data-now-prev aria-label="이전 기사"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+              <button class="now__btn" type="button" data-now-toggle aria-label="자동 넘김 멈춤">
+                <span data-icon-pause><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5.5v13M15 5.5v13"/></svg></span><span data-icon-play hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
+              </button>
+              <button class="now__btn" type="button" data-now-next aria-label="다음 기사"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            </div>
+          </div>
+
+          <ol class="now__thumbs" data-now-thumbs>
+            
+            <li class="now-thumb is-active">
+              <a class="now-thumb__link" href="articles/issue-now.html" data-now-go="0" aria-current="true">
+                <span class="now-thumb__media"><img src="assets/images/2026-10/issue-now/hero.jpg" srcset="assets/images/2026-10/issue-now/hero-800.jpg 800w, assets/images/2026-10/issue-now/hero.jpg 1000w" sizes="(min-width: 768px) 120px, 96px" width="1000" height="670" alt="전사 고객서비스 혁신 워크숍에서 참석자들이 회의실 테이블에 둘러앉아 발표를 듣고 있다" loading="lazy" decoding="async" style="object-position:50% 40%"></span>
+                <span class="now-thumb__body">
+                  <span class="label">ISSUE NOW</span>
+                  <span class="now-thumb__title">고객 최우선 가치를 실현하는 ‘100% 전력서비스 기업’</span>
+                </span>
+                <span class="now-thumb__progress" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li class="now-thumb">
+              <a class="now-thumb__link" href="articles/next-wave.html" data-now-go="1">
+                <span class="now-thumb__media"><img src="assets/images/2026-10/next-wave/hero.jpg" srcset="assets/images/2026-10/next-wave/hero-800.jpg 800w, assets/images/2026-10/next-wave/hero.jpg 1200w" sizes="(min-width: 768px) 120px, 96px" width="1200" height="609" alt="전력망과 데이터를 뜻하는 아이콘들이 손 위에 떠 있는 디지털 그래픽" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+                <span class="now-thumb__body">
+                  <span class="label">NEXT WAVE</span>
+                  <span class="now-thumb__title">재생에너지 시대, 배전계통을 더 스마트하게! ADMS</span>
+                </span>
+                <span class="now-thumb__progress" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li class="now-thumb">
+              <a class="now-thumb__link" href="articles/on-site.html" data-now-go="2">
+                <span class="now-thumb__media"><img src="assets/images/2026-10/on-site/hero.jpg" srcset="assets/images/2026-10/on-site/hero-800.jpg 800w, assets/images/2026-10/on-site/hero.jpg 1000w" sizes="(min-width: 768px) 120px, 96px" width="1000" height="670" alt="성송면 주민들과 한전 직원들이 현수막을 들고 한전 본사 앞에서 함께 사진을 찍고 있다" loading="lazy" decoding="async" style="object-position:50% 70%"></span>
+                <span class="now-thumb__body">
+                  <span class="label">ON SITE</span>
+                  <span class="now-thumb__title">갈등을 넘어 상생으로, 고창 성송면에 밝힌 빛나는 이정표</span>
+                </span>
+                <span class="now-thumb__progress" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li class="now-thumb">
+              <a class="now-thumb__link" href="articles/kepco-news.html" data-now-go="3">
+                <span class="now-thumb__media"><span class="ph" aria-hidden="true"></span></span>
+                <span class="now-thumb__body">
+                  <span class="label">KEPCO NEWS</span>
+                  <span class="now-thumb__title">이달의 한전 소식</span>
+                </span>
+                <span class="now-thumb__progress" aria-hidden="true"></span>
+              </a>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -516,6 +581,15 @@
     <a class="tabbar__item" href="index.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7v8.5a.5.5 0 0 1-.5.5H15v-6H9v6H4.5a.5.5 0 0 1-.5-.5z"/></svg>이번 호</a>
     <a class="tabbar__item" href="index.html#participate"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>참여</a>
     <button class="tabbar__item" type="button" data-scroll-top><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>위로</button>
+  </nav>
+
+  <nav class="remote" aria-label="리모컨" data-remote>
+    <ul>
+      <li><a class="remote__btn" href="articles/inception.html" aria-label="다음 기사: INCEPTION 전환의 시대, 인간의 자리" data-tip="다음 · INCEPTION"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="articles/refresh.html" aria-label="이전 기사: REFRESH 횡성지사 5인방 래프팅에 흠뻑 빠지다" data-tip="이전 · REFRESH"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a></li>
+      <li><button class="remote__btn" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></li>
+    </ul>
   </nav>
 </body>
 </html>

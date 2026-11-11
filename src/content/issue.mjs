@@ -58,11 +58,12 @@ export const issue = {
       id: 'kepco-now',
       name: 'KEPCO NOW',
       desc: '지금 한전에서 일어나는 이슈 · 기술 · 현장',
+      layout: 'carousel', // 큰 기사 1개 + 아래 썸네일, 자동으로 넘어감 (size·span은 쓰지 않음)
       items: [
-        { slug: 'issue-now', size: 'lg', span: 8, rows: 3 },
-        { slug: 'next-wave', size: 'sm', span: 4 },
-        { slug: 'on-site', size: 'sm', span: 4 },
-        { slug: 'kepco-news', size: 'sm', span: 4 },
+        { slug: 'issue-now' },
+        { slug: 'next-wave' },
+        { slug: 'on-site' },
+        { slug: 'kepco-news' },
       ],
     },
     {

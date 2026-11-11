@@ -13,8 +13,8 @@ function header(issue) {
       <a class="site-header__logo" href="${home()}" aria-label="KEPCO 웹진 ${esc(issue.titleKo)} 홈">
         <img src="${asset('assets/images/logo-kepco.svg')}" alt="" width="119" height="28">
       </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
-        ${icon('toc')}<span>목차</span>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open aria-label="목차">
+        ${icon('toc')}
       </button>
     </div>
   </header>`;
@@ -92,6 +92,29 @@ function tabbar(isHome) {
 }
 
 /**
+ * 리모컨 (데스크톱 오른쪽 아래 고정) — 다음 기사 · 이전 기사 · 지난 호 보기 · 맨 위로
+ * 순서는 목차 순서 + 맨 끝 EVENT, 끝에서는 처음으로 돌아갑니다.
+ * 메인·가이드처럼 기사가 아닌 페이지에서는 ‘다음’ = 첫 기사, ‘이전’ = 마지막(EVENT).
+ * 아이콘만 보이고, 마우스·키보드 포커스 시 왼쪽에 이름표가 나옵니다(화면낭독기는 aria-label).
+ */
+function remote(issue, articles, currentSlug) {
+  const pages = [
+    ...articles.map((a) => ({ slug: a.slug, name: a.corner, title: flat(a.title) })),
+    { slug: EVENT_SLUG, name: issue.quiz.corner, title: issue.quiz.title },
+  ];
+  const i = pages.findIndex((x) => x.slug === currentSlug);
+  const next = pages[(i + 1) % pages.length]; // i가 -1이면 첫 기사
+  const prev = pages[(i - 1 + pages.length) % pages.length]; // i가 -1이면 마지막
+  const item = (attrs, iconName, label, tip) => `
+      <li><${attrs.tag} class="remote__btn" ${attrs.rest} aria-label="${esc(label)}" data-tip="${esc(tip)}">${icon(iconName)}</${attrs.tag}></li>`;
+  return `
+  <nav class="remote" aria-label="리모컨" data-remote>
+    <ul>${item({ tag: 'a', rest: `href="${article(next.slug)}"` }, 'right', `다음 기사: ${next.name} ${next.title}`, `다음 · ${next.name}`)}${item({ tag: 'a', rest: `href="${article(prev.slug)}"` }, 'left', `이전 기사: ${prev.name} ${prev.title}`, `이전 · ${prev.name}`)}${item({ tag: 'a', rest: `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"` }, 'archive', '지난 호 보기 (새 창)', '지난 호 보기')}${item({ tag: 'button', rest: 'type="button" data-scroll-top' }, 'up', '맨 위로', '맨 위로')}
+    </ul>
+  </nav>`;
+}
+
+/**
  * @param {object} p
  * @param {object} p.issue
  * @param {object[]} p.articles
@@ -102,9 +125,14 @@ function tabbar(isHome) {
  * @param {string} [p.current]   현재 기사 slug
  * @param {string[]} p.styles    추가 CSS
  * @param {string[]} p.scripts   JS 파일명
+ *   'vendor/…'로 시작하면 assets/vendor의 외부 라이브러리(jQuery · slick)를 가리킵니다.
  * @param {string} p.main
  * @param {string} [p.beforeHeader]
  */
+function fileUrl(name, kind) {
+  return name.startsWith('vendor/') ? asset(`assets/${name}`) : asset(`assets/${kind}/`) + name;
+}
+
 export function page(p) {
   const { issue } = p;
   const url = issue.siteUrl + (p.file === 'index.html' ? '' : p.file);
@@ -133,10 +161,10 @@ export function page(p) {
   <link rel="stylesheet" href="${asset('assets/css/')}base.css">
   <link rel="stylesheet" href="${asset('assets/css/')}components.css">
   <link rel="stylesheet" href="${asset('assets/css/')}layout.css">
-${p.styles.map((s) => `  <link rel="stylesheet" href="${asset('assets/css/')}${s}">`).join('\n')}
+${p.styles.map((s) => `  <link rel="stylesheet" href="${fileUrl(s, 'css')}">`).join('\n')}
 
   <script>document.documentElement.classList.add('js');</script>
-${p.scripts.map((s) => `  <script src="${asset('assets/js/')}${s}" defer></script>`).join('\n')}
+${p.scripts.map((s) => `  <script src="${fileUrl(s, 'js')}" defer></script>`).join('\n')}
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -148,6 +176,7 @@ ${p.main}
   </main>
 ${footer(issue)}
 ${tabbar(isHome)}
+${remote(issue, p.articles, p.current)}
 </body>
 </html>
 `;
