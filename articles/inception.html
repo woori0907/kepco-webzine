@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/article.css">
 
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');try{var ts=localStorage.getItem('kepco-webzine:text-size');if(ts==='1'||ts==='2')document.documentElement.setAttribute('data-text-size',ts);}catch(e){}</script>
   <script src="../assets/js/menu.js" defer></script>
   <script src="../assets/js/scroll-ui.js" defer></script>
   <script src="../assets/js/smooth-scroll.js" defer></script>
@@ -30,6 +30,8 @@
   <script src="../assets/js/progress.js" defer></script>
   <script src="../assets/js/toc-spy.js" defer></script>
   <script src="../assets/js/lightbox.js" defer></script>
+  <script src="../assets/js/text-size.js" defer></script>
+  <script src="../assets/js/reactions.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -158,7 +160,7 @@
             <li class="menu__item">
               <a class="menu__link" href="../articles/travel-mate.html">
                 <span class="menu__corner">TRAVEL MATE</span>
-                <span class="visually-hidden">: 시간이 키운 가을, 안동</span>
+                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
               </a>
             </li>
             <li class="menu__item">
@@ -198,7 +200,9 @@
         <p class="label a-hero__label">SPOTLIGHT · INCEPTION</p>
         <h1 class="a-hero__title">전환의 시대, 인간의 자리</h1>
         <p class="a-hero__dek">생각의 해상도를 높이는 ‘업스케일링 사고법’</p>
+        
       </div>
+      
       <a class="a-hero__scroll" href="#article-body" data-scroll-duration="1100" aria-label="본문으로 이동"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </header>
     <div class="a-body" id="article-body">
@@ -208,9 +212,14 @@
         <li><span>글</span> 박영민 『업스케일링 사고법』 저자</li>
       </ul>
       <p class="a-meta__info">
-        <span>2026.10 · SPOTLIGHT · 커버 스토리</span>
         <span class="a-meta__time"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</span>
       </p>
+      <div class="a-size" role="group" aria-label="글자 크기" hidden data-text-size-control>
+        <button class="a-size__btn" type="button" data-text-size-step="-1" aria-label="글자 작게"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 19l5-13 5 13M5 14.5h6M15 12h6"/></svg></button>
+        <span class="a-size__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <button class="a-size__btn" type="button" data-text-size-step="1" aria-label="글자 크게"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 19l5-13 5 13M5 14.5h6M15 12h6M18 9v6"/></svg></button>
+        <span class="visually-hidden" role="status" data-text-size-status></span>
+      </div>
     </div>
       
     <section class="a-summary" aria-labelledby="summary-title">
@@ -220,9 +229,8 @@
       </ol>
     </section>
       
-    <nav class="a-toc" aria-labelledby="toc-title" data-toc>
+    <nav class="a-toc" aria-label="이 기사의 순서" data-toc>
       <div class="a-toc__inner">
-        <h2 class="b-box-label" id="toc-title">이 기사의 순서</h2>
         <ol>
           <li><a href="#sec-1">몸 밖으로 내보낸 것들</a></li><li><a href="#sec-2">생각은 평균값이 아니다</a></li><li><a href="#sec-3">업스케일링 하나, 몸 안으로 가져오기</a></li><li><a href="#sec-4">업스케일링 둘, 거꾸로 뒤집기</a></li><li><a href="#sec-5">업스케일링 셋, 함께 정렬하기</a></li>
         </ol>
@@ -274,6 +282,24 @@
     </aside>
 <p class="b-p">생각의 업스케일링은 개인의 다짐으로만 완성되지 않는다. 모두가 기계에게 판단을 맡길 때, 나 혼자 버티기란 쉽지 않기 때문이다. 결국 공동체의 일원이 모두 함께 만들어 가야 할 문화의 문제다.</p>
 <p class="b-p">개인의 경험이나 감각에 앞서 주도권을 AI에게 선뜻 위임하지 않는 일, 당장의 효율성 너머 무쓸모와 실패의 여백을 시스템에 품어내는 일, 그리고 소통의 오차를 줄이기 위해 핵심 단어의 의미부터 제대로 정렬해보는 일. 이 작은 실천이 모여 문화가 될 때, 비로소 나와 우리의 고화질 해상도를 지켜낼 수 있다. 한 사람의 기억이 아닌, 함께 부르고 들었던 무수한 목소리를 통해 지금까지 전해지는 ‘오디세이’처럼 말이다.</p>
+      
+    <section class="a-react" aria-labelledby="react-title" hidden
+             data-reactions="inception" data-store="local" data-endpoint="">
+      <h2 class="a-react__title" id="react-title">이 기사, 어떠셨나요?</h2>
+      <div class="a-react__list" role="group" aria-labelledby="react-title">
+        
+        <button class="a-react__btn" type="button" aria-pressed="false" data-reaction="like" data-label="좋아요">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19.5s-7.5-4.6-7.5-10.1A4.1 4.1 0 0 1 12 7.1a4.1 4.1 0 0 1 7.5 2.3c0 5.5-7.5 10.1-7.5 10.1z"/></svg><span>좋아요</span><span class="a-react__count" data-reaction-count></span>
+        </button>
+        <button class="a-react__btn" type="button" aria-pressed="false" data-reaction="useful" data-label="유용해요">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 17.5h5M10.5 20.5h3M12 3.5a5.75 5.75 0 0 0-3.4 10.4c.6.4.9 1 .9 1.7v.4h5v-.4c0-.7.3-1.3.9-1.7A5.75 5.75 0 0 0 12 3.5z"/></svg><span>유용해요</span><span class="a-react__count" data-reaction-count></span>
+        </button>
+        <button class="a-react__btn" type="button" aria-pressed="false" data-reaction="fun" data-label="재밌어요">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14a4 4 0 0 0 7 0M9.25 9.75v.5M14.75 9.75v.5"/></svg><span>재밌어요</span><span class="a-react__count" data-reaction-count></span>
+        </button>
+      </div>
+      <p class="a-react__status" role="status" data-reaction-status></p>
+    </section>
       
     <aside class="a-author" aria-label="필자 소개">
       <p class="b-box-label">글쓴이</p>

@@ -1,6 +1,7 @@
 /**
  * 사진 크게 보기 (레이어 팝업)
- * - 기사 본문 사진(.a-body .b-figure__media img)을 클릭하거나, 포커스 후 Enter·Space로 엽니다.
+ * - 기사 본문 사진(.b-figure__media · 장소 소개 .b-spot__photo · 지도 .b-map__image 안의 img)을
+ *   클릭하거나, 포커스 후 Enter·Space로 엽니다.
  * - 이전·다음 버튼과 ← → 키로 같은 기사 안의 사진을 넘겨 봅니다.
  * - 닫기 버튼 · 배경 클릭 · ESC로 닫고, 연 사진으로 포커스를 되돌립니다.
  * - 열려 있는 동안 본문 스크롤을 잠그고 포커스를 팝업 안에 가둡니다.
@@ -9,7 +10,9 @@
 (function () {
   'use strict';
 
-  var images = Array.prototype.slice.call(document.querySelectorAll('.a-body .b-figure__media img'));
+  var images = Array.prototype.slice.call(document.querySelectorAll(
+    '.a-body .b-figure__media img, .a-body .b-spot__photo img, .a-body .b-map__image img'
+  ));
   if (!images.length) return;
 
   var ICON = {
@@ -56,6 +59,11 @@
 
   /** 사진에 맞는 캡션: 사진 칸의 캡션 → 단독 사진의 캡션 → 묶음 공통 캡션 */
   function captionOf(img) {
+    // 장소 소개 사진은 장소 이름 · 한 줄 제목, 지도는 지도 이름
+    var spot = img.closest('.b-spot');
+    if (spot) return spot.querySelector('.b-spot__name').textContent + ' · ' + spot.querySelector('.b-spot__sub').textContent;
+    var map = img.closest('.b-map');
+    if (map) return map.querySelector('figcaption').textContent;
     var item = img.closest('.b-images__item, .b-figure');
     var own = item && item.querySelector(':scope > figcaption');
     if (own) return own.textContent;
@@ -134,7 +142,7 @@
 
   // ---- 본문 사진을 누를 수 있게 ---------------------------------------------
   images.forEach(function (img, index) {
-    var media = img.closest('.b-figure__media');
+    var media = img.closest('.b-figure__media, .b-spot__photo, .b-map__image');
     media.classList.add('is-zoomable');
     media.setAttribute('role', 'button');
     media.setAttribute('tabindex', '0');

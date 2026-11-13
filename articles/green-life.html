@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/article.css">
 
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');try{var ts=localStorage.getItem('kepco-webzine:text-size');if(ts==='1'||ts==='2')document.documentElement.setAttribute('data-text-size',ts);}catch(e){}</script>
   <script src="../assets/js/menu.js" defer></script>
   <script src="../assets/js/scroll-ui.js" defer></script>
   <script src="../assets/js/smooth-scroll.js" defer></script>
@@ -30,6 +30,8 @@
   <script src="../assets/js/progress.js" defer></script>
   <script src="../assets/js/toc-spy.js" defer></script>
   <script src="../assets/js/lightbox.js" defer></script>
+  <script src="../assets/js/text-size.js" defer></script>
+  <script src="../assets/js/reactions.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -158,7 +160,7 @@
             <li class="menu__item">
               <a class="menu__link" href="../articles/travel-mate.html">
                 <span class="menu__corner">TRAVEL MATE</span>
-                <span class="visually-hidden">: 시간이 키운 가을, 안동</span>
+                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
               </a>
             </li>
             <li class="menu__item">
@@ -198,7 +200,9 @@
         <p class="label a-hero__label">LIFE &amp; CULTURE · GREEN LIFE</p>
         <h1 class="a-hero__title">겨울왕국에서 길을 잃다</h1>
         <p class="a-hero__dek">얼음이 녹으면 사라지는 것들</p>
+        
       </div>
+      
       <a class="a-hero__scroll" href="#article-body" data-scroll-duration="1100" aria-label="본문으로 이동"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </header>
     <div class="a-body" id="article-body">
@@ -208,9 +212,14 @@
         <li><span>글</span> 미정</li>
       </ul>
       <p class="a-meta__info">
-        <span>2026.10 · LIFE &amp; CULTURE · 환경·교양(외부 필진)</span>
         <span class="a-meta__time"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>원고 준비 중</span>
       </p>
+      <div class="a-size" role="group" aria-label="글자 크기" hidden data-text-size-control>
+        <button class="a-size__btn" type="button" data-text-size-step="-1" aria-label="글자 작게"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 19l5-13 5 13M5 14.5h6M15 12h6"/></svg></button>
+        <span class="a-size__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <button class="a-size__btn" type="button" data-text-size-step="1" aria-label="글자 크게"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 19l5-13 5 13M5 14.5h6M15 12h6M18 9v6"/></svg></button>
+        <span class="visually-hidden" role="status" data-text-size-status></span>
+      </div>
     </div>
       
     <section class="a-summary" aria-labelledby="summary-title">
@@ -281,6 +290,7 @@
       <span style="width:92%"></span><span style="width:99%"></span><span style="width:58%"></span>
     </div>
       
+      
     </div>
   </article>
   </main>
@@ -309,7 +319,7 @@
 
   <nav class="remote" aria-label="리모컨" data-remote>
     <ul>
-      <li><a class="remote__btn" href="../articles/travel-mate.html" aria-label="다음 기사: TRAVEL MATE 시간이 키운 가을, 안동" data-tip="다음 · TRAVEL MATE"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="../articles/travel-mate.html" aria-label="다음 기사: TRAVEL MATE 산과 바다 사이, 머물고 싶은 도시 속초" data-tip="다음 · TRAVEL MATE"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
       <li><a class="remote__btn" href="../articles/science-lab.html" aria-label="이전 기사: SCIENCE LAB 눈 오는 날에는 왜 주변이 더 조용하게 느껴질까?" data-tip="이전 · SCIENCE LAB"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
       <li><a class="remote__btn" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a></li>
       <li><button class="remote__btn" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></li>

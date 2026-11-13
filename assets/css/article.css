@@ -182,6 +182,154 @@
 }
 
 /* --------------------------------------------------------------------------
+   Hero · 인쇄본 표지형 (hero.layout: 'top')
+   제목을 사진 위쪽 하늘에 두고, 아래쪽은 사진이 그대로 보이게.
+   ‘본문 읽기’ 버튼은 왼쪽 아래(제목과 같은 선), 오른쪽 아래에는 코스 박스.
+   -------------------------------------------------------------------------- */
+.a-hero__credit {
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+  .a-hero.is-top .a-hero__media::after {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 48%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 22%);
+  }
+
+  .a-hero.is-top .a-hero__text {
+    top: var(--space-10);
+    bottom: auto;
+  }
+
+  /* 아래쪽이 밝은 사진(눈 등)이어도 보이도록 어두운 바탕을 깔아 둠 */
+  .a-hero.is-top .a-hero__scroll {
+    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.32);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .a-hero.is-top .a-hero__scroll:hover {
+    background: rgba(0, 0, 0, 0.48);
+  }
+}
+
+/* 태블릿: 코스 박스가 가운데 ‘본문 읽기’ 버튼과 겹치지 않게 좁게 (두 줄 머리) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .a-hero.has-course .a-course {
+    max-width: 320px;
+    padding-inline: var(--space-2);
+  }
+
+  .a-hero.has-course .a-course__head span {
+    flex-basis: 100%;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* 코스 박스 — 장소 태그를 순서대로 잇고, 누르면 그 장소로 이동 */
+.a-course {
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs-caption-base);
+  line-height: var(--lh-snug);
+}
+
+.a-course__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px var(--space-1);
+}
+
+.a-course__head b {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: var(--weight-bold);
+}
+
+.a-course__head .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.a-course__head span {
+  padding-left: var(--space-1);
+  border-left: var(--border) solid var(--line-strong);
+  color: var(--text-muted);
+}
+
+.a-course__stops {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.a-course__stops li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.a-course__stops li + li::before {
+  content: "→" / "";
+  padding-inline: 4px;
+  color: var(--accent-ink);
+}
+
+.a-course__stops a {
+  display: inline-block;
+  padding-block: 4px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.02em;
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--duration-fast) ease;
+}
+
+.a-course__stops a:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 768px) {
+  .a-course {
+    position: absolute;
+    right: max(var(--margin), calc((100% - var(--content-max)) / 2));
+    bottom: var(--space-4);
+    max-width: calc(100% - var(--margin) * 2 - 72px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  }
+}
+
+/* PC: 오른쪽 아래 고정 리모컨(layout.css .remote)에 가리지 않게 그만큼 비켜 둠 */
+@media (min-width: 1024px) {
+  .a-course {
+    right: max(112px, calc((100% - var(--content-max)) / 2));
+  }
+}
+
+@media (max-width: 767px) {
+  .a-course {
+    margin: var(--space-3) var(--margin) 0;
+    border: var(--border) solid var(--line);
+  }
+
+  /* 좁은 화면에서는 세로선 없이 두 줄로 */
+  .a-course__head span {
+    flex-basis: 100%;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
    본문 칼럼 — 720px 가운데, 넓은 사진은 1040px까지
    -------------------------------------------------------------------------- */
 .a-body {
@@ -217,11 +365,11 @@
 }
 
 /* 박스·사진 앞뒤는 넉넉하게 */
-.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .a-summary, .a-toc) {
+.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .a-summary, .a-toc) {
   margin-top: var(--space-6);
 }
 
-.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .a-summary, .a-toc) + * {
+.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .a-summary, .a-toc) + * {
   margin-top: var(--space-6);
 }
 
@@ -271,6 +419,96 @@
 .a-meta__time .icon {
   width: 16px;
   height: 16px;
+}
+
+/* 글자 크기 — 작게 · 단계 표시(기본 + 2단계) · 크게 (assets/js/text-size.js) */
+.a-size {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.a-size[hidden] {
+  display: none;
+}
+
+.a-size__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.a-size__btn:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.a-size__btn:disabled {
+  color: var(--line);
+  cursor: default;
+}
+
+.a-size__btn .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.a-size__dots {
+  display: inline-flex;
+  gap: 4px;
+  padding-inline: 4px;
+}
+
+.a-size__dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+/* 지금 단계까지 채움 */
+.a-size__dots i:first-child,
+[data-text-size="1"] .a-size__dots i:nth-child(-n + 2),
+[data-text-size="2"] .a-size__dots i {
+  background: var(--accent-ink);
+}
+
+/* 본문 글자 크기 단계: 기기별 기본 크기(tokens.css)에 단계마다 2px씩 (캡션은 1px씩)
+   html의 data-text-size를 text-size.js가 바꿉니다. 히어로 제목은 그대로. */
+:root {
+  --fs-body-base: var(--fs-body);
+  --fs-lead-base: var(--fs-lead);
+  --fs-subhead-base: var(--fs-subhead);
+  --fs-subtitle-base: var(--fs-subtitle);
+  --fs-caption-base: var(--fs-caption);
+}
+
+[data-text-size="1"] .a-body {
+  --fs-body: calc(var(--fs-body-base) + 2px);
+  --fs-lead: calc(var(--fs-lead-base) + 2px);
+  --fs-subhead: calc(var(--fs-subhead-base) + 2px);
+  --fs-subtitle: calc(var(--fs-subtitle-base) + 2px);
+  --fs-caption: calc(var(--fs-caption-base) + 1px);
+}
+
+[data-text-size="2"] .a-body {
+  --fs-body: calc(var(--fs-body-base) + 4px);
+  --fs-lead: calc(var(--fs-lead-base) + 4px);
+  --fs-subhead: calc(var(--fs-subhead-base) + 4px);
+  --fs-subtitle: calc(var(--fs-subtitle-base) + 4px);
+  --fs-caption: calc(var(--fs-caption-base) + 2px);
+}
+
+/* 글자 크기 버튼 자체는 커지지 않게 */
+.a-meta {
+  font-size: var(--fs-caption-base);
 }
 
 /* --------------------------------------------------------------------------
@@ -844,10 +1082,537 @@
   margin-top: var(--space-3);
 }
 
+/* 참여 안내 — 미색 면 · 항목 표 · 원형 사진 (인쇄본 안내 박스) */
+.b-callout.is-paper {
+  border: 0;
+  background: var(--color-paper);
+}
+
+/* 지도 바로 아래 미색 안내 박스는 지도와 한 면처럼 이어 붙임 (인쇄본 MAP 페이지) */
+.a-body > .b-map + .b-callout.is-paper {
+  margin-top: 0;
+  padding-inline: var(--space-5);
+  border-top: var(--border) solid var(--line);
+}
+
+.b-callout .b-box-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.b-callout .b-box-label .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.b-callout.has-image {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.b-callout__image img {
+  width: 100%;
+  height: auto;
+}
+
+.b-callout__rows {
+  display: grid;
+  gap: 4px;
+  margin-top: var(--space-3);
+}
+
+.b-callout__rows > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-1);
+}
+
+.b-callout__rows dt {
+  font-weight: var(--weight-bold);
+}
+
+.b-callout__rows dt::after {
+  content: "ㅣ" / "";
+  margin-left: var(--space-1);
+  color: var(--text-muted);
+  font-weight: var(--weight-regular);
+}
+
+.b-callout__note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+
 @media (max-width: 767px) {
   .b-callout {
     padding: var(--space-3);
   }
+
+  .b-callout.has-image {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .b-callout__image {
+    order: -1;
+    width: 140px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   장소 소개 (spot) — 인쇄본 TRAVEL MATE의 여행지 한 곳
+   PC·태블릿  사진 | 글 두 칸, 짝수 번째는 좌우를 바꿈 (지그재그)
+              is-panorama: 가로로 긴 사진을 위에, 아래에 글 | 추천·가는 법 두 칸
+   모바일     사진 → 글 → 추천 → 가는 법 한 줄로
+   장소 사이는 가는 선으로 나눔. 사진 모서리에 종이 태그(MOUNTAIN 등)를 비스듬히.
+   -------------------------------------------------------------------------- */
+.a-body > .b-spot {
+  margin-top: var(--space-10);
+}
+
+.a-body > .b-spot + .b-spot {
+  padding-top: var(--space-10);
+  border-top: var(--border) solid var(--line);
+}
+
+.a-body > .b-spot + :not(.b-spot) {
+  margin-top: var(--space-10);
+}
+
+.b-spot {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  align-items: start;
+  scroll-margin-top: calc(var(--header-height) + var(--space-3));
+}
+
+.b-spot.is-flip .b-spot__media {
+  order: 2;
+}
+
+.b-spot__media {
+  position: relative;
+}
+
+.b-spot__photo {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.b-spot__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 종이 태그 — 구멍 뚫린 흰 꼬리표를 사진 위 모서리에 비스듬히 */
+.b-spot__tag {
+  position: absolute;
+  top: -18px;
+  left: -12px;
+  display: inline-flex;
+  align-items: center;
+  min-width: 152px;
+  padding: 10px var(--space-3) 10px 44px;
+  border: var(--border) solid var(--line-strong);
+  background: var(--bg);
+  font-size: var(--fs-caption-base);
+  line-height: 1;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.14em;
+  color: var(--text);
+  transform: rotate(-7deg);
+  transform-origin: left center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.b-spot__tag::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.b-spot.is-flip .b-spot__tag {
+  left: auto;
+  right: -12px;
+  transform: rotate(7deg);
+  transform-origin: right center;
+}
+
+.b-spot__title {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-2);
+  line-height: var(--lh-snug);
+}
+
+.b-spot__name {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: var(--fs-subhead);
+  font-weight: var(--weight-bold);
+}
+
+.b-spot__sub {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: var(--fs-lead);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+/* 번호 — 가는 선 원 안의 숫자 (인쇄본 ①②③④) */
+.b-spot__num {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: 50%;
+  font-size: var(--fs-lead-base);
+  font-weight: var(--weight-medium);
+}
+
+.b-spot__body {
+  margin-top: var(--space-2);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  word-break: keep-all;
+}
+
+.b-spot__notes {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.b-spot__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-1);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.b-spot__label .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.b-spot__pick blockquote p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.b-spot__by {
+  margin-top: 4px;
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-semibold);
+}
+
+.b-spot__guide dl {
+  display: grid;
+  gap: 4px;
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+}
+
+.b-spot__guide dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-1);
+}
+
+.b-spot__guide dt {
+  font-weight: var(--weight-bold);
+}
+
+.b-spot__guide dt::after {
+  content: "ㅣ" / "";
+  margin-left: var(--space-1);
+  color: var(--text-muted);
+  font-weight: var(--weight-regular);
+}
+
+/* 가로로 긴 사진 — 위에 넓게, 글은 아래 두 칸 */
+.b-spot.is-panorama {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.b-spot.is-panorama .b-spot__photo {
+  aspect-ratio: auto;
+}
+
+.b-spot.is-panorama .b-spot__photo img {
+  height: auto;
+}
+
+.b-spot.is-panorama .b-spot__tag {
+  left: auto;
+  right: var(--space-6);
+  transform: rotate(7deg);
+  transform-origin: right center;
+}
+
+.b-spot.is-panorama .b-spot__text {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.b-spot.is-panorama .b-spot__notes {
+  margin-top: 0;
+  align-content: start;
+}
+
+@media (max-width: 1023px) {
+  .b-spot,
+  .b-spot.is-panorama .b-spot__text {
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 767px) {
+  .b-spot,
+  .b-spot.is-panorama .b-spot__text {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .b-spot.is-flip .b-spot__media {
+    order: 0;
+  }
+
+  .b-spot.is-panorama .b-spot__text {
+    gap: 0;
+  }
+
+  .b-spot.is-panorama .b-spot__notes {
+    margin-top: var(--space-3);
+  }
+
+  /* 화면 밖으로 나가지 않게 태그를 사진 안쪽으로 */
+  .b-spot__tag,
+  .b-spot.is-flip .b-spot__tag,
+  .b-spot.is-panorama .b-spot__tag {
+    left: 8px;
+    right: auto;
+    top: -14px;
+    min-width: 0;
+    padding: 8px var(--space-2) 8px 36px;
+    font-size: 13px;
+    transform: rotate(-5deg);
+    transform-origin: left center;
+  }
+
+  .b-spot__tag::before {
+    left: 12px;
+    width: 13px;
+    height: 13px;
+    margin-top: -6.5px;
+  }
+
+  .a-body > .b-spot,
+  .a-body > .b-spot + .b-spot,
+  .a-body > .b-spot + :not(.b-spot) {
+    margin-top: var(--space-8);
+  }
+
+  .a-body > .b-spot + .b-spot {
+    padding-top: var(--space-8);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   일러스트 지도 (map) — 미색 면 위 손그림 지도
+   -------------------------------------------------------------------------- */
+.b-map {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  background: var(--color-paper);
+}
+
+.b-map .b-box-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+}
+
+.b-map .b-box-label .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.b-map__image {
+  max-width: 912px;
+  margin-inline: auto;
+}
+
+.b-map__image img {
+  width: 100%;
+  height: auto;
+}
+
+/* 모바일: 지도 글씨가 작아지지 않게 화면 끝까지 넓힘 (누르면 크게 보기) */
+@media (max-width: 767px) {
+  .a-body > .b-map {
+    margin-inline: calc(var(--margin) * -1);
+    padding: var(--space-3) var(--space-1) var(--space-2);
+  }
+
+  .b-map .b-box-label {
+    padding-inline: var(--space-2);
+  }
+
+  .a-body > .b-map + .b-callout.is-paper {
+    margin-inline: calc(var(--margin) * -1);
+    padding-inline: var(--margin);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   반응 버튼 (reactions.js) — 본문 끝, 필자 소개 위
+   고른 반응은 키워드색 면, 고른 뒤에는 나머지 버튼이 흐려짐(취소 없음)
+   -------------------------------------------------------------------------- */
+.a-body > .a-react {
+  margin-top: var(--space-10);
+  text-align: center;
+}
+
+.a-react[hidden] {
+  display: none;
+}
+
+.a-react__title {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+}
+
+.a-react__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.a-react__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 48px;
+  padding: 0 var(--space-3) 0 var(--space-2);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  font-size: var(--fs-caption-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.a-react__btn .icon {
+  width: 22px;
+  height: 22px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.a-react__btn:not([aria-disabled="true"]):hover {
+  border-color: var(--line-strong);
+}
+
+.a-react__btn:not([aria-disabled="true"]):hover .icon {
+  transform: scale(1.12);
+}
+
+.a-react__count {
+  min-width: 1ch;
+  font-weight: var(--weight-regular);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.a-react__count[hidden] {
+  display: none;
+}
+
+.a-react__btn[aria-pressed="true"] {
+  border-color: var(--accent-ink);
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+
+.a-react__btn[aria-pressed="true"] .icon {
+  fill: currentColor;
+  fill-opacity: 0.18;
+}
+
+.a-react__btn[aria-pressed="true"] .a-react__count {
+  color: var(--accent-ink);
+}
+
+.a-react.is-done .a-react__btn {
+  cursor: default;
+}
+
+.a-react.is-done .a-react__btn[aria-pressed="false"] {
+  color: var(--text-muted);
+}
+
+.a-react__status {
+  min-height: 1.45em;
+  margin-top: var(--space-1);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+}
+
+/* 모바일: 세 버튼을 한 줄에 같은 너비로 */
+@media (max-width: 767px) {
+  .a-react__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .a-react__btn {
+    justify-content: center;
+    gap: 4px;
+    padding-inline: var(--space-1);
+    font-size: 13px;
+  }
+
+  .a-react__btn .icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* 반응 바로 뒤 필자 소개는 간격을 줄임 */
+.a-body > .a-react + .a-author {
+  margin-top: var(--space-6) !important;
 }
 
 /* --------------------------------------------------------------------------

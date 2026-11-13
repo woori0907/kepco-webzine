@@ -83,13 +83,15 @@ function prepare(raw, slug, section) {
   if (a.summary.length !== 3) throw new Error(`${slug}: 3줄 요약은 3줄이어야 합니다`);
 
   let n = 0;
+  let spots = 0;
   const sections = [];
   const body = a.body.map((block) => {
-    if (block.type === 'h2' || block.type === 'people') {
+    if (block.type === 'h2' || block.type === 'people' || block.type === 'spot') {
       n += 1;
       const id = `sec-${n}`;
-      sections.push({ id, text: block.type === 'people' ? block.title : block.text });
-      return { ...block, id };
+      const text = { people: block.title, spot: block.name }[block.type] || block.text;
+      sections.push({ id, text, tag: block.tag });
+      return block.type === 'spot' ? { ...block, id, num: (spots += 1) } : { ...block, id };
     }
     return block;
   });
@@ -139,7 +141,7 @@ articles.forEach((a) => {
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
     styles: ['article.css'],
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'reactions.js'],
     main: articleMain(a, issue),
   }));
 });

@@ -2,6 +2,7 @@
 // 이미지는 tools/optimize-images.ps1 로 만든 JPG를 씁니다.
 //   assets/images/<호>/<ref>.jpg       기본(가로 최대 1600px)
 //   assets/images/<호>/<ref>-800.jpg   작은 화면용(있을 때만)
+//   ref에 .png를 붙이면 그 PNG를 그대로 씀 (투명 배경 일러스트·원형 사진용, 작은 화면용 없음)
 
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -32,16 +33,24 @@ function jpegSize(file) {
   throw new Error(`JPEG 크기를 읽지 못했습니다: ${file}`);
 }
 
+/** PNG 헤더(IHDR)에서 가로·세로 읽기 */
+function pngSize(file) {
+  const buf = readFileSync(file);
+  if (buf.toString('ascii', 12, 16) !== 'IHDR') throw new Error(`PNG 크기를 읽지 못했습니다: ${file}`);
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
 const cache = new Map();
 
 function info(ref) {
   if (cache.has(ref)) return cache.get(ref);
-  const rel = `${IMAGE_DIR}/${ref}.jpg`;
+  const isPng = ref.endsWith('.png');
+  const rel = isPng ? `${IMAGE_DIR}/${ref}` : `${IMAGE_DIR}/${ref}.jpg`;
   const abs = path.join(ROOT, rel);
   if (!existsSync(abs)) throw new Error(`이미지가 없습니다: ${rel}`);
-  const size = jpegSize(abs);
+  const size = isPng ? pngSize(abs) : jpegSize(abs);
   const smallRel = `${IMAGE_DIR}/${ref}-800.jpg`;
-  const small = existsSync(path.join(ROOT, smallRel)) ? smallRel : null;
+  const small = !isPng && existsSync(path.join(ROOT, smallRel)) ? smallRel : null;
   const result = { src: rel, small, ...size };
   cache.set(ref, result);
   return result;

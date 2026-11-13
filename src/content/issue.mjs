@@ -110,6 +110,21 @@ export const issue = {
     ],
   },
 
+  // 기사 반응 버튼 (본문 끝) — 기사마다 브라우저당 한 번, 취소 없음
+  // store: 'local' = 이 브라우저에만 저장(오프라인 시연용)
+  //        'sheets' = 구글 스프레드시트 — tools/apps-script/reactions.gs를 배포한 주소를 endpoint에. README 참고
+  // items: [id, 버튼 글자, 아이콘]  — id는 시트에 기록되는 값이라 운영 중에는 바꾸지 마세요.
+  reactions: {
+    store: 'local',
+    endpoint: '',
+    title: '이 기사, 어떠셨나요?',
+    items: [
+      ['like', '좋아요', 'heart'],
+      ['useful', '유용해요', 'bulb'],
+      ['fun', '재밌어요', 'smile'],
+    ],
+  },
+
   // EVENT 응모 폼 + 응모 한마디(댓글)
   // store: 'local' = 이 브라우저에만 저장(오프라인 시연용)
   //        'sheets' = 구글 스프레드시트(Apps Script 웹 앱) — endpoint에 웹 앱 주소를 넣습니다. README 참고

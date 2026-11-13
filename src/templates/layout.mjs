@@ -163,7 +163,7 @@ export function page(p) {
   <link rel="stylesheet" href="${asset('assets/css/')}layout.css">
 ${p.styles.map((s) => `  <link rel="stylesheet" href="${fileUrl(s, 'css')}">`).join('\n')}
 
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');try{var ts=localStorage.getItem('kepco-webzine:text-size');if(ts==='1'||ts==='2')document.documentElement.setAttribute('data-text-size',ts);}catch(e){}</script>
 ${p.scripts.map((s) => `  <script src="${fileUrl(s, 'js')}" defer></script>`).join('\n')}
 </head>
 <body>
