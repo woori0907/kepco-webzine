@@ -144,6 +144,8 @@ export function page(p) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- 시안 공개 전: 모든 페이지를 검색엔진에서 제외. 정식 공개 때 이 줄을 지웁니다. -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <title>${esc(p.title)}</title>
   <meta name="description" content="${esc(p.description)}">
 
