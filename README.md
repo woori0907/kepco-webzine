@@ -79,6 +79,8 @@ Node.js(18 이상)만 있으면 되고 설치할 패키지는 없습니다.
   - `map` — 미색 면 위 일러스트 지도. 바로 뒤에 `callout`(`tone: 'paper'`, `wide: true`)을 두면 지도와 한 면으로 이어집니다.
   - 기사에 `course`를 적고 히어로에 `layout: 'top'`을 주면, 인쇄본 표지처럼 제목이 사진 위쪽에 오고 오른쪽 아래에 코스 박스(태그 순서, 누르면 그 장소로 이동)가 붙습니다.
   - 투명 배경 PNG(지도·원형 사진)는 `src`에 `.png`까지 적으면 그대로 씁니다(JPG는 확장자 없이).
+- **칼럼(PERSPECTIVE) 블록**: `opener`(도입부: 라벨 · 가는 큰 제목 · 선택 상자 인용), `chapter`(색 면 챕터, `tone: 'pink' | 'blue'`, 파트마다 왼쪽 소제목 · 오른쪽 글), `note`(A LITTLE NOTE 메모 카드), `steps`(번호 + 작은 사진), `lead`(리드문을 본문 중간에). 예시는 `src/content/articles/perspective.mjs`.
+- **종이 테마 · 선 챕터**(RE:VIEW): 기사에 `theme: 'paper'`를 적으면 본문 바탕이 미색 종이가 되고, `chapter`에 `tone: 'line'`을 주면 색 면 없이 왼쪽 소제목 | 세로 선 | 오른쪽 본문으로 나뉩니다. 예시는 `src/content/articles/review.mjs`.
 - **사진 크게 보기**: 기사 본문 사진을 누르면 레이어 팝업으로 크게 보입니다(`assets/js/lightbox.js`). 따로 설정할 것은 없습니다.
 
 ## 운영 때 바꿀 곳

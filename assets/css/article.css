@@ -776,6 +776,11 @@
   object-fit: cover;
 }
 
+/* 세로로 긴 사진 (figure narrow: true) — 본문 폭 다 채우지 않게 */
+.b-figure.is-narrow {
+  max-width: 360px;
+}
+
 .b-figure figcaption,
 .b-images figcaption {
   margin-top: var(--space-1);
@@ -1488,6 +1493,396 @@
   .a-body > .b-map + .b-callout.is-paper {
     margin-inline: calc(var(--margin) * -1);
     padding-inline: var(--margin);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   도입부 (opener) — 챕터와 같은 2단 · 같은 글자 크기
+   왼쪽: 작은 라벨 · 키워드색 한 줄 · 소제목 크기 제목 | 세로 선 | 오른쪽: 본문 · 인용 한 줄 · 소제목
+   -------------------------------------------------------------------------- */
+.b-opener {
+  container-type: inline-size;
+  scroll-margin-top: calc(var(--header-height) + var(--space-3));
+}
+
+.a-body > .b-opener {
+  margin-top: var(--space-8);
+}
+
+.b-opener__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.b-opener__label {
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.b-opener__title {
+  display: grid;
+  gap: 4px;
+  margin-top: var(--space-1);
+  font-size: var(--fs-subhead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.b-opener__kicker {
+  color: var(--accent-ink);
+}
+
+.b-opener__body {
+  min-width: 0;
+}
+
+.b-opener__body > * + * {
+  margin-top: var(--space-3);
+}
+
+/* 인용 한 줄 — 왼쪽 키워드색 선만 */
+.b-opener__quote {
+  margin-block: var(--space-4) !important;
+  padding: 4px 0 4px var(--space-3);
+  border-left: 3px solid var(--accent);
+}
+
+.b-opener__quote p {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-semibold);
+  word-break: keep-all;
+}
+
+.b-opener__sub {
+  margin-top: var(--space-5) !important;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+}
+
+.b-opener__sub + .b-p {
+  margin-top: var(--space-1);
+}
+
+@container (min-width: 720px) {
+  .b-opener__grid {
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: var(--space-5);
+  }
+
+  .b-opener__body {
+    padding-left: var(--space-5);
+    border-left: var(--border) solid var(--line-strong);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   챕터 (chapter) — 색 면 한 장에 한 주제 (인쇄본 Intuition · Experience 쪽)
+   넓을 때: 왼쪽 소제목(+사진) | 오른쪽 글. 좁으면 위아래로.
+   -------------------------------------------------------------------------- */
+.b-chapter {
+  --chapter-bg: var(--color-scene-life);
+  --chapter-pad: var(--space-6);
+  --chapter-pad-x: var(--chapter-pad);
+  position: relative;
+  container-type: inline-size;
+  padding: var(--chapter-pad) var(--chapter-pad-x);
+  background: var(--chapter-bg);
+  overflow: hidden;
+}
+
+.b-chapter.is-blue {
+  --chapter-bg: var(--color-scene-now);
+}
+
+.a-body > .b-chapter {
+  margin-top: var(--space-8);
+}
+
+.a-body > .b-chapter + .b-chapter {
+  margin-top: 0;
+}
+
+.b-chapter__cover {
+  margin: calc(var(--chapter-pad) * -1) calc(var(--chapter-pad-x) * -1) var(--space-4);
+}
+
+.b-chapter__cover img {
+  width: 100%;
+  height: auto;
+}
+
+/* 큰 영문 글자 — 면 색 위 흰 글자 (장식) */
+.b-chapter__word {
+  margin: calc(var(--space-2) * -1) 0 var(--space-4);
+  font-size: clamp(56px, 15cqw, 140px);
+  line-height: 0.9;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  text-align: right;
+}
+
+.b-chapter__part {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "title" "main" "photo";
+  gap: var(--space-3);
+  scroll-margin-top: calc(var(--header-height) + var(--space-3));
+}
+
+.b-chapter__part + .b-chapter__part {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border) solid var(--line-strong);
+}
+
+.b-chapter__title {
+  grid-area: title;
+  font-size: var(--fs-subhead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+  word-break: keep-all;
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--header-height) + var(--space-3));
+}
+
+/* 동그라미 번호(①) · 제목 윗줄(가는 글씨) — 인쇄본 GREEN LIFE 소제목 */
+.b-chapter__num {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--space-2);
+  border: var(--border) solid currentColor;
+  border-radius: 50%;
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
+
+.b-chapter__kicker {
+  display: block;
+  font-weight: 400;
+}
+
+.b-chapter__photo {
+  grid-area: photo;
+}
+
+.b-chapter__photo img {
+  width: 100%;
+  height: auto;
+}
+
+.b-chapter__main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.b-chapter__main > * + * {
+  margin-top: var(--space-3);
+}
+
+@container (min-width: 720px) {
+  .b-chapter__part {
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "title main" "photo main";
+    column-gap: var(--space-5);
+    row-gap: var(--space-4);
+  }
+
+  .b-chapter__photo {
+    align-self: start;
+  }
+
+  /* 소제목 | 세로 선 | 본문 — 모든 챕터 공통 (RE:VIEW · PERSPECTIVE) */
+  .b-chapter__main {
+    padding-left: var(--space-5);
+    border-left: var(--border) solid var(--line-strong);
+  }
+}
+
+/* 색 면 챕터는 면만 바깥으로 넓혀, 안쪽 글 칸 너비를 선 챕터(RE:VIEW)와 똑같이 맞춤 */
+@media (min-width: 768px) {
+  .a-body > .b-chapter:not(.is-line) {
+    --chapter-pad-x: var(--space-4);
+    margin-inline: calc(var(--chapter-pad-x) * -1);
+  }
+}
+
+@media (max-width: 767px) {
+  .a-body > .b-chapter {
+    --chapter-pad: var(--space-3);
+    margin-inline: calc(var(--margin) * -1);
+    padding-inline: var(--margin);
+  }
+
+  .b-chapter__cover {
+    margin-inline: calc(var(--margin) * -1);
+  }
+}
+
+/* 선 챕터 (tone: 'line') — 색 면 없이 미색 종이 위에 왼쪽 소제목 | 세로 선 | 오른쪽 본문 (인쇄본 RE:VIEW) */
+.b-chapter.is-line {
+  --chapter-bg: transparent;
+  --chapter-pad: 0px;
+  overflow: visible;
+}
+
+.b-chapter.is-line .b-chapter__part + .b-chapter__part {
+  border-top-color: var(--line);
+}
+
+@container (min-width: 720px) {
+  /* 왼쪽 칸의 일러스트는 칸 너비 그대로, 아래쪽으로 */
+  .b-chapter.is-line .b-chapter__photo {
+    max-width: 160px;
+    margin-top: var(--space-4);
+  }
+}
+
+.b-chapter.is-line .b-chapter__photo .b-figure__media {
+  background: none;
+}
+
+/* 흰 바탕 일러스트(투명 배경 없음)를 종이 색에 녹여 바탕 상자가 보이지 않게 */
+.b-chapter.is-line .b-chapter__photo img {
+  mix-blend-mode: darken;
+}
+
+@media (max-width: 767px) {
+  .b-chapter.is-line .b-chapter__photo {
+    width: 120px;
+    margin-inline: auto;
+  }
+}
+
+/* 종이 테마 (기사 theme: 'paper') — 본문 바탕을 미색 종이로 */
+.article.is-paper .a-body {
+  background: var(--color-paper);
+}
+
+/* 메모 카드 (note) — 구멍 뚫린 흰 종이를 비스듬히 */
+.b-note {
+  position: relative;
+  max-width: 420px;
+  margin: var(--space-6) auto var(--space-3) !important;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-8);
+  border: var(--border) solid var(--line-strong);
+  background: var(--bg);
+  text-align: center;
+  transform: rotate(-5deg);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.is-blue .b-note {
+  transform: rotate(5deg);
+}
+
+.b-note::before {
+  content: "";
+  position: absolute;
+  left: var(--space-2);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--chapter-bg, var(--surface));
+}
+
+.b-note__label {
+  font-size: 12px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.16em;
+}
+
+.b-note__quote {
+  margin-top: 4px;
+  font-size: var(--fs-caption-base);
+  font-weight: var(--weight-semibold);
+}
+
+.b-note__text {
+  font-size: var(--fs-caption-base);
+  line-height: var(--lh-snug);
+  color: var(--text-muted);
+}
+
+/* 번호 목록 + 작은 사진 (steps) */
+.b-steps {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.b-step {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 160px;
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.b-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: 50%;
+  font-size: var(--fs-caption-base);
+  font-weight: var(--weight-medium);
+}
+
+.b-step__title {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+}
+
+.b-step__desc {
+  margin-top: 4px;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.b-step__photo {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.b-step__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .b-step {
+    grid-template-columns: 32px minmax(0, 1fr) 88px;
+    gap: var(--space-1) 12px;
+  }
+
+  .b-step__num {
+    width: 32px;
+    height: 32px;
+  }
+
+  .b-step__photo {
+    aspect-ratio: 1 / 1;
   }
 }
 

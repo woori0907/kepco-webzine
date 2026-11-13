@@ -15,10 +15,15 @@
 //   callout     참여 안내              참여 공지
 //   spot        장소 소개(번호·태그)   여행지 1곳 (사진 + 태그 + 추천 한마디 + 가는 법)
 //   map         일러스트 지도          MAP 페이지
+//   lead        리드문(본문 중간)      리드
+//   opener      도입부                 칼럼 여는 쪽 (RE: SHIFT)
+//   chapter     색 면 챕터             주제별 색 면 페이지 (Intuition · Experience)
+//   note        메모 카드              A LITTLE NOTE
+//   steps       번호 목록 + 작은 사진  습관·방법 1~4
 //
 // 블록마다 class="b-..." 하나만 붙여 CSS(article.css)에서 모양을 정합니다.
 
-import { esc, each, when } from '../lib/html.mjs';
+import { esc, each, when, flat } from '../lib/html.mjs';
 import { img } from '../lib/image.mjs';
 import { icon } from './icons.mjs';
 
@@ -48,7 +53,7 @@ const renderers = {
     </figure>`,
 
   figure: (b) => `
-    <figure class="b-figure ${ratioClass(b.ratio)}${b.wide ? ' is-wide' : ''}">
+    <figure class="b-figure ${ratioClass(b.ratio)}${b.wide ? ' is-wide' : ''}${b.narrow ? ' is-narrow' : ''}">
       <div class="b-figure__media">${img(b, { sizes: b.wide ? WIDE_SIZES : BODY_SIZES })}</div>
       ${when(b.caption, () => `<figcaption>${esc(b.caption)}</figcaption>`)}
     </figure>`,
@@ -138,6 +143,74 @@ const renderers = {
         </section>`)}
       </div>
     </aside>`,
+
+  // 리드문을 본문 중간(예: 도입부 뒤)에 둘 때
+  lead: (b) => `<p class="b-lead">${esc(b.text)}</p>`,
+
+  // 도입부 — 인쇄본 RE: SHIFT 쪽. 챕터(chapter)와 같은 2단: 왼쪽 라벨 · 제목 | 세로 선 | 오른쪽 글
+  //   label 'RE: SHIFT'  kicker '새로고침!'(목차에 들어감)  title 제목(줄바꿈은 띄어쓰기로)
+  //   text [단락…] · quote 인용 한 줄 · subhead 작은 소제목 · after [단락…]
+  opener: (b) => `
+    <section class="b-opener is-wide" id="${b.id}" aria-labelledby="${b.id}-title">
+      <div class="b-opener__grid">
+        <div class="b-opener__head">
+          ${when(b.label, () => `<p class="b-opener__label" lang="en">${esc(b.label)}</p>`)}
+          <h2 class="b-opener__title" id="${b.id}-title">
+            <span class="b-opener__kicker">${esc(b.kicker)}</span>
+            <span class="b-opener__line">${esc(flat(b.title))}</span>
+          </h2>
+        </div>
+        <div class="b-opener__body">
+          ${each(b.text, (t) => `<p class="b-p">${esc(t)}</p>`)}
+          ${when(b.quote, () => `<blockquote class="b-opener__quote"><p>${esc(b.quote)}</p></blockquote>`)}
+          ${when(b.subhead, () => `<h3 class="b-opener__sub">${esc(b.subhead)}</h3>`)}
+          ${each(b.after, (t) => `<p class="b-p">${esc(t)}</p>`)}
+        </div>
+      </div>
+    </section>`,
+
+  // 챕터 — 색 면 위에 한 주제를 묶음 (인쇄본 PERSPECTIVE의 Intuition · Experience 쪽)
+  //   tone  'pink' | 'blue' | 'line'(색 면 없이 세로 선으로 나눔)   word  'Intuition' 같은 큰 영문 글자(장식, 없어도 됨)
+  //   name  '직관' (화면낭독기용 이름)   cover  { src, alt } 챕터 맨 위 가로 사진
+  //   parts [{ title, photo?, blocks: [p · note · steps …] }]
+  //         num   동그라미 번호(①)   kicker  제목 윗줄(가는 글씨, 예: ‘세례 요한은 보덴호를’)
+  //         title은 왼쪽 소제목(목차에 들어감), photo는 소제목 아래 사진, blocks는 오른쪽
+  chapter: (b) => `
+    <section class="b-chapter is-wide is-${b.tone || 'pink'}" aria-label="${esc([b.word, b.name].filter(Boolean).join(' · '))}">
+      ${when(b.cover, () => `<figure class="b-chapter__cover"><div class="b-figure__media">${img(b.cover, { sizes: WIDE_SIZES })}</div></figure>`)}
+      ${when(b.word, () => `<p class="b-chapter__word" lang="en" aria-hidden="true">${esc(b.word)}</p>`)}
+      ${each(b.parts, (part) => `
+      <div class="b-chapter__part">
+        <h2 class="b-chapter__title" id="${part.id}">${when(part.num, () => `<span class="b-chapter__num">${esc(part.num)}</span>`)}${when(part.kicker, () => `<span class="b-chapter__kicker">${esc(part.kicker)}</span> `)}${esc(part.title)}</h2>
+        ${when(part.photo, () => `<figure class="b-chapter__photo"><div class="b-figure__media">${img(part.photo, { sizes: '(min-width: 1140px) 240px, 100vw' })}</div></figure>`)}
+        <div class="b-chapter__main">
+          ${(part.blocks || []).map(renderBlock).join('\n')}
+        </div>
+      </div>`)}
+    </section>`,
+
+  // 메모 카드 — 비스듬한 종이 메모 (인쇄본 A LITTLE NOTE)
+  note: (b) => `
+    <aside class="b-note" aria-label="${esc(b.label || 'A LITTLE NOTE')}">
+      <p class="b-note__label" lang="en">${esc(b.label || 'A LITTLE NOTE')}</p>
+      <p class="b-note__quote">${esc(b.quote)}</p>
+      ${when(b.text, () => `<p class="b-note__text">${esc(b.text)}</p>`)}
+    </aside>`,
+
+  // 번호 목록 + 작은 사진 — 습관·방법 4가지 같은 단계
+  //   items [{ title, text, photo?: { src, alt } }]
+  steps: (b) => `
+    <ol class="b-steps">
+      ${each(b.items, (s, i) => `
+      <li class="b-step">
+        <span class="b-step__num" aria-hidden="true">${i + 1}</span>
+        <div class="b-step__text">
+          <p class="b-step__title">${esc(s.title)}</p>
+          <p class="b-step__desc">${esc(s.text)}</p>
+        </div>
+        ${when(s.photo, () => `<div class="b-step__photo">${img(s.photo, { sizes: '(min-width: 768px) 160px, 112px' })}</div>`)}
+      </li>`)}
+    </ol>`,
 
   // ---- 원고 준비 중인 코너용 자리 표시 ----
   draft: (b) => `
@@ -255,6 +328,16 @@ export function blockText(block) {
       return [block.title, block.text].join(' ');
     case 'spot':
       return [block.name, block.title, block.text, block.pick?.text].join(' ');
+    case 'lead':
+      return block.text;
+    case 'opener':
+      return [block.kicker, block.title, ...(block.text || []), block.quote, block.subhead, ...(block.after || [])].join(' ');
+    case 'note':
+      return [block.quote, block.text].join(' ');
+    case 'steps':
+      return block.items.map((s) => `${s.title} ${s.text}`).join(' ');
+    case 'chapter':
+      return block.parts.map((p) => [p.title, ...(p.blocks || []).map(blockText)].join(' ')).join(' ');
     default:
       return '';
   }

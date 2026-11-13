@@ -85,16 +85,28 @@ function prepare(raw, slug, section) {
   let n = 0;
   let spots = 0;
   const sections = [];
-  const body = a.body.map((block) => {
-    if (block.type === 'h2' || block.type === 'people' || block.type === 'spot') {
-      n += 1;
-      const id = `sec-${n}`;
-      const text = { people: block.title, spot: block.name }[block.type] || block.text;
-      sections.push({ id, text, tag: block.tag });
+  const nextId = (text, tag) => {
+    n += 1;
+    const id = `sec-${n}`;
+    sections.push({ id, text, tag });
+    return id;
+  };
+  const mark = (block) => {
+    // 챕터(chapter)는 안쪽 파트마다 소제목 id를 붙이고, 파트 안 블록도 같은 규칙으로
+    if (block.type === 'chapter') {
+      return {
+        ...block,
+        parts: block.parts.map((part) => ({ ...part, id: nextId([part.kicker, part.title].filter(Boolean).join(' ')), blocks: (part.blocks || []).map(mark) })),
+      };
+    }
+    if (['h2', 'people', 'spot', 'opener'].includes(block.type)) {
+      const text = { people: block.title, spot: block.name, opener: block.kicker }[block.type] || block.text;
+      const id = nextId(text, block.tag);
       return block.type === 'spot' ? { ...block, id, num: (spots += 1) } : { ...block, id };
     }
     return block;
-  });
+  };
+  const body = a.body.map(mark);
 
   const text = [a.lead || '', ...body.map(blockText)].join(' ');
   return {

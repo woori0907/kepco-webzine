@@ -121,7 +121,7 @@ function reactions(a, issue) {
 export function articleMain(a, issue) {
   return `
   <div class="progress" aria-hidden="true"><div class="progress__bar" data-progress></div></div>
-  <article class="article" data-article>
+  <article class="article${a.theme ? ` is-${a.theme}` : ''}" data-article>
     ${hero(a)}
     <div class="a-body" id="article-body">
       ${meta(a)}
