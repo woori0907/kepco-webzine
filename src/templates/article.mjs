@@ -6,6 +6,7 @@ import { esc, lines, each, when, readLabel } from '../lib/html.mjs';
 import { img } from '../lib/image.mjs';
 import { icon } from './icons.mjs';
 import { renderBlock } from './blocks.mjs';
+import { churuMarker } from './churu.mjs';
 
 /**
  * 코스 박스 — 인쇄본 표지의 ‘MOUNTAIN → LAKE → SEA → VILLAGE’
@@ -133,5 +134,6 @@ export function articleMain(a, issue) {
       ${reactions(a, issue)}
       ${author(a)}
     </div>
+    ${churuMarker(a, issue)}
   </article>`;
 }

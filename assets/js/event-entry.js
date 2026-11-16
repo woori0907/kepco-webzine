@@ -93,7 +93,7 @@
         var all = load(ALL) || [];
         var dup = all.some(function (item) { return digits(item.phone) === digits(entry.phone); });
         if (dup) return fail('duplicate', '이미 응모한 연락처예요.');
-        var no = 'EV' + eventId.replace('-', '').slice(2) + '-' + ('000' + (all.length + 1)).slice(-4);
+        var no = (/churu/.test(eventId) ? 'CH' : 'EV') + eventId.replace(/\D/g, '').slice(2) + '-' + ('000' + (all.length + 1)).slice(-4);
         all.push(Object.assign({ no: no }, entry));
         if (!store(ALL, all)) return fail('storage', '이 브라우저에 저장할 수 없어요. 사생활 보호 모드를 끄고 다시 시도해 주세요.');
         return Promise.resolve({ no: no });
@@ -149,7 +149,9 @@
   var backend = STORES[section.getAttribute('data-store')] || STORES.local;
 
   // ---- 댓글 목록 ------------------------------------------------------------
-  var box = document.querySelector('[data-comments]');
+  // 응모 한마디 목록이 없는 페이지(츄르를 찾아라)에서는 목록 부분을 건너뜀
+  var box = document.querySelector('[data-comments]') || document.createElement('div');
+  var hasComments = !!box.parentNode;
   var list = box.querySelector('[data-comments-list]');
   var count = box.querySelector('[data-comments-count]');
   var empty = box.querySelector('[data-comments-empty]');
@@ -190,6 +192,7 @@
   }
 
   function refresh() {
+    if (!hasComments) return Promise.resolve();
     return backend.list().then(function (items) {
       all = items;
       shown = 0;
@@ -203,7 +206,7 @@
     });
   }
 
-  more.addEventListener('click', function () {
+  if (more) more.addEventListener('click', function () {
     var first = shown;
     renderMore();
     var target = list.children[first];
@@ -318,6 +321,14 @@
 
     if (input.website.value) return; // 자동 입력 방지 칸이 채워짐 → 조용히 무시
 
+    // 츄르를 찾아라: 츄르를 다 찾기 전에는 접수하지 않음 (churu.js가 data-churu-ready를 붙임)
+    var churuPage = document.querySelector('[data-churu-page]');
+    if (churuPage && !churuPage.hasAttribute('data-churu-ready')) {
+      alertBox.textContent = '츄르를 모두 찾아야 응모할 수 있어요.';
+      alertBox.hidden = false;
+      return;
+    }
+
     if (!quizCleared()) {
       alertBox.textContent = '퀴즈 세 문제를 모두 맞혀야 응모할 수 있어요. 위의 퀴즈를 먼저 풀어 주세요.';
       alertBox.hidden = false;
@@ -342,6 +353,8 @@
       agree: true,
       date: new Date().toISOString(),
     };
+    // 츄르를 찾아라: 찾은 기록 증빙(브라우저 임의값 · 찾은 기사 · 확인값)을 함께 남김 — 추첨 때 대조용
+    if (churuPage) entry.churu = churuPage.getAttribute('data-churu-proof') || '';
 
     submit.disabled = true;
     submit.setAttribute('aria-busy', 'true');

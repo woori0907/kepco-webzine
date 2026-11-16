@@ -31,7 +31,7 @@ function quiz(q, bySlug) {
 }
 
 // 응모 폼 — 퀴즈를 모두 맞힌 뒤 제출할 수 있습니다. 동작은 assets/js/event-entry.js
-function entryForm(q, e) {
+export function entryForm(q, e) {
   const p = e.privacy;
   return `
       <section class="panel entry" id="event-entry" aria-labelledby="entry-title" tabindex="-1"

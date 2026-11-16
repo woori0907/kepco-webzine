@@ -21,6 +21,7 @@ import { homeMain } from './templates/home.mjs';
 import { articleMain } from './templates/article.mjs';
 import { eventMain } from './templates/event.mjs';
 import { guideMain } from './templates/guide.mjs';
+import { churuMain, churuSlug } from './templates/churu.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 configureImages({ root: ROOT, dir: `assets/images/${issue.imageFolder}` });
@@ -35,6 +36,8 @@ for (const section of issue.sections) {
   }
 }
 const bySlug = Object.fromEntries(articles.map((a) => [a.slug, a]));
+// 츄르를 숨길 수 있는 기사 = 원고가 있는 기사 전부
+if (issue.churu) issue.churu.pages = articles.filter((a) => !a.draft).map((a) => a.slug);
 if (!bySlug[issue.coverStory]) throw new Error(`커버스토리 '${issue.coverStory}'가 목차에 없습니다`);
 for (const q of issue.quiz.questions) {
   if (!bySlug[q.from]) throw new Error(`퀴즈 힌트 기사 '${q.from}'가 목차에 없습니다`);
@@ -152,8 +155,8 @@ articles.forEach((a) => {
     title: `${flat(a.title)} | KEPCO 웹진 ${issue.titleKo}`,
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
-    styles: ['article.css'],
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'reactions.js'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'reactions.js', 'churu.js'],
+    styles: ['article.css', 'churu.css'],
     main: articleMain(a, issue),
   }));
 });
@@ -170,6 +173,21 @@ write(articleFile(EVENT_SLUG), page({
   scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'event-entry.js', 'participation.js'], // event-entry가 먼저: ?reset 초기화 뒤에 퀴즈가 읽도록
   main: eventMain(issue, bySlug),
 }));
+
+// 츄르를 찾아라 — 숨은 이벤트 (목차·메인·리모컨에 없음, 츄르 3개를 다 찾은 팝업에서만 연결)
+if (issue.churu) {
+  write(articleFile(churuSlug(issue)), page({
+    ...common,
+    file: articleFile(churuSlug(issue)),
+    current: churuSlug(issue),
+    title: `${issue.churu.title} | KEPCO 웹진 ${issue.titleKo}`,
+    description: issue.churu.desc,
+    ogImage: issue.coverArt.src,
+    styles: ['event.css', 'churu.css'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'churu.js', 'event-entry.js'],
+    main: churuMain(issue),
+  }));
+}
 
 // 퍼블리셔용 컴포넌트 가이드 (목차에는 넣지 않음)
 mkdirSync(path.join(ROOT, 'guide'), { recursive: true });

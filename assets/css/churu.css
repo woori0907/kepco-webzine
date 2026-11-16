@@ -1,0 +1,174 @@
+/* ==========================================================================
+   츄르를 찾아라 — 본문 위 츄르 버튼 · 팝업 · 응모 페이지 (assets/js/churu.js)
+   ========================================================================== */
+
+/* 본문 단락 위에 겹쳐 둔 츄르 — 높이 96px (누르는 영역 64×100px) */
+.has-churu {
+  position: relative;
+}
+
+.churu {
+  position: absolute;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 100px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  transition: transform var(--duration-fast) ease;
+}
+
+.churu img {
+  width: auto;
+  height: 96px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.churu:hover {
+  transform: translate(-50%, -50%) rotate(-8deg) scale(1.12);
+}
+
+.churu:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 파워캣 스프라이트 — 가로 3칸 중 한 칸 */
+.churu-cat {
+  display: block;
+  width: 168px;
+  aspect-ratio: 503 / 452;
+  background-repeat: no-repeat;
+  background-size: 300% 100%;
+}
+
+.churu-cat--1 { background-position: 0% 0; }
+.churu-cat--2 { background-position: 50% 0; }
+.churu-cat--3 { background-position: 100% 0; }
+
+/* 팝업 */
+.churu-pop {
+  width: min(360px, calc(100% - var(--space-4)));
+  margin: auto;
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  border: var(--border) solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+}
+
+.churu-pop::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.churu-pop[open] {
+  animation: churu-pop var(--duration-base, 240ms) var(--ease-out, ease-out);
+}
+
+@keyframes churu-pop {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .churu-pop[open] { animation: none; }
+  .churu,
+  .churu:hover { transition: none; }
+}
+
+.churu-pop .churu-cat {
+  margin: 0 auto var(--space-3);
+}
+
+.churu-pop__title {
+  font-size: var(--fs-subhead);
+  line-height: var(--lh-snug);
+  font-weight: var(--weight-bold);
+  word-break: keep-all;
+}
+
+.churu-pop__meter {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+}
+
+.churu-pop__meter i {
+  width: 10px;
+  height: 10px;
+  border: var(--border) solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.churu-pop__meter i.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.churu-pop__note {
+  margin-top: var(--space-2);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.churu-pop__actions {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+}
+
+.churu-pop__actions .btn {
+  justify-content: center;
+}
+
+/* 응모 페이지 (find-churu.html) — 오른쪽 칸 없이 한 단 */
+.event--solo .event__main {
+  grid-column: 1 / -1;
+  max-width: 760px;
+}
+
+.churu-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: none;
+}
+
+.churu-head .churu-cat {
+  flex: none;
+  width: 140px;
+}
+
+.churu-locked {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+}
+
+.churu-locked__text {
+  line-height: 1.7;
+}
+
+.churu-locked__count {
+  font-weight: var(--weight-bold);
+  color: var(--accent-ink);
+}
+
+@media (max-width: 767px) {
+  .churu-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .churu-head .churu-cat {
+    width: 104px;
+  }
+}

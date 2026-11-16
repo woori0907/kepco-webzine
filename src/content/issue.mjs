@@ -145,6 +145,25 @@ export const issue = {
     ],
   },
 
+  // 츄르를 찾아라 — 기사 3곳에 숨긴 츄르를 모두 찾으면 열리는 숨은 이벤트 (articles/find-churu-…html)
+  //   어느 기사에 숨길지는 읽는 사람마다 무작위로 정해져 그 브라우저에 기억됩니다 (assets/js/churu.js)
+  //   목차·메인·리모컨에는 넣지 않습니다.
+  churu: {
+    id: '2026-10-churu',
+    slug: 'find-churu', // 실제 파일은 articles/find-churu-<key로 만든 글자>.html — 목차에 없고 HTML에도 그대로 적지 않음
+    key: 'powercat-loves-churu-2026-10', // 바꾸면 응모 페이지 주소가 바뀜
+    total: 3,
+    image: 'find-churu/churu.png',
+    sprite: 'find-churu/powercat-sprite.png', // 가로로 3칸 — 찾은 개수번째 칸을 팝업에 씀
+    corner: 'HIDDEN EVENT',
+    title: '츄르를 찾아라',
+    desc: '이번 호 기사 곳곳에 숨은 츄르 3개를 모두 찾은 분만 응모할 수 있는 파워캣의 비밀 이벤트예요.',
+    // 응모 폼 설정은 entry를 그대로 쓰고, 아래 값만 바꿈 — 경품·기간은 확정되면 고쳐 주세요.
+    entry: {
+      prize: '츄르를 모두 찾은 분 중 추첨 · 경품 미정',
+    },
+  },
+
   poll: {
     id: '2026-10',
     title: '이번 호에서 가장 좋았던 기사는?',
