@@ -31,13 +31,15 @@
   <script src="assets/js/smooth-scroll.js" defer></script>
   <script src="assets/js/rise.js" defer></script>
   <script src="assets/js/scene-bg.js" defer></script>
-  <script src="assets/js/dir-hover.js" defer></script>
+  <script src="assets/js/dot-nav.js" defer></script>
   <script src="assets/vendor/jquery/jquery.min.js" defer></script>
   <script src="assets/vendor/slick/slick.min.js" defer></script>
   <script src="assets/js/now-carousel.js" defer></script>
   <script src="assets/js/cover-video.js" defer></script>
   <script src="assets/js/participation.js" defer></script>
   <script src="assets/js/newsletter.js" defer></script>
+  <script src="assets/js/glow-cursor.js" defer></script>
+  <script src="assets/js/cursor.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -128,6 +130,12 @@
           <ol class="menu__list">
             
             <li class="menu__item">
+              <a class="menu__link" href="articles/travel-mate.html">
+                <span class="menu__corner">TRAVEL MATE</span>
+                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
+              </a>
+            </li>
+            <li class="menu__item">
               <a class="menu__link" href="articles/art-culture.html">
                 <span class="menu__corner">ART &amp; CULTURE</span>
                 <span class="visually-hidden">: 사람은 왜 풍경 속에 들어왔을까?</span>
@@ -137,12 +145,6 @@
               <a class="menu__link" href="articles/green-life.html">
                 <span class="menu__corner">GREEN LIFE</span>
                 <span class="visually-hidden">: 겨울왕국에서 길을 잃다</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" href="articles/travel-mate.html">
-                <span class="menu__corner">TRAVEL MATE</span>
-                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
               </a>
             </li>
             <li class="menu__item">
@@ -360,7 +362,7 @@
         </div>
       </div>
     </section>
-    <section class="section home-section scene-life" id="life" aria-labelledby="life-title" data-scene="life">
+    <section class="section home-section scene-life is-feature" id="life" aria-labelledby="life-title" data-scene="life">
       <div class="container">
         <div class="section-head">
           <div>
@@ -369,53 +371,56 @@
             <p class="section-head__desc">일상을 넓히는 문화 · 환경 · 여행 · 체험</p>
           </div>
         </div>
-        <div class="grid home-grid">
+      </div>
+      
+        <article class="life-feature" data-rise>
+          <div class="life-feature__media"><img src="assets/images/2026-10/travel-mate/00_hero_seoraksan_full.jpg" width="912" height="646" alt="눈 덮인 설악산 능선 위로 파란 하늘이 펼쳐지고, 상고대가 핀 나무 사이로 나무 울타리 산책로가 이어진다" loading="lazy" decoding="async" style="object-position:50% 35%"></div>
+          <div class="life-feature__inner container">
+            <div class="life-feature__body">
+              <p class="label">TRAVEL MATE</p>
+              <h3 class="life-feature__title">산과 바다 사이, 머물고 싶은 도시 속초</h3>
+              <p class="life-feature__summary">설악산에서 영랑호, 영금정, 아바이마을까지. 속초고성지사 직원이 추천하는 산에서 바다로 이어지는 겨울 속초.</p>
+              <a class="btn life-feature__go" href="articles/travel-mate.html">기사 바로가기<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="visually-hidden"> TRAVEL MATE 산과 바다 사이, 머물고 싶은 도시 속초</span></a>
+            </div>
+          </div>
+        </article>
+      <div class="container">
+        <ul class="life-row">
           
-          <article class="card card--lg span-6" data-rise>
-            <a class="card__link" href="articles/art-culture.html">
-              <div class="card__media"><img src="assets/images/2026-10/art-culture/00_hero_hunters_in_the_snow_16x9.jpg" width="912" height="513" alt="피터르 브뤼헐 《눈 속의 사냥꾼》 일부. 눈 덮인 언덕을 내려가는 사냥꾼과 개들 너머로 얼어붙은 연못과 마을이 펼쳐진다" loading="lazy" decoding="async"></div>
-              <div class="card__body">
-                <p class="label">ART &amp; CULTURE</p>
-                <h3 class="card__title">사람은 왜 풍경 속에 들어왔을까?</h3>
-                <p class="card__summary">눈 덮인 마을로 돌아가는 사냥꾼과 안개 바다 앞에 홀로 선 방랑자. 두 그림 속 작은 사람이 풍경의 의미를 바꾸는 방법.</p>
-                <p class="card__meta"><span>예술·문화</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</p>
-              </div>
+          <li class="life-item" data-rise>
+            <a class="card__link life-item__link" href="articles/art-culture.html">
+              <span class="card__media life-item__media"><img src="assets/images/2026-10/art-culture/00_hero_hunters_in_the_snow_16x9.jpg" width="912" height="513" alt="피터르 브뤼헐 《눈 속의 사냥꾼》 일부. 눈 덮인 언덕을 내려가는 사냥꾼과 개들 너머로 얼어붙은 연못과 마을이 펼쳐진다" loading="lazy" decoding="async"></span>
+              <span class="life-item__body">
+                <span class="label">ART &amp; CULTURE</span>
+                <span class="life-item__title">사람은 왜 풍경 속에 들어왔을까?</span>
+                <span class="life-item__summary">눈 덮인 마을로 돌아가는 사냥꾼과 안개 바다 앞에 홀로 선 방랑자. 두 그림 속 작은 사람이 풍경의 의미를 바꾸는 방법.</span>
+                <span class="card__meta"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</span>
+              </span>
             </a>
-          </article>
-          <article class="card card--lg span-6" data-rise>
-            <a class="card__link" href="articles/green-life.html">
-              <div class="card__media"><img src="assets/images/2026-10/greenlife/01_cover_fatbike_on_frozen_lake.jpg" width="912" height="1290" alt="얼어붙은 푸른 호수 위에 털모자와 고글을 쓴 사람이 바퀴가 굵은 자전거를 세우고 서 있다" loading="lazy" decoding="async"></div>
-              <div class="card__body">
-                <p class="label">GREEN LIFE</p>
-                <h3 class="card__title">겨울왕국에서 길을 잃다</h3>
-                <p class="card__summary">얼어붙은 호수와 강이 열어주던 길. 기후변화로 얼음이 사라지며 함께 끊어질 위기에 놓인 세 지역의 길과 전통.</p>
-                <p class="card__meta"><span>환경·교양</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 6분</p>
-              </div>
+          </li>
+          <li class="life-item" data-rise>
+            <a class="card__link life-item__link" href="articles/green-life.html">
+              <span class="card__media life-item__media"><img src="assets/images/2026-10/greenlife/01_cover_fatbike_on_frozen_lake.jpg" width="912" height="1290" alt="얼어붙은 푸른 호수 위에 털모자와 고글을 쓴 사람이 바퀴가 굵은 자전거를 세우고 서 있다" loading="lazy" decoding="async"></span>
+              <span class="life-item__body">
+                <span class="label">GREEN LIFE</span>
+                <span class="life-item__title">겨울왕국에서 길을 잃다</span>
+                <span class="life-item__summary">얼어붙은 호수와 강이 열어주던 길. 기후변화로 얼음이 사라지며 함께 끊어질 위기에 놓인 세 지역의 길과 전통.</span>
+                <span class="card__meta"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 6분</span>
+              </span>
             </a>
-          </article>
-          <article class="card card--lg span-6" data-rise>
-            <a class="card__link" href="articles/travel-mate.html">
-              <div class="card__media"><img src="assets/images/2026-10/travel-mate/00_hero_seoraksan_16x9.jpg" width="912" height="513" alt="눈 덮인 설악산 능선과 상고대가 핀 산책로" loading="lazy" decoding="async"></div>
-              <div class="card__body">
-                <p class="label">TRAVEL MATE</p>
-                <h3 class="card__title">산과 바다 사이, 머물고 싶은 도시 속초</h3>
-                <p class="card__summary">설악산에서 영랑호, 영금정, 아바이마을까지. 속초고성지사 직원이 추천하는 산에서 바다로 이어지는 겨울 속초.</p>
-                <p class="card__meta"><span>직원 참여형 코너</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 2분</p>
-              </div>
+          </li>
+          <li class="life-item" data-rise>
+            <a class="card__link life-item__link" href="articles/refresh.html">
+              <span class="card__media life-item__media"><img src="assets/images/2026-10/refresh/00_hero_climbing_wall_16x9.jpg" width="912" height="513" alt="알록달록한 홀드가 붙은 클라이밍 벽을 한 직원이 오르고, 동료 세 명이 아래에서 지켜본다" loading="lazy" decoding="async"></span>
+              <span class="life-item__body">
+                <span class="label">REFRESH</span>
+                <span class="life-item__title">한 걸음씩 더 높이, 처음 만나는 클라이밍의 세계</span>
+                <span class="life-item__summary">“저기까지 갈 수 있을까?” 인천본부 ICT운영부 직원 네 명이 서로 응원하며 처음 오른 실내 클라이밍 벽.</span>
+                <span class="card__meta"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</span>
+              </span>
             </a>
-          </article>
-          <article class="card card--lg span-6" data-rise>
-            <a class="card__link" href="articles/refresh.html">
-              <div class="card__media"><img src="assets/images/2026-10/refresh/00_hero_climbing_wall_16x9.jpg" width="912" height="513" alt="알록달록한 홀드가 붙은 클라이밍 벽을 한 직원이 오르고, 동료 세 명이 아래에서 지켜본다" loading="lazy" decoding="async"></div>
-              <div class="card__body">
-                <p class="label">REFRESH</p>
-                <h3 class="card__title">한 걸음씩 더 높이, 처음 만나는 클라이밍의 세계</h3>
-                <p class="card__summary">“저기까지 갈 수 있을까?” 인천본부 ICT운영부 직원 네 명이 서로 응원하며 처음 오른 실내 클라이밍 벽.</p>
-                <p class="card__meta"><span>직원 체험형 코너</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>읽는 시간 4분</p>
-              </div>
-            </a>
-          </article>
-        </div>
+          </li>
+        </ul>
       </div>
     </section></div>
 
@@ -473,19 +478,19 @@
                   <span><span class="poll__corner">KEPCO NEWS</span>이달의 한전 소식</span>
                 </label>
                 <label class="choice">
-                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="art-culture" required>
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="travel-mate" required>
                   <span class="choice__mark" aria-hidden="true">8</span>
+                  <span><span class="poll__corner">TRAVEL MATE</span>산과 바다 사이, 머물고 싶은 도시 속초</span>
+                </label>
+                <label class="choice">
+                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="art-culture" required>
+                  <span class="choice__mark" aria-hidden="true">9</span>
                   <span><span class="poll__corner">ART &amp; CULTURE</span>사람은 왜 풍경 속에 들어왔을까?</span>
                 </label>
                 <label class="choice">
                   <input class="visually-hidden" type="radio" name="poll-2026-10" value="green-life" required>
-                  <span class="choice__mark" aria-hidden="true">9</span>
-                  <span><span class="poll__corner">GREEN LIFE</span>겨울왕국에서 길을 잃다</span>
-                </label>
-                <label class="choice">
-                  <input class="visually-hidden" type="radio" name="poll-2026-10" value="travel-mate" required>
                   <span class="choice__mark" aria-hidden="true">10</span>
-                  <span><span class="poll__corner">TRAVEL MATE</span>산과 바다 사이, 머물고 싶은 도시 속초</span>
+                  <span><span class="poll__corner">GREEN LIFE</span>겨울왕국에서 길을 잃다</span>
                 </label>
                 <label class="choice">
                   <input class="visually-hidden" type="radio" name="poll-2026-10" value="refresh" required>
@@ -542,13 +547,14 @@
     <button class="tabbar__item" type="button" data-scroll-top><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg>위로</button>
   </nav>
 
-  <nav class="remote" aria-label="리모컨" data-remote>
-    <ul>
-      <li><a class="remote__btn" href="articles/inception.html" aria-label="다음 기사: INCEPTION 전환의 시대, 인간의 자리" data-tip="다음 · INCEPTION"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
-      <li><a class="remote__btn" href="articles/refresh.html" aria-label="이전 기사: REFRESH 한 걸음씩 더 높이, 처음 만나는 클라이밍의 세계" data-tip="이전 · REFRESH"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
-      <li><a class="remote__btn" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a></li>
-      <li><button class="remote__btn" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></li>
-    </ul>
+  <nav class="remote remote--home" aria-label="섹션 바로가기" data-remote>
+    <ol class="dots" data-dots>
+      <li><a class="dots__link is-active" href="#spotlight" data-dot="spotlight" data-tip="SPOTLIGHT" aria-current="true"><span class="visually-hidden">SPOTLIGHT</span></a></li><li><a class="dots__link" href="#kepco-now" data-dot="kepco-now" data-tip="KEPCO NOW"><span class="visually-hidden">KEPCO NOW</span></a></li><li><a class="dots__link" href="#life" data-dot="life" data-tip="LIFE &amp; CULTURE"><span class="visually-hidden">LIFE &amp; CULTURE</span></a></li><li><a class="dots__link" href="#participate" data-dot="participate" data-tip="참여"><span class="visually-hidden">참여</span></a></li>
+    </ol>
+    <div class="remote__rounds">
+      <a class="remote__btn remote__round" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기 (새 창)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a>
+      <button class="remote__btn remote__round" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+    </div>
   </nav>
 </body>
 </html>

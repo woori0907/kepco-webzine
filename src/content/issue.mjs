@@ -68,12 +68,14 @@ export const issue = {
       id: 'life',
       name: 'LIFE & CULTURE', // 임시 이름
       desc: '일상을 넓히는 문화 · 환경 · 여행 · 체험',
+      // 분위기 전환: TRAVEL MATE를 화면 폭 가득 크게, 나머지 셋은 한 줄에 썸네일 | 설명 (size·span은 쓰지 않음)
+      layout: 'feature',
       items: [
         // 원고가 없는 SCIENCE LAB은 이번 호에서 뺌
-        { slug: 'art-culture', size: 'lg', span: 6 },
-        { slug: 'green-life', size: 'lg', span: 6 },
-        { slug: 'travel-mate', size: 'lg', span: 6 },
-        { slug: 'refresh', size: 'lg', span: 6 },
+        { slug: 'travel-mate', feature: true },
+        { slug: 'art-culture' },
+        { slug: 'green-life' },
+        { slug: 'refresh' },
       ],
       // 기사 템플릿이 아닌 별도 페이지 (articles/event.html)
       event: true,

@@ -13,7 +13,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { issue } from './content/issue.mjs';
 import { configureImages } from './lib/image.mjs';
-import { readingMinutes, flat } from './lib/html.mjs';
+import { readingMinutes, flat, plain } from './lib/html.mjs';
 import { setRoot, articleFile, ARTICLE_DIR, EVENT_SLUG } from './lib/paths.mjs';
 import { blockText } from './templates/blocks.mjs';
 import { page } from './templates/layout.mjs';
@@ -111,7 +111,7 @@ function prepare(raw, slug, section) {
   };
   const body = a.body.map(mark);
 
-  const text = [a.lead || '', ...body.map(blockText)].join(' ');
+  const text = [plain(a.lead || ''), ...body.map(blockText)].join(' ');
   return {
     ...a,
     body,
@@ -142,7 +142,7 @@ write('index.html', page({
   description: issue.intro,
   ogImage: issue.coverArt.src,
   styles: ['vendor/slick/slick.css', 'home.css'],
-  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dir-hover.js', 'vendor/jquery/jquery.min.js', 'vendor/slick/slick.min.js', 'now-carousel.js', 'cover-video.js', 'participation.js', 'newsletter.js'],
+  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dot-nav.js', 'vendor/jquery/jquery.min.js', 'vendor/slick/slick.min.js', 'now-carousel.js', 'cover-video.js', 'participation.js', 'newsletter.js'],
   main: homeMain(issue, bySlug),
 }));
 
@@ -155,7 +155,7 @@ articles.forEach((a) => {
     title: `${flat(a.title)} | KEPCO 웹진 ${issue.titleKo}`,
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'reactions.js', 'churu.js'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'reactions.js', 'churu.js', 'highlight.js'],
     styles: ['article.css', 'churu.css'],
     main: articleMain(a, issue),
   }));

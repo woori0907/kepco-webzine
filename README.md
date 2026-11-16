@@ -49,7 +49,7 @@ src/
 assets/
   css/  tokens · base · components · layout(공통) / home(메인) / article(기사) / event / guide / fonts
   js/   공통: menu · scroll-ui · smooth-scroll · rise · participation
-        메인: scene-bg(섹션 배경) · dir-hover(썸네일 방향 호버) · now-carousel(KEPCO NOW 캐러셀) · cover-video · newsletter
+        메인: scene-bg(섹션 배경) · dot-nav(사이드 점 내비게이션) · now-carousel(KEPCO NOW 캐러셀) · cover-video · newsletter
         기사: progress(읽기 진행) · toc-spy(목차 현재 위치) · lightbox(사진 크게 보기) · text-size(글자 크기)
         EVENT: event-entry(응모 폼 · 한마디 목록, 저장 방식 local/sheets)
   images/2026-10/<기사>/  웹용 JPG
@@ -65,6 +65,7 @@ tools/apps-script/         구글 스프레드시트로 응모 받을 때 시트
    `powershell -ExecutionPolicy Bypass -File tools/optimize-images.ps1 -Source <원본폴더> -Dest assets/images/2026-11`
 2. `src/content/issue.mjs`에서 호 정보·키워드·퀴즈와 `sections`(섹션별 코너 목록과 메인 배치)를, `tokens.css`에서 키워드색 3줄(`--color-key*`)을 바꿉니다.
 3. `src/content/articles/`에 기사 원고를 블록으로 넣습니다. 블록 종류는 `src/templates/blocks.mjs` 맨 위 표에 있습니다(인쇄본 모듈과 1:1).
+   - **형광펜 하이라이트**: 본문 글에서 중요한 문장을 `==이렇게==` 감싸면, 그 문장이 화면 가운데에 올 때 형광펜이 칠해지고 벗어나면 지워집니다(`assets/js/highlight.js`). 단락·리드·도입부·장소 소개·단계 설명에서 쓸 수 있고, 기사마다 1~2곳이 적당합니다. 색은 `article.css`의 `--hl-color`.
    - 원고가 아직 없는 코너는 `draft: true`와 코너·성격·제목만 적으면 자리 잡힌 페이지가 만들어집니다. 원고가 들어오면 `draft`를 지우고 내용을 채웁니다. 원고 준비 중인 기사는 독자 설문 보기에서 빠집니다.
 4. `node src/build.mjs` → `index.html`, `articles/`, `guide/`에 HTML이 생성됩니다(기사 폴더는 매번 비우고 새로 만듭니다). 생성기는 alt가 빠진 이미지, 3줄이 아닌 요약 등을 오류로 알려 줍니다.
 
@@ -115,4 +116,6 @@ Node.js(18 이상)만 있으면 되고 설치할 패키지는 없습니다.
 - **지난 호 링크**: `src/content/issue.mjs`의 `ARCHIVE_BASE`. 지금은 현행 사이트 주소이고, 같은 서버에 올릴 때는 `'../'`로 바꿔도 됩니다.
 - **공유 미리보기(OG)**: `issue.siteUrl` 기준의 절대주소로 들어갑니다.
 - **KEPCO NOW 캐러셀**: 섹션에 `layout: 'carousel'`을 적으면 그 섹션이 캐러셀이 됩니다(`issue.mjs`). 넘김 간격은 `home.css`의 `--now-delay`.
-- **섹션 배경색 · 썸네일 모노톤 색**: `tokens.css`의 `--color-scene-*` · `--color-tone-*`. 색 강도는 `home.css`의 `--tone-strength`.
+- **글로우 커서**: 모든 페이지에서 마우스를 따라 파스텔 보라 빛 점이 꼬리처럼 남았다가 사라집니다(`assets/js/glow-cursor.js`, 레이아웃이 모든 페이지에 자동으로 넣음). 색은 `tokens.css`의 `--glow-color` · `--glow-core`, 점 크기·번짐·남는 시간·촘촘함은 스크립트 맨 위 설정. 터치 기기와 ‘움직임 줄이기’ 설정에서는 꺼집니다.
+- **동그라미 커서**: 원래 화살표 대신 작은 점 + 늦게 따라오는 원(`assets/js/cursor.js`, 모양은 `layout.css`의 `.cursor`). 링크·버튼 위에서는 원이 커지며 옅은 보라로 채워지고, 누르는 동안 작아집니다. 글자 입력 칸 위에서는 원래 I자 커서가 나옵니다. 터치 기기와 ‘움직임 줄이기’ 설정에서는 원래 커서 그대로.
+- **섹션 배경색**: `tokens.css`의 `--color-scene-*`. 썸네일은 원래 색 그대로이고, 마우스를 올리면 빛이 한 번 훑고 지나갑니다(`home.css` 맨 아래).

@@ -123,9 +123,67 @@ function carousel(s, articles) {
         </div>`;
 }
 
+/**
+ * 전환 배치 (섹션의 layout: 'feature') — 분위기를 바꾸는 섹션 (LIFE & CULTURE)
+ *   맨 앞 기사(feature: true): 화면 폭 가득 찬 사진 위에 소개 + 바로가기 버튼
+ *   나머지: 한 줄에 가로로 — 썸네일 | 설명 (썸네일 높이 = 설명 높이), 사이사이 가는 세로선
+ */
+function feature(a) {
+  return `
+        <article class="life-feature" data-rise>
+          <div class="life-feature__media">${img(a.hero, { sizes: '100vw' })}</div>
+          <div class="life-feature__inner container">
+            <div class="life-feature__body">
+              <p class="label">${esc(a.corner)}</p>
+              <h3 class="life-feature__title">${esc(flat(a.title))}</h3>
+              <p class="life-feature__summary">${esc(a.oneLine)}</p>
+              <a class="btn life-feature__go" href="${article(a.slug)}">기사 바로가기${icon('right')}<span class="visually-hidden"> ${esc(a.corner)} ${esc(flat(a.title))}</span></a>
+            </div>
+          </div>
+        </article>`;
+}
+
+function rowCard(a) {
+  return `
+          <li class="life-item" data-rise>
+            <a class="card__link life-item__link" href="${article(a.slug)}">
+              <span class="card__media life-item__media${a.hero.art ? ` is-${a.hero.art}` : ''}">${img(a.card || a.hero, { sizes: '(min-width: 1024px) 180px, 40vw' })}</span>
+              <span class="life-item__body">
+                <span class="label">${esc(a.corner)}</span>
+                <span class="life-item__title">${esc(flat(a.title))}</span>
+                <span class="life-item__summary">${esc(a.oneLine)}</span>
+                <span class="card__meta">${icon('clock')}${readLabel(a)}</span>
+              </span>
+            </a>
+          </li>`;
+}
+
 function section(s, bySlug, coverStory, index) {
   const items = s.items.filter((item) => item.slug !== coverStory);
   if (!items.length) return '';
+  const lead = s.layout === 'feature' ? items.find((item) => item.feature) : null;
+  const head = `
+        <div class="section-head">
+          <div>
+            <p class="section-head__num">${String(index + 1).padStart(2, '0')}</p>
+            <h2 class="section-head__title" id="${s.id}-title">${esc(s.name)}</h2>
+            <p class="section-head__desc">${esc(s.desc)}</p>
+          </div>
+        </div>`;
+  if (lead) {
+    const rest = items.filter((item) => item !== lead);
+    return `
+    <section class="section home-section scene-${s.id} is-feature" id="${s.id}" aria-labelledby="${s.id}-title" data-scene="${s.id}">
+      <div class="container">${head}
+      </div>
+      ${feature(bySlug[lead.slug])}
+      <div class="container">
+        <ul class="life-row">
+          ${each(rest, (item) => rowCard(bySlug[item.slug]))}
+        </ul>
+      </div>
+    </section>`;
+  }
   const body = s.layout === 'carousel'
     ? carousel(s, items.map((item) => bySlug[item.slug]))
     : `

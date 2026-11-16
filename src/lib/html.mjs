@@ -7,6 +7,20 @@ export function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (c) => ESC[c]);
 }
 
+/**
+ * 본문 글 — esc + 형광펜 표시
+ * 원고에서 ==이렇게== 감싼 부분은 <mark class="hl">로 바뀌고,
+ * 화면 가운데에 들어오면 형광펜이 칠해집니다 (assets/js/highlight.js)
+ */
+export function rich(value) {
+  return esc(value).replace(/==(.+?)==/g, '<mark class="hl">$1</mark>');
+}
+
+/** 형광펜 표시(==)를 뺀 순수 텍스트 — 읽는 시간 계산 등 */
+export function plain(value) {
+  return String(value ?? '').replace(/==(.+?)==/g, '$1');
+}
+
 /** 제목 안의 줄바꿈(\n) → 태블릿 이상에서만 줄을 나누는 <br> */
 export function lines(value) {
   return String(value ?? '')

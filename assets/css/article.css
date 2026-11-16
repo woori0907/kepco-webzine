@@ -2612,3 +2612,36 @@
     grid-template-columns: 32px minmax(0, 1fr);
   }
 }
+
+/* --------------------------------------------------------------------------
+   형광펜 하이라이트 (원고의 ==문장==, assets/js/highlight.js)
+   문장이 화면 가운데에 오면 왼쪽부터 칠해지고, 벗어나면 지워짐
+   여러 줄에 걸쳐도 줄마다 칠해지도록 box-decoration-break: clone
+   -------------------------------------------------------------------------- */
+mark.hl {
+  --hl-color: rgba(255, 240, 70, 0.95); /* 밝은 형광 노랑 */
+  padding: 0 2px;
+  color: inherit;
+  font-weight: var(--weight-bold); /* 처음부터 굵게 (형광펜만 움직임) */
+  background-color: transparent; /* 브라우저 기본 노란 바탕 제거 */
+  background-image: linear-gradient(transparent 55%, var(--hl-color) 55%, var(--hl-color) 92%, transparent 92%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.has-hl mark.hl {
+  background-size: 0% 100%;
+  transition: background-size 900ms cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+
+.has-hl mark.hl.is-on {
+  background-size: 100% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .has-hl mark.hl {
+    transition: none;
+  }
+}

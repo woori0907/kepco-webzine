@@ -543,6 +543,103 @@
   transform: translate(0, -50%);
 }
 
+/* --------------------------------------------------------------------------
+   메인 사이드 내비게이션 (remote--home)
+   점: 섹션 바로가기 — 지금 섹션은 길쭉한 막대 / 아래: 따로 떨어진 원형 버튼(지난 호 · 맨 위로)
+   -------------------------------------------------------------------------- */
+.remote--home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  /* 위치는 기사 페이지 리모컨과 같은 오른쪽 아래 (.remote) */
+}
+
+.remote .dots li + li {
+  border-top: 0; /* 리모컨 버튼 사이 구분선은 점에는 쓰지 않음 */
+}
+
+.dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0;
+}
+
+.dots__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px; /* 누르는 영역은 넉넉하게, 점은 작게 */
+}
+
+.dots__link::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+  opacity: 0.28;
+  transition: height var(--duration-base) var(--ease-out), opacity var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.dots__link:hover::after {
+  opacity: 0.6;
+}
+
+.dots__link.is-active::after {
+  height: 22px;
+  opacity: 1;
+  background: var(--accent-ink);
+}
+
+/* 이름표 — 리모컨 버튼과 같은 모양 */
+.dots__link::before {
+  content: attr(data-tip);
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--bg);
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(4px, -50%);
+  transition: opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+  pointer-events: none;
+}
+
+.dots__link:hover::before,
+.dots__link:focus-visible::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.remote__rounds {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.remote__round {
+  background: var(--bg);
+  border: var(--border) solid var(--line);
+  box-shadow: 0 6px 20px rgba(20, 20, 20, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dots__link::after {
+    transition: none;
+  }
+}
+
 @media (max-width: 1023px) {
   .remote {
     display: none;
@@ -602,4 +699,84 @@
   .card__link:hover .card__media img {
     transform: none;
   }
+}
+
+/* 글로우 커서 캔버스 (assets/js/glow-cursor.js) — 화면 전체, 클릭·선택은 그대로 통과 */
+.glow-cursor {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   동그라미 커서 (assets/js/cursor.js) — 작은 점 + 늦게 따라오는 원
+   스크립트가 켜진 PC에서만 원래 화살표를 숨김. 글자 입력 칸 위에서는 원래 I자 커서
+   -------------------------------------------------------------------------- */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.has-cursor.cursor-text :is(input, textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.cursor-on .cursor {
+  opacity: 1;
+}
+
+.cursor-on.cursor-text .cursor {
+  opacity: 0;
+}
+
+.cursor--dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--accent-ink);
+}
+
+.cursor--ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1.5px solid var(--accent-ink);
+  background: transparent;
+  transition:
+    opacity 200ms ease,
+    width var(--duration-base) var(--ease-out),
+    height var(--duration-base) var(--ease-out),
+    margin var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+/* 링크·버튼 위: 원이 커지고 옅은 보라로 채워짐 */
+.cursor--ring.is-link {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: transparent;
+  background: rgba(190, 166, 230, 0.35);
+}
+
+/* 누르는 동안 */
+.cursor--ring.is-down {
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
 }

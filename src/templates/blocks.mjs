@@ -28,7 +28,7 @@
 //
 // 블록마다 class="b-..." 하나만 붙여 CSS(article.css)에서 모양을 정합니다.
 
-import { esc, each, when, flat } from '../lib/html.mjs';
+import { esc, each, when, flat, rich, plain } from '../lib/html.mjs';
 import { img } from '../lib/image.mjs';
 import { icon } from './icons.mjs';
 
@@ -45,7 +45,7 @@ function ratioClass(ratio) {
 }
 
 const renderers = {
-  p: (b) => `<p class="b-p">${esc(b.text)}</p>`,
+  p: (b) => `<p class="b-p">${rich(b.text)}</p>`,
 
   h2: (b) => `<h2 class="b-h2" id="${b.id}">${esc(b.text)}</h2>`,
 
@@ -154,7 +154,7 @@ const renderers = {
     </aside>`,
 
   // 리드문을 본문 중간(예: 도입부 뒤)에 둘 때
-  lead: (b) => `<p class="b-lead">${esc(b.text)}</p>`,
+  lead: (b) => `<p class="b-lead">${rich(b.text)}</p>`,
 
   // 도입부 — 인쇄본 RE: SHIFT 쪽. 챕터(chapter)와 같은 2단: 왼쪽 라벨 · 제목 | 세로 선 | 오른쪽 글
   //   label 'RE: SHIFT'  kicker '새로고침!'(목차에 들어감)  title 제목(줄바꿈은 띄어쓰기로)
@@ -170,10 +170,10 @@ const renderers = {
           </h2>
         </div>
         <div class="b-opener__body">
-          ${each(b.text, (t) => `<p class="b-p">${esc(t)}</p>`)}
+          ${each(b.text, (t) => `<p class="b-p">${rich(t)}</p>`)}
           ${when(b.quote, () => `<blockquote class="b-opener__quote"><p>${esc(b.quote)}</p></blockquote>`)}
           ${when(b.subhead, () => `<h3 class="b-opener__sub">${esc(b.subhead)}</h3>`)}
-          ${each(b.after, (t) => `<p class="b-p">${esc(t)}</p>`)}
+          ${each(b.after, (t) => `<p class="b-p">${rich(t)}</p>`)}
         </div>
       </div>
     </section>`,
@@ -216,7 +216,7 @@ const renderers = {
         <span class="b-step__num" aria-hidden="true">${i + 1}</span>
         <div class="b-step__text">
           <p class="b-step__title">${esc(s.title)}</p>
-          <p class="b-step__desc">${esc(s.text)}</p>
+          <p class="b-step__desc">${rich(s.text)}</p>
         </div>
         ${when(s.photo, () => `<div class="b-step__photo">${img(s.photo, { sizes: '(min-width: 768px) 160px, 112px' })}</div>`)}
       </li>`)}
@@ -347,7 +347,7 @@ const renderers = {
             <span class="b-spot__name">${esc(b.name)}</span>
             <span class="b-spot__sub">${esc(b.title)}</span>
           </h2>
-          <p class="b-spot__body">${esc(b.text)}</p>
+          <p class="b-spot__body">${rich(b.text)}</p>
         </div>
         <div class="b-spot__notes">
           ${when(b.pick, () => `
@@ -385,6 +385,10 @@ export function renderBlock(block) {
 
 /** 읽는 시간 계산에 쓰는 순수 텍스트 */
 export function blockText(block) {
+  return plain(rawText(block));
+}
+
+function rawText(block) {
   switch (block.type) {
     case 'p':
     case 'h2':
@@ -406,9 +410,9 @@ export function blockText(block) {
     case 'steps':
       return block.items.map((s) => `${s.title} ${s.text}`).join(' ');
     case 'chapter':
-      return block.parts.map((p) => [p.kicker, p.title, ...(p.blocks || []).map(blockText)].join(' ')).join(' ');
+      return block.parts.map((p) => [p.kicker, p.title, ...(p.blocks || []).map(rawText)].join(' ')).join(' ');
     case 'row':
-      return (block.blocks || []).map(blockText).join(' ');
+      return (block.blocks || []).map(rawText).join(' ');
     case 'voices':
       return block.items.map((v) => v.text).join(' ');
     case 'aside':

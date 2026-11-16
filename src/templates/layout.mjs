@@ -115,6 +115,30 @@ function remote(issue, articles, currentSlug) {
 }
 
 /**
+ * 메인 전용 사이드 내비게이션 (데스크톱 오른쪽 고정)
+ *   점(dot) — 섹션(SPOTLIGHT · KEPCO NOW · LIFE & CULTURE · 참여)으로 이동, 지금 보는 섹션이 길게 표시 (dot-nav.js)
+ *   그 아래 따로 떨어진 원형 버튼 — 지난 호 보기 · 맨 위로
+ */
+function dotnav(issue) {
+  const stops = [
+    ...issue.sections.map((s) => ({ id: s.id, name: s.name })),
+    { id: 'participate', name: '참여' },
+  ];
+  const round = (tag, rest, iconName, label) =>
+    `<${tag} class="remote__btn remote__round" ${rest} aria-label="${esc(label)}" data-tip="${esc(label)}">${icon(iconName)}</${tag}>`;
+  return `
+  <nav class="remote remote--home" aria-label="섹션 바로가기" data-remote>
+    <ol class="dots" data-dots>
+      ${each(stops, (s, i) => `<li><a class="dots__link${i === 0 ? ' is-active' : ''}" href="#${s.id}" data-dot="${s.id}" data-tip="${esc(s.name)}"${i === 0 ? ' aria-current="true"' : ''}><span class="visually-hidden">${esc(s.name)}</span></a></li>`)}
+    </ol>
+    <div class="remote__rounds">
+      ${round('a', `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"`, 'archive', '지난 호 보기 (새 창)')}
+      ${round('button', 'type="button" data-scroll-top', 'up', '맨 위로')}
+    </div>
+  </nav>`;
+}
+
+/**
  * @param {object} p
  * @param {object} p.issue
  * @param {object[]} p.articles
@@ -166,7 +190,7 @@ export function page(p) {
 ${p.styles.map((s) => `  <link rel="stylesheet" href="${fileUrl(s, 'css')}">`).join('\n')}
 
   <script>document.documentElement.classList.add('js');try{var ts=localStorage.getItem('kepco-webzine:text-size');if(ts==='1'||ts==='2')document.documentElement.setAttribute('data-text-size',ts);}catch(e){}</script>
-${p.scripts.map((s) => `  <script src="${fileUrl(s, 'js')}" defer></script>`).join('\n')}
+${[...p.scripts, 'glow-cursor.js', 'cursor.js'].map((s) => `  <script src="${fileUrl(s, 'js')}" defer></script>`).join('\n')}
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -178,7 +202,7 @@ ${p.main}
   </main>
 ${footer(issue)}
 ${tabbar(isHome)}
-${remote(issue, p.articles, p.current)}
+${isHome ? dotnav(issue) : remote(issue, p.articles, p.current)}
 </body>
 </html>
 `;

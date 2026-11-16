@@ -37,17 +37,16 @@
   --color-key: #b5a0c9; /* 메인 컬러 — 면 · 막대 · 선 · 표지 아트 (흰 배경 글자에는 쓰지 않음) */
   --color-key-ink: #634a80; /* 같은 색상의 진한 톤 — 글자 · 링크 · 버튼 (흰 배경 대비 7.4:1) */
   --color-key-tint: #f1ecf6; /* 옅은 강조 면 (진한 톤 글자 대비 6.4:1) */
+  /* 글로우 커서 (glow-cursor.js) — 흰 보케 원 · 밝은 바탕에서도 보이도록 바깥에 옅은 보라 빛 */
+  --glow-color: #a98ae6;
+  --glow-core: #ffffff;
 
   /* ---- Color: 섹션 배경 — 메인 컬러(#b5a0c9, H271)의 색상만 돌려 만든 옅은 톤 3가지 ----
      세 톤 모두 본문 글자·보조 글자·진한 톤 글자와 대비 AA(4.5:1) 이상 */
-  --color-scene-spotlight: #e8e0f0; /* H271 · 메인 컬러 그대로 — 기획·칼럼 */
-  --color-scene-now: #e1e0f0; /* H243 · 푸른 보라 — 회사 소식·기술 */
-  --color-scene-life: #f9eef4; /* H325 · 파스텔 로즈 — 문화·여행·체험 */
+  --color-scene-spotlight: #f5f0fb; /* H271 · 밝은 라벤더 — 기획·칼럼 */
+  --color-scene-now: #eef2fc; /* H225 · 밝은 하늘빛 — 회사 소식·기술 */
+  --color-scene-life: #fef3f6; /* H340 · 밝은 로즈 — 문화·여행·체험 */
 
-  /* 섹션 썸네일 모노톤 색 — 같은 색조의 중간 톤 (S30% · L58%) */
-  --color-tone-spotlight: #9574b4;
-  --color-tone-now: #7774b4;
-  --color-tone-life: #b899ab; /* 채도를 낮춘 로즈 그레이 */
 
   /* ---- Color: 상태 (브랜드 색 아님, 폼 오류에만 사용) ---------------------- */
   --color-error: #c8322b;

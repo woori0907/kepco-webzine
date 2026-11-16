@@ -2,7 +2,7 @@
 //   히어로(대표 이미지 + 제목) → 메타 → 3줄 요약 → 목차 → 리드 → 본문 부품 → 필자 소개
 //   다음·이전 기사와 지난 호는 오른쪽 아래 리모컨(layout.mjs)으로 이동합니다.
 
-import { esc, lines, each, when, readLabel } from '../lib/html.mjs';
+import { esc, lines, each, when, readLabel, rich } from '../lib/html.mjs';
 import { img } from '../lib/image.mjs';
 import { icon } from './icons.mjs';
 import { renderBlock } from './blocks.mjs';
@@ -129,7 +129,7 @@ export function articleMain(a, issue) {
       ${meta(a)}
       ${summary(a)}
       ${toc(a)}
-      ${when(a.lead, () => `<p class="b-lead">${esc(a.lead)}</p>`)}
+      ${when(a.lead, () => `<p class="b-lead">${rich(a.lead)}</p>`)}
       ${a.body.map(renderBlock).join('\n')}
       ${reactions(a, issue)}
       ${author(a)}

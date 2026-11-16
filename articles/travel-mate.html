@@ -36,6 +36,9 @@
   <script src="../assets/js/text-size.js" defer></script>
   <script src="../assets/js/reactions.js" defer></script>
   <script src="../assets/js/churu.js" defer></script>
+  <script src="../assets/js/highlight.js" defer></script>
+  <script src="../assets/js/glow-cursor.js" defer></script>
+  <script src="../assets/js/cursor.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -126,6 +129,12 @@
           <ol class="menu__list">
             
             <li class="menu__item">
+              <a class="menu__link" href="../articles/travel-mate.html" aria-current="page">
+                <span class="menu__corner">TRAVEL MATE</span>
+                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
+              </a>
+            </li>
+            <li class="menu__item">
               <a class="menu__link" href="../articles/art-culture.html">
                 <span class="menu__corner">ART &amp; CULTURE</span>
                 <span class="visually-hidden">: 사람은 왜 풍경 속에 들어왔을까?</span>
@@ -135,12 +144,6 @@
               <a class="menu__link" href="../articles/green-life.html">
                 <span class="menu__corner">GREEN LIFE</span>
                 <span class="visually-hidden">: 겨울왕국에서 길을 잃다</span>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a class="menu__link" href="../articles/travel-mate.html" aria-current="page">
-                <span class="menu__corner">TRAVEL MATE</span>
-                <span class="visually-hidden">: 산과 바다 사이, 머물고 싶은 도시 속초</span>
               </a>
             </li>
             <li class="menu__item">
@@ -222,7 +225,7 @@
         </ol>
       </div>
     </nav>
-      <p class="b-lead">설악산의 웅장한 능선과 푸른 동해가 맞닿아 있는 도시, 속초. 산과 바다, 호수와 골목이 가까운 거리에 어우러져 하루 안에서도 서로 다른 풍경을 만날 수 있는 곳이다. 이번 TRAVEL MATE에서는 속초·고성지사 직원들이 직접 추천하는 네 곳을 따라가본다. 설악산의 겨울 풍경부터 호수를 따라 걷는 산책길, 바다를 바라보며 잠시 쉬어가는 장소까지. 산에서 시작해 바다로 이어지는 속초 여행을 만나보자.</p>
+      <p class="b-lead">설악산의 웅장한 능선과 푸른 동해가 맞닿아 있는 도시, 속초. 산과 바다, 호수와 골목이 가까운 거리에 어우러져 <mark class="hl">하루 안에서도 서로 다른 풍경을 만날 수 있는 곳이다.</mark> 이번 TRAVEL MATE에서는 속초·고성지사 직원들이 직접 추천하는 네 곳을 따라가본다. 설악산의 겨울 풍경부터 호수를 따라 걷는 산책길, 바다를 바라보며 잠시 쉬어가는 장소까지. 산에서 시작해 바다로 이어지는 속초 여행을 만나보자.</p>
       
     <section class="b-spot is-wide" id="sec-1" aria-labelledby="sec-1-title">
       <figure class="b-spot__media">
@@ -394,7 +397,7 @@
       
     </div>
     
-  <div hidden data-churu="2026-10-churu" data-total="3" data-pages="inception,perspective,review,issue-now,next-wave,on-site,kepco-news,art-culture,green-life,travel-mate,refresh"
+  <div hidden data-churu="2026-10-churu" data-total="3" data-pages="inception,perspective,review,issue-now,next-wave,on-site,kepco-news,travel-mate,art-culture,green-life,refresh"
        data-img="../assets/images/2026-10/find-churu/churu.png" data-sprite="../assets/images/2026-10/find-churu/powercat-sprite.png" data-k="=wWb0hmLyMWN3kTMmNDZx0SdyVHaj1CZulmZvMXZsNWa0JXYv4iL"
        data-slug="travel-mate"></div>
   </article>
@@ -424,8 +427,8 @@
 
   <nav class="remote" aria-label="리모컨" data-remote>
     <ul>
-      <li><a class="remote__btn" href="../articles/refresh.html" aria-label="다음 기사: REFRESH 한 걸음씩 더 높이, 처음 만나는 클라이밍의 세계" data-tip="다음 · REFRESH"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
-      <li><a class="remote__btn" href="../articles/green-life.html" aria-label="이전 기사: GREEN LIFE 겨울왕국에서 길을 잃다" data-tip="이전 · GREEN LIFE"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="../articles/art-culture.html" aria-label="다음 기사: ART &amp; CULTURE 사람은 왜 풍경 속에 들어왔을까?" data-tip="다음 · ART &amp; CULTURE"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a class="remote__btn" href="../articles/kepco-news.html" aria-label="이전 기사: KEPCO NEWS 이달의 한전 소식" data-tip="이전 · KEPCO NEWS"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
       <li><a class="remote__btn" href="https://www.kepco.co.kr/KEPCO_FILE/html/2026_09/main.html" target="_blank" rel="noopener" aria-label="지난 호 보기 (새 창)" data-tip="지난 호 보기"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="4.5" width="17" height="4" rx="1"/><path d="M5 8.5V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5M10 12.5h4"/></svg></a></li>
       <li><button class="remote__btn" type="button" data-scroll-top aria-label="맨 위로" data-tip="맨 위로"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button></li>
     </ul>

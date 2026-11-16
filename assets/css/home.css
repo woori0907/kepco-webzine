@@ -408,92 +408,19 @@
 .has-scene body[data-scene-bg="life"] { background-color: var(--color-scene-life); }
 .has-scene body[data-scene-bg="surface"] { background-color: var(--surface); }
 
-/* 섹션 사이 구분이 배경색으로 충분하므로 섹션 위쪽 여백을 고르게 */
+/* 섹션 사이 구분이 배경색으로 충분하므로 섹션 위쪽 여백을 고르게
+   아래 여백은 두지 않아, 섹션 사이 간격 = 다음 섹션의 위 여백 하나 (참여 섹션 앞도 같음) */
+.home-section {
+  padding-bottom: 0;
+}
+
 .home-section + .home-section {
   padding-top: var(--section-space);
 }
 
 /* --------------------------------------------------------------------------
-   섹션 썸네일 모노톤
-   - 사진을 흑백으로 바꾼 뒤 섹션 색조를 ‘color’ 합성으로 덮어 한 가지 색의 명암으로 보이게 함
-   - 마우스가 들어온 방향에서 원래 색이 밀려 들어오고, 나간 방향으로 밀려 나감 (dir-hover.js)
-     · 원래 색 사진은 스크립트가 복제해 위에 겹치고, clip-path로 한쪽 끝에서 펼침
-     · 키보드 포커스는 방향이 없으므로 한 번에 원래 색
-     · 스크립트가 없으면 마우스를 올렸을 때 0.4초 동안 흐려지듯 원래 색으로 바뀜
-   - 마우스가 있는 기기에서만 적용 (터치 기기는 호버가 없으므로 원래 색 그대로)
-   -------------------------------------------------------------------------- */
-.scene-spotlight { --tone: var(--color-tone-spotlight); }
-.scene-kepco-now { --tone: var(--color-tone-now); }
-.scene-life { --tone: var(--color-tone-life); --tone-strength: 0.8; }
-
-@media (hover: hover) {
-  .home-section .card__media {
-    isolation: isolate; /* 색 합성이 카드 사진 안에서만 일어나도록 */
-  }
-
-  .home-section .card__media img {
-    filter: grayscale(1) contrast(1.05);
-    transition:
-      filter 400ms var(--ease-out),
-      transform var(--duration-base) var(--ease-out);
-  }
-
-  /* 사진이 있는 카드만 (회색 박스 자리에는 색을 입히지 않음) */
-  .home-section .card__media:has(img)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--tone);
-    mix-blend-mode: color;
-    opacity: var(--tone-strength, 1); /* 1보다 작으면 흑백 사진이 조금 비쳐 더 은은해짐 */
-    pointer-events: none;
-    transition: opacity 400ms var(--ease-out);
-  }
-
-  /* 스크립트가 없을 때: 흐려지듯 원래 색으로 */
-  html:not(.has-dirhover) .home-section .card__link:hover .card__media img,
-  html:not(.has-dirhover) .home-section .card__link:focus-visible .card__media img {
-    filter: none;
-  }
-
-  html:not(.has-dirhover) .home-section .card__link:hover .card__media::after,
-  html:not(.has-dirhover) .home-section .card__link:focus-visible .card__media::after {
-    opacity: 0;
-  }
-
-  /* 방향 감지: 원래 색 사진 레이어 */
-  .card__reveal {
-    position: absolute;
-    inset: 0;
-    z-index: 2; /* 모노톤 색 막(::after) 위 */
-    clip-path: inset(0 0 100% 0);
-    pointer-events: none;
-    transition: clip-path 450ms var(--ease-out);
-  }
-
-  .home-section .card__media .card__reveal img {
-    filter: none;
-  }
-
-  /* 펼치기 전 시작 위치 = 들어온 쪽 가장자리로 접힌 상태 */
-  .card__reveal[data-from="top"] { clip-path: inset(0 0 100% 0); }
-  .card__reveal[data-from="bottom"] { clip-path: inset(100% 0 0 0); }
-  .card__reveal[data-from="left"] { clip-path: inset(0 100% 0 0); }
-  .card__reveal[data-from="right"] { clip-path: inset(0 0 0 100%); }
-
-  .card__reveal.is-shown {
-    clip-path: inset(0 0 0 0);
-  }
-
-  .card__reveal.no-transition {
-    transition: none;
-  }
-}
-
-/* --------------------------------------------------------------------------
    KEPCO NOW 캐러셀 — 큰 기사 1개 + 아래 썸네일 (assets/js/now-carousel.js)
    - 큰 기사는 slick fade로 전환, 썸네일 위 진행 막대가 다 차면 다음 기사로
-   - 썸네일: 지금 기사만 원래 색, 나머지는 섹션 색 모노톤
    -------------------------------------------------------------------------- */
 .now {
   --now-delay: 6s; /* 자동 넘김 간격 */
@@ -723,35 +650,6 @@
   to { transform: scaleX(1); }
 }
 
-/* 썸네일 모노톤: 지금 기사·마우스 올린 썸네일만 원래 색 */
-.now-thumb__media img {
-  filter: grayscale(1) contrast(1.05);
-  transition: filter 400ms var(--ease-out);
-}
-
-.now-thumb__media:has(img)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--tone);
-  mix-blend-mode: color;
-  opacity: var(--tone-strength, 1);
-  pointer-events: none;
-  transition: opacity 400ms var(--ease-out);
-}
-
-.now-thumb.is-active .now-thumb__media img,
-.now-thumb__link:hover .now-thumb__media img,
-.now-thumb__link:focus-visible .now-thumb__media img {
-  filter: none;
-}
-
-.now-thumb.is-active .now-thumb__media::after,
-.now-thumb__link:hover .now-thumb__media::after,
-.now-thumb__link:focus-visible .now-thumb__media::after {
-  opacity: 0;
-}
-
 @media (max-width: 1023px) {
   .now-feature__link {
     grid-template-columns: minmax(0, 1fr);
@@ -798,5 +696,283 @@
 @media (prefers-reduced-motion: reduce) {
   .now.is-ready .now-thumb.is-active .now-thumb__progress {
     animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LIFE & CULTURE 전환 배치 (섹션 layout: 'feature')
+   - 앞 섹션들(정보성)과 분위기를 바꾸는 자리: TRAVEL MATE를 화면 폭 가득, 사진 위에 소개 + 바로가기
+   - 나머지 셋: 한 줄에 가로로, 썸네일 | 설명 (썸네일 높이 = 설명 높이), 가운데 기사 앞뒤로 가는 세로선
+   -------------------------------------------------------------------------- */
+.life-feature {
+  position: relative;
+  margin-top: var(--space-6);
+  min-height: clamp(420px, 56vw, 720px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--color-black);
+  color: var(--text-on-dark);
+}
+
+.life-feature__media {
+  position: absolute;
+  inset: 0;
+}
+
+.life-feature__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+/* 글이 놓이는 왼쪽 아래를 어둡게 */
+.life-feature__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 55%, rgba(0, 0, 0, 0) 75%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 45%);
+}
+
+.life-feature__inner {
+  position: relative;
+  width: 100%;
+  padding-block: var(--space-8);
+}
+
+.life-feature__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 560px;
+}
+
+.life-feature .label {
+  color: var(--text-on-dark);
+}
+
+.life-feature__title {
+  font-size: var(--fs-title);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-bold);
+  text-wrap: balance;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+.life-feature__summary {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  opacity: 0.92;
+  word-break: keep-all;
+}
+
+.life-feature__go {
+  margin-top: var(--space-2);
+  background: var(--color-white);
+  color: var(--color-black);
+}
+
+.life-feature__go:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+.life-feature__go .icon {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--duration-fast) ease;
+}
+
+.life-feature__go:hover .icon {
+  transform: translateX(4px);
+}
+
+/* 나머지 기사 셋 — 세로로 쌓음: ART & CULTURE | GREEN LIFE | REFRESH
+   한 줄은 썸네일 | 설명, 썸네일 높이 = 설명 높이. GREEN LIFE 앞뒤로 0.5px 가로 구분선 */
+.life-row {
+  display: grid;
+  margin-top: var(--space-6);
+}
+
+.life-item {
+  min-width: 0;
+  padding-block: var(--space-4);
+}
+
+.life-item:first-child {
+  padding-top: 0;
+}
+
+.life-item:last-child {
+  padding-bottom: 0;
+}
+
+.life-item + .life-item {
+  border-top: 0.5px solid var(--line-strong);
+}
+
+.life-item__link {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  align-items: stretch; /* 썸네일 높이 = 설명 높이 */
+  gap: var(--space-5);
+}
+
+.life-item__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: auto; /* 카드 공통의 4:5 비율을 풀어, 높이를 설명 글에 맞춤 */
+  min-height: 180px;
+  background: var(--surface);
+}
+
+/* 사진은 칸을 채우기만 하고 높이를 정하지 않음 — 높이는 설명 글이 정함 */
+.life-item__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.life-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  max-width: 640px;
+  padding-block: var(--space-1);
+}
+
+.life-item__title {
+  font-size: var(--fs-subtitle);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-bold);
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.life-item__link:hover .life-item__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+.life-item__summary {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+/* 읽는 시간은 소개글 바로 아래 (썸네일이 더 높아도 아래로 밀리지 않게) */
+.life-item__body .card__meta {
+  margin-top: 4px;
+}
+
+@media (max-width: 1023px) {
+  .life-item__link {
+    grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 767px) {
+  .life-feature {
+    min-height: 0;
+    display: block;
+    background: none;
+    color: var(--text);
+  }
+
+  .life-feature__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  .life-feature__media::after {
+    display: none;
+  }
+
+  .life-feature__inner {
+    padding-block: var(--space-3) 0;
+  }
+
+  .life-feature .label {
+    color: var(--accent-ink);
+  }
+
+  .life-feature__title {
+    text-shadow: none;
+  }
+
+  .life-feature__summary {
+    color: var(--text-muted);
+    opacity: 1;
+  }
+
+  .life-feature__go {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .life-item {
+    padding-block: var(--space-3);
+  }
+
+  .life-item__link {
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .life-item__title {
+    font-size: var(--fs-body);
+  }
+
+  .life-item__summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: var(--fs-caption);
+  }
+
+  .life-item__media {
+    min-height: 120px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   썸네일 빛 훑기 — 마우스를 올리면 사선 빛이 왼쪽에서 오른쪽으로 한 번 지나감
+   (메인 카드 · KEPCO NOW 큰 기사·썸네일 · LIFE & CULTURE 목록)
+   - 마우스가 있는 기기에서만, 움직임 줄이기 설정이면 꺼짐
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :is(.card__media, .now-feature__media, .now-thumb__media)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(110deg, transparent 34%, rgba(255, 255, 255, 0.35) 44%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.35) 56%, transparent 66%);
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  :is(.card__link, .now-feature__link, .now-thumb__link):hover :is(.card__media, .now-feature__media, .now-thumb__media)::before {
+    animation: thumb-sweep 0.9s ease-in-out both;
+  }
+
+  @keyframes thumb-sweep {
+    0% { transform: translateX(-100%); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 1; }
   }
 }
