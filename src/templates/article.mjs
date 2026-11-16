@@ -25,9 +25,10 @@ function course(a) {
 
 // hero.layout 'top' — 인쇄본 표지처럼 제목을 사진 위쪽(하늘)에 둠
 // hero.credit       — 사진 출처 (제목 아래 작은 글씨)
+// hero.tone 'light' — 밝은 사진 위에 어두운 글씨 (인쇄본 NEXT WAVE 표지)
 function hero(a) {
   const art = a.hero.art ? ` is-${a.hero.art}` : '';
-  const layout = a.hero.layout ? ` is-${a.hero.layout}` : '';
+  const layout = (a.hero.layout ? ` is-${a.hero.layout}` : '') + (a.hero.tone ? ` is-${a.hero.tone}` : '');
   return `
     <header class="a-hero${layout}${a.course ? ' has-course' : ''}">
       <div class="a-hero__media${art}">

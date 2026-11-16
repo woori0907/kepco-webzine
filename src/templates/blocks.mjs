@@ -20,6 +20,11 @@
 //   chapter     색 면 챕터             주제별 색 면 페이지 (Intuition · Experience)
 //   note        메모 카드              A LITTLE NOTE
 //   steps       번호 목록 + 작은 사진  습관·방법 1~4
+//   flow        구조도                 인포그래픽 (입력 → 판정 상자 흐름)
+//   row         2단 묶음               나란히 놓인 정보 박스 2개
+//   voices      그림 + 한마디          말풍선 인물 일러스트
+//   aside       곁글                   사진 옆 설명 상자
+//   foot        각주                   본문 아래 각주
 //
 // 블록마다 class="b-..." 하나만 붙여 CSS(article.css)에서 모양을 정합니다.
 
@@ -52,9 +57,11 @@ const renderers = {
       ${when(b.cite, () => `<figcaption>${esc(b.cite)}</figcaption>`)}
     </figure>`,
 
+  //   quote  사진 위에 얹는 인용 상자 (인쇄본 ART & CULTURE 35쪽)
   figure: (b) => `
-    <figure class="b-figure ${ratioClass(b.ratio)}${b.wide ? ' is-wide' : ''}${b.narrow ? ' is-narrow' : ''}">
+    <figure class="b-figure ${ratioClass(b.ratio)}${b.wide ? ' is-wide' : ''}${b.narrow ? ' is-narrow' : ''}${b.quote ? ' has-quote' : ''}">
       <div class="b-figure__media">${img(b, { sizes: b.wide ? WIDE_SIZES : BODY_SIZES })}</div>
+      ${when(b.quote, () => `<blockquote class="b-figure__quote"><p>${esc(b.quote)}</p></blockquote>`)}
       ${when(b.caption, () => `<figcaption>${esc(b.caption)}</figcaption>`)}
     </figure>`,
 
@@ -116,8 +123,10 @@ const renderers = {
 
   people: (b) => `
     <section class="b-people is-wide" aria-labelledby="${b.id}">
-      <p class="b-box-label">${esc(b.label || 'Mini Interview')}</p>
-      <h2 class="b-people__title" id="${b.id}">${esc(b.title)}</h2>
+      ${b.title
+        ? `<p class="b-box-label">${esc(b.label || 'Mini Interview')}</p>
+      <h2 class="b-people__title" id="${b.id}">${esc(b.title)}</h2>`
+        : `<h2 class="b-people__title is-label" id="${b.id}" lang="en">${esc(b.label || 'Mini Interview')}</h2>`}
       <ul class="b-people__list">
         ${each(b.items, (person) => `
         <li class="b-person">
@@ -190,9 +199,10 @@ const renderers = {
     </section>`,
 
   // 메모 카드 — 비스듬한 종이 메모 (인쇄본 A LITTLE NOTE)
+  //   label  기본 'A LITTLE NOTE', ''이면 라벨 없이
   note: (b) => `
-    <aside class="b-note" aria-label="${esc(b.label || 'A LITTLE NOTE')}">
-      <p class="b-note__label" lang="en">${esc(b.label || 'A LITTLE NOTE')}</p>
+    <aside class="b-note" aria-label="${esc(b.label ?? 'A LITTLE NOTE') || '메모'}">
+      ${when(b.label ?? 'A LITTLE NOTE', () => `<p class="b-note__label" lang="en">${esc(b.label ?? 'A LITTLE NOTE')}</p>`)}
       <p class="b-note__quote">${esc(b.quote)}</p>
       ${when(b.text, () => `<p class="b-note__text">${esc(b.text)}</p>`)}
     </aside>`,
@@ -211,6 +221,63 @@ const renderers = {
         ${when(s.photo, () => `<div class="b-step__photo">${img(s.photo, { sizes: '(min-width: 768px) 160px, 112px' })}</div>`)}
       </li>`)}
     </ol>`,
+
+  // 구조도 — 위에서 아래로 이어지는 상자 흐름 (인쇄본 NEXT WAVE ‘SEDA 구조도’)
+  //   title  화면낭독기·캡션용 이름
+  //   boxes  [{ label?, title, items?: [{ photo?, name, text }], join?: [항목…](+로 이음),
+  //            scale?: [등급…](번호 매김), checks?: [문장…] }]
+  flow: (b) => `
+    <figure class="b-flow" aria-label="${esc(b.title)}">
+      <ol class="b-flow__list">
+        ${each(b.boxes, (box) => `
+        <li class="b-flow__box">
+          <p class="b-flow__head">${when(box.label, () => `<span lang="en">${esc(box.label)}</span>`)}<b>${esc(box.title)}</b></p>
+          ${when(box.items, () => `
+          <ul class="b-flow__items">
+            ${each(box.items, (it) => `
+            <li>${when(it.photo, () => `<span class="b-flow__photo">${img(it.photo, { sizes: '88px' })}</span>`)}<span><b>${esc(it.name)}</b>${esc(it.text)}</span></li>`)}
+          </ul>`)}
+          ${when(box.join, () => `<p class="b-flow__join">${box.join.map(esc).join('<span aria-hidden="true">+</span>')}</p>`)}
+          ${when(box.scale, () => `<ol class="b-flow__scale">${each(box.scale, (s) => `<li>${esc(s)}</li>`)}</ol>`)}
+          ${when(box.checks, () => `<ul class="b-flow__checks">${each(box.checks, (s) => `<li>${icon('check')}${esc(s)}</li>`)}</ul>`)}
+        </li>`)}
+      </ol>
+      ${when(b.caption, () => `<figcaption>${esc(b.caption)}</figcaption>`)}
+    </figure>`,
+
+  // 2단 묶음 — 정보 박스 두 개를 나란히 (좁은 화면에서는 위아래)
+  row: (b) => `
+    <div class="b-row">
+      ${(b.blocks || []).map(renderBlock).join('\n')}
+    </div>`,
+
+  // 그림 + 한마디 — 말풍선 인물 일러스트 (인쇄본 REFRESH 48쪽)
+  //   items [{ photo: { src, alt }, text }]
+  voices: (b) => `
+    <section class="b-voices is-wide" aria-label="${esc(b.title || '참여자 한마디')}">
+      <ul class="b-voices__list">
+        ${each(b.items, (v) => `
+        <li class="b-voice">
+          <span class="b-voice__face">${img(v.photo, { sizes: '96px' })}</span>
+          <p class="b-voice__text">${esc(v.text)}</p>
+        </li>`)}
+      </ul>
+    </section>`,
+
+  // 곁글 — 사진 옆 짧은 설명 상자
+  aside: (b) => `
+    <aside class="b-aside"${b.title ? ` aria-label="${esc(b.title)}"` : ''}>
+      ${when(b.title, () => `<p class="b-aside__title">${esc(b.title)}</p>`)}
+      <p>${esc(b.text)}</p>
+    </aside>`,
+
+  // 각주 — 본문 속 ¹ ² 표시에 대응
+  foot: (b) => `
+    <aside class="b-foot" aria-label="각주">
+      <ol>
+        ${each(b.items, (t) => `<li>${esc(t)}</li>`)}
+      </ol>
+    </aside>`,
 
   // ---- 원고 준비 중인 코너용 자리 표시 ----
   draft: (b) => `
@@ -235,6 +302,7 @@ const renderers = {
 
   //   rows   [['참여 대상', '한전 임직원'], …]   note  * 작은 안내
   //   image  { src, alt }  오른쪽 원형 사진       tone  'paper'면 미색 면 (인쇄본 안내 박스)
+  //   photo  { src, alt }  오른쪽 가로 사진 (관람 TIP 같은 장소 소개)
   //   icon   라벨 앞 아이콘 이름                  wide  true면 본문보다 넓게 (지도 아래 이어 붙일 때)
   callout: (b) => `
     <aside class="b-callout${b.tone ? ` is-${b.tone}` : ''}${b.image ? ' has-image' : ''}${b.wide ? ' is-wide' : ''}" aria-label="${esc(b.title)}">
@@ -250,6 +318,7 @@ const renderers = {
         ${when(b.note, () => `<p class="b-callout__note">${esc(b.note)}</p>`)}
         ${when(b.action, () => `<a class="btn btn--primary" href="${esc(b.action.href)}">${esc(b.action.label)}${icon(b.action.icon || 'right')}</a>`)}
       </div>
+      ${when(b.photo, () => `<div class="b-callout__photo">${img(b.photo, { sizes: '(min-width: 768px) 360px, 100vw' })}</div>`)}
       ${when(b.image, () => `<div class="b-callout__image">${img(b.image, { sizes: '(min-width: 768px) 200px, 160px' })}</div>`)}
     </aside>`,
 
@@ -337,7 +406,15 @@ export function blockText(block) {
     case 'steps':
       return block.items.map((s) => `${s.title} ${s.text}`).join(' ');
     case 'chapter':
-      return block.parts.map((p) => [p.title, ...(p.blocks || []).map(blockText)].join(' ')).join(' ');
+      return block.parts.map((p) => [p.kicker, p.title, ...(p.blocks || []).map(blockText)].join(' ')).join(' ');
+    case 'row':
+      return (block.blocks || []).map(blockText).join(' ');
+    case 'voices':
+      return block.items.map((v) => v.text).join(' ');
+    case 'aside':
+      return block.text;
+    case 'flow':
+      return block.boxes.map((x) => [x.title, ...(x.items || []).map((i) => i.text), ...(x.checks || [])].join(' ')).join(' ');
     default:
       return '';
   }

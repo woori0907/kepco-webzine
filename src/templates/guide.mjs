@@ -31,7 +31,7 @@ const EXAMPLES = [
       type: 'images',
       cols: 1,
       items: [
-        { src: 'on-site/committee', alt: '입지선정위원회 회의장에서 위원들이 회의 테이블에 둘러앉아 있다', caption: '사진 한 장에 붙는 캡션.' },
+        { src: 'on-site/01_hvdc_test_hall', alt: '은색 구형 전극을 얹은 시험 설비들이 늘어선 HVDC 실증시험장 내부', caption: '사진 한 장에 붙는 캡션.' },
       ],
     },
   },
@@ -55,7 +55,7 @@ const EXAMPLES = [
       cols: 1,
       ratio: 'natural',
       items: [
-        { src: 'next-wave/platform', alt: 'ADMS 오픈 플랫폼과 연결된 업무 서비스 도식', caption: '도표는 원본 비율 그대로.' },
+        { src: 'next-wave/02_seda_diagram_infographic.png', alt: '센서 데이터와 유지보수 정보가 실시간 상태판정으로 이어지는 SEDA 구조도', caption: '도표는 원본 비율 그대로.' },
       ],
     },
   },
@@ -66,8 +66,8 @@ const EXAMPLES = [
       type: 'images',
       cols: 2,
       items: [
-        { src: 'refresh/paddle', alt: '보트 위의 직원들이 급류 앞에서 노를 젓고 있다', caption: '왼쪽 사진 캡션.' },
-        { src: 'refresh/swim', alt: '구명조끼를 입은 직원들이 강물에 나란히 떠 있다', caption: '오른쪽 사진 캡션.' },
+        { src: 'refresh/02_climbing_shoes', alt: '매트 위에 놓인 닳은 클라이밍 슈즈와 장비', caption: '왼쪽 사진 캡션.' },
+        { src: 'refresh/04_team_photo_sitting', alt: '클라이밍 벽 앞에 나란히 앉아 웃는 직원 네 명', caption: '오른쪽 사진 캡션.' },
       ],
     },
   },

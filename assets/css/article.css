@@ -216,6 +216,22 @@
   }
 }
 
+/* 밝은 사진 위 어두운 글씨 (hero.tone: 'light') — 인쇄본 NEXT WAVE 표지처럼 */
+@media (min-width: 768px) {
+  .a-hero.is-light .a-hero__media::after {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%);
+  }
+
+  .a-hero.is-light .a-hero__text,
+  .a-hero.is-light .a-hero__label {
+    color: var(--text);
+  }
+
+  .a-hero.is-light .a-hero__title {
+    text-shadow: none;
+  }
+}
+
 /* 태블릿: 코스 박스가 가운데 ‘본문 읽기’ 버튼과 겹치지 않게 좁게 (두 줄 머리) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .a-hero.has-course .a-course {
@@ -365,11 +381,11 @@
 }
 
 /* 박스·사진 앞뒤는 넉넉하게 */
-.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .a-summary, .a-toc) {
+.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .b-flow, .b-row, .b-voices, .a-summary, .a-toc) {
   margin-top: var(--space-6);
 }
 
-.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .a-summary, .a-toc) + * {
+.a-body > :is(.b-figure, .b-images, .b-quote, .b-data, .b-glossary, .b-people, .b-info, .b-callout, .b-map, .b-flow, .b-row, .b-voices, .a-summary, .a-toc) + * {
   margin-top: var(--space-6);
 }
 
@@ -1771,6 +1787,14 @@
   background: var(--color-paper);
 }
 
+.article.is-mist .a-body {
+  background: var(--color-mist);
+}
+
+.article.is-cream .a-body {
+  background: var(--color-cream);
+}
+
 /* 메모 카드 (note) — 구멍 뚫린 흰 종이를 비스듬히 */
 .b-note {
   position: relative;
@@ -2266,4 +2290,325 @@
 
   .lightbox__prev { left: var(--margin); }
   .lightbox__next { right: var(--margin); }
+}
+
+/* --------------------------------------------------------------------------
+   챕터 안 사진·상자 앞뒤 간격
+   -------------------------------------------------------------------------- */
+.b-chapter__main > :is(.b-figure, .b-images, .b-flow, .b-row, .b-steps, .b-aside, .b-callout, .b-data) {
+  margin-top: var(--space-5);
+}
+
+.b-chapter__main > :is(.b-figure, .b-images, .b-flow, .b-row, .b-aside, .b-callout, .b-data) + * {
+  margin-top: var(--space-5);
+}
+
+/* 사진 위 인용 상자 (figure quote) — 인쇄본 ART & CULTURE 35쪽 */
+.b-figure.has-quote {
+  position: relative;
+}
+
+.b-figure__quote {
+  position: absolute;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(440px, calc(100% - var(--space-6)));
+  padding: var(--space-2) var(--space-3);
+  border: var(--border) solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.82);
+  text-align: center;
+}
+
+.b-figure__quote p {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  font-weight: var(--weight-medium);
+  word-break: keep-all;
+}
+
+@media (max-width: 767px) {
+  .b-figure__quote {
+    position: static;
+    transform: none;
+    width: auto;
+    margin-top: var(--space-2);
+    background: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   구조도 (flow) — 상자를 위에서 아래로, 사이에 화살표
+   -------------------------------------------------------------------------- */
+.b-flow__list {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 520px;
+}
+
+.b-flow__box {
+  position: relative;
+  border: var(--border) solid var(--accent-ink);
+  background: var(--bg);
+}
+
+.b-flow__box + .b-flow__box::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(var(--space-5) * -1 + 6px);
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--accent-ink);
+  border-bottom: 2px solid var(--accent-ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.b-flow__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border) solid var(--accent-ink);
+  color: var(--accent-ink);
+  line-height: var(--lh-snug);
+}
+
+.b-flow__head span {
+  font-weight: var(--weight-bold);
+}
+
+.b-flow__head b {
+  font-weight: var(--weight-semibold);
+}
+
+.b-flow__items,
+.b-flow__join,
+.b-flow__scale,
+.b-flow__checks {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+}
+
+.b-flow__items li {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.b-flow__items li + li {
+  margin-top: var(--space-1);
+}
+
+.b-flow__items b {
+  display: block;
+  font-weight: var(--weight-bold);
+}
+
+.b-flow__photo img {
+  width: 100%;
+  height: auto;
+}
+
+.b-flow__join {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space-1);
+}
+
+.b-flow__join span {
+  color: var(--accent-ink);
+  font-weight: var(--weight-bold);
+}
+
+.b-flow__scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space-2);
+  list-style: none;
+  counter-reset: grade;
+  border-bottom: var(--border) solid var(--line);
+}
+
+.b-flow__scale li {
+  counter-increment: grade;
+}
+
+.b-flow__scale li::before {
+  content: counter(grade);
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  border: var(--border) solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+  vertical-align: 1px;
+}
+
+.b-flow__checks li {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.b-flow__checks .icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: var(--accent-ink);
+}
+
+.b-flow figcaption {
+  margin-top: var(--space-1);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   2단 묶음 (row) — 정보 박스 두 개 나란히
+   -------------------------------------------------------------------------- */
+.b-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.b-row .b-data__list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 599px) {
+  .b-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   그림 + 한마디 (voices) — 말풍선 인물 일러스트
+   -------------------------------------------------------------------------- */
+.b-voices__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5) var(--gutter);
+}
+
+.b-voice {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.b-voice:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) 96px;
+}
+
+.b-voice:nth-child(even) .b-voice__face {
+  order: 2;
+}
+
+.b-voice__face img {
+  width: 100%;
+  height: auto;
+}
+
+.b-voice__text {
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border) solid var(--line-strong);
+  border-radius: 16px;
+  background: var(--bg);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+@media (max-width: 767px) {
+  .b-voices__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .b-voice,
+  .b-voice:nth-child(even) {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .b-voice:nth-child(even) .b-voice__face {
+    order: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   곁글 (aside) · 각주 (foot)
+   -------------------------------------------------------------------------- */
+.b-aside {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--line-strong);
+  background: var(--surface);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+.b-aside__title {
+  margin-bottom: 4px;
+  font-weight: var(--weight-bold);
+}
+
+.b-foot {
+  padding-top: var(--space-2);
+  border-top: var(--border) solid var(--line);
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.b-foot ol {
+  list-style: none;
+}
+
+.b-foot li + li {
+  margin-top: 4px;
+}
+
+/* 미니 인터뷰 제목을 라벨 글자 그대로 쓸 때 (people, title 없음) */
+.b-people__title.is-label {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* 관람 TIP 같은 안내 상자 오른쪽 가로 사진 (callout photo) */
+.b-callout:has(.b-callout__photo) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.b-callout__photo img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .b-callout:has(.b-callout__photo) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+/* 사진 없는 단계 목록은 글이 오른쪽 끝까지 */
+.b-step:not(:has(.b-step__photo)) {
+  grid-template-columns: 36px minmax(0, 1fr);
+}
+
+@media (max-width: 767px) {
+  .b-step:not(:has(.b-step__photo)) {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
 }

@@ -100,7 +100,7 @@ function prepare(raw, slug, section) {
       };
     }
     if (['h2', 'people', 'spot', 'opener'].includes(block.type)) {
-      const text = { people: block.title, spot: block.name, opener: block.kicker }[block.type] || block.text;
+      const text = { people: block.title || '미니 인터뷰', spot: block.name, opener: block.kicker }[block.type] || block.text;
       const id = nextId(text, block.tag);
       return block.type === 'spot' ? { ...block, id, num: (spots += 1) } : { ...block, id };
     }

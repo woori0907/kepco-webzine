@@ -30,6 +30,8 @@
   --color-gray-2: #dcdcd7; /* 구분선 · 테두리 */
   --color-gray-3: #f4f4f0; /* 박스 · 면 */
   --color-paper: #fffbf6; /* 미색 종이 면 — 인쇄본 지도·안내 박스 (일러스트 지도 바탕과 같은 색) */
+  --color-mist: #eef2f2; /* 회청색 면 — 인쇄본 ART & CULTURE 바탕 */
+  --color-cream: #fdf6e3; /* 크림색 면 — 인쇄본 REFRESH 바탕 */
 
   /* ---- Color: 월별 키워드색 (2026.10 ‘전환’) — 호마다 이 3줄만 바꿉니다 ---- */
   --color-key: #b5a0c9; /* 메인 컬러 — 면 · 막대 · 선 · 표지 아트 (흰 배경 글자에는 쓰지 않음) */

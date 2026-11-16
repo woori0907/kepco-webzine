@@ -47,11 +47,9 @@ export const issue = {
       desc: '이달의 키워드를 여러 시선으로 깊게 들여다봅니다.',
       items: [
         { slug: 'inception' }, // 메인에서는 표지 자리에 들어감
-        { slug: 'theme-focus', size: 'lg', span: 8, rows: 2 },
-        { slug: 'perspective', size: 'sm', span: 4 },
-        { slug: 'inside', size: 'sm', span: 4 },
+        // 원고가 없는 THEME FOCUS · INSIDE · SCENE은 이번 호에서 뺌 (기사 파일은 남겨 둠)
+        { slug: 'perspective', size: 'lg', span: 6 },
         { slug: 'review', size: 'lg', span: 6 },
-        { slug: 'scene', size: 'lg', span: 6 },
       ],
     },
     {
@@ -69,11 +67,11 @@ export const issue = {
     {
       id: 'life',
       name: 'LIFE & CULTURE', // 임시 이름
-      desc: '일상을 넓히는 문화 · 과학 · 여행 · 체험',
+      desc: '일상을 넓히는 문화 · 환경 · 여행 · 체험',
       items: [
-        { slug: 'art-culture', size: 'lg', span: 4 },
-        { slug: 'science-lab', size: 'lg', span: 4 },
-        { slug: 'green-life', size: 'lg', span: 4 },
+        // 원고가 없는 SCIENCE LAB은 이번 호에서 뺌
+        { slug: 'art-culture', size: 'lg', span: 6 },
+        { slug: 'green-life', size: 'lg', span: 6 },
         { slug: 'travel-mate', size: 'lg', span: 6 },
         { slug: 'refresh', size: 'lg', span: 6 },
       ],
