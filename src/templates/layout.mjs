@@ -90,7 +90,7 @@ function tabbar(issue, isHome, isArticle) {
     ${isArticle
       ? `<button class="tabbar__item" type="button" data-share>${icon('share')}공유</button>`
       : `<a class="tabbar__item" href="${home('#participate')}">${icon('chat')}참여</a>`}
-    <a class="tabbar__item" href="${esc(issue.ebook)}" target="_blank" rel="noopener" aria-label="e북 보기 (새 창)">${icon('book')}e북</a>
+    <a class="tabbar__item" href="${esc(asset(issue.ebook))}" target="_blank" rel="noopener" aria-label="e북 보기 (새 창)">${icon('book')}e북</a>
     <button class="tabbar__item" type="button" data-scroll-top>${icon('up')}위로</button>
   </nav>`;
 }
@@ -114,7 +114,7 @@ function remote(issue, articles, currentSlug) {
       <li><${attrs.tag} class="remote__btn" ${attrs.rest} aria-label="${esc(label)}" data-tip="${esc(tip)}">${icon(iconName)}</${attrs.tag}></li>`;
   return `
   <nav class="remote" aria-label="리모컨" data-remote>
-    <ul>${item({ tag: 'a', rest: `href="${article(next.slug)}"` }, 'right', `다음 기사: ${next.name} ${next.title}`, `다음 · ${next.name}`)}${item({ tag: 'a', rest: `href="${article(prev.slug)}"` }, 'left', `이전 기사: ${prev.name} ${prev.title}`, `이전 · ${prev.name}`)}${isArticle ? item({ tag: 'button', rest: 'type="button" data-share' }, 'share', '이 기사 공유하기', '공유하기') : ''}${item({ tag: 'a', rest: `href="${esc(issue.ebook)}" target="_blank" rel="noopener"` }, 'book', 'e북 보기 (새 창)', 'e북 보기')}${item({ tag: 'a', rest: `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"` }, 'archive', '지난 호 보기 (새 창)', '지난 호 보기')}${item({ tag: 'button', rest: 'type="button" data-scroll-top' }, 'up', '맨 위로', '맨 위로')}
+    <ul>${item({ tag: 'a', rest: `href="${article(next.slug)}"` }, 'right', `다음 기사: ${next.name} ${next.title}`, `다음 · ${next.name}`)}${item({ tag: 'a', rest: `href="${article(prev.slug)}"` }, 'left', `이전 기사: ${prev.name} ${prev.title}`, `이전 · ${prev.name}`)}${isArticle ? item({ tag: 'button', rest: 'type="button" data-share' }, 'share', '이 기사 공유하기', '공유하기') : ''}${item({ tag: 'a', rest: `href="${esc(asset(issue.ebook))}" target="_blank" rel="noopener"` }, 'book', 'e북 보기 (새 창)', 'e북 보기')}${item({ tag: 'a', rest: `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"` }, 'archive', '지난 호 보기 (새 창)', '지난 호 보기')}${item({ tag: 'button', rest: 'type="button" data-scroll-top' }, 'up', '맨 위로', '맨 위로')}
     </ul>
   </nav>`;
 }
@@ -137,7 +137,7 @@ function dotnav(issue) {
       ${each(stops, (s, i) => `<li><a class="dots__link${i === 0 ? ' is-active' : ''}" href="#${s.id}" data-dot="${s.id}" data-tip="${esc(s.name)}"${i === 0 ? ' aria-current="true"' : ''}><span class="visually-hidden">${esc(s.name)}</span></a></li>`)}
     </ol>
     <div class="remote__rounds">
-      ${round('a', `href="${esc(issue.ebook)}" target="_blank" rel="noopener"`, 'book', 'e북 보기 (새 창)')}
+      ${round('a', `href="${esc(asset(issue.ebook))}" target="_blank" rel="noopener"`, 'book', 'e북 보기 (새 창)')}
       ${round('a', `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"`, 'archive', '지난 호 보기 (새 창)')}
       ${round('button', 'type="button" data-scroll-top', 'up', '맨 위로')}
     </div>
