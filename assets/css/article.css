@@ -2645,3 +2645,97 @@ mark.hl {
     transition: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   기사 듣기 (기사 audio, assets/js/listen.js) — 글자 크기 버튼 왼쪽
+   -------------------------------------------------------------------------- */
+.a-listen {
+  position: relative;
+  display: inline-flex;
+  margin-left: auto;
+}
+
+.a-listen[hidden] {
+  display: none;
+}
+
+/* 듣기 버튼이 있으면 글자 크기는 그 바로 옆에 붙음 */
+.a-listen:not([hidden]) + .a-size {
+  margin-left: var(--space-1);
+}
+
+.a-listen__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px 0 6px;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-caption-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  white-space: nowrap;
+  transition: border-color var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.a-listen__btn:hover {
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.a-listen__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+  color: var(--color-white);
+}
+
+.a-listen__icon .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.a-listen__time {
+  font-weight: var(--weight-regular);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.a-listen__time:empty {
+  display: none;
+}
+
+/* 진행 막대 — 재생을 시작한 뒤에만, 버튼 아래 가장자리 안쪽에 */
+.a-listen__bar {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 3px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--line);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.a-listen.is-started .a-listen__bar {
+  opacity: 1;
+}
+
+.a-listen__bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent-ink);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.a-listen.is-playing .a-listen__btn {
+  border-color: var(--accent-ink);
+}

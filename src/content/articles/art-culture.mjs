@@ -6,6 +6,7 @@ export default {
   corner: 'ART & CULTURE',
   type: '예술·문화(외부 필진)',
   theme: 'mist', // 회청색 면 (인쇄본 내지 배경)
+  audio: 'assets/audio/artculture.mp3', // 기사 듣기 (글자 크기 버튼 옆 재생 버튼)
   title: '사람은 왜 풍경 속에 들어왔을까?',
   dek: ': 브뤼헐의 《눈 속의 사냥꾼》\n× 카스파르 다비트 프리드리히의 《안개 바다 위의 방랑자》',
   oneLine: '눈 덮인 마을로 돌아가는 사냥꾼과 안개 바다 앞에 홀로 선 방랑자. 두 그림 속 작은 사람이 풍경의 의미를 바꾸는 방법.',

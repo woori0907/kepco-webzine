@@ -3,6 +3,7 @@
 //   다음·이전 기사와 지난 호는 오른쪽 아래 리모컨(layout.mjs)으로 이동합니다.
 
 import { esc, lines, each, when, readLabel, rich } from '../lib/html.mjs';
+import { asset } from '../lib/paths.mjs';
 import { img } from '../lib/image.mjs';
 import { icon } from './icons.mjs';
 import { renderBlock } from './blocks.mjs';
@@ -55,6 +56,16 @@ function meta(a) {
       <p class="a-meta__info">
         <span class="a-meta__time">${icon('clock')}${readLabel(a)}</span>
       </p>
+      ${when(a.audio, () => `
+      <div class="a-listen" hidden data-listen>
+        <audio preload="none" src="${esc(asset(a.audio))}" data-listen-audio></audio>
+        <button class="a-listen__btn" type="button" aria-pressed="false" data-listen-btn>
+          <span class="a-listen__icon" aria-hidden="true"><span data-icon-play>${icon('play')}</span><span data-icon-pause hidden>${icon('pause')}</span></span>
+          <span data-listen-label>기사 듣기</span>
+          <span class="a-listen__time" data-listen-time></span>
+        </button>
+        <span class="a-listen__bar" aria-hidden="true"><i data-listen-progress></i></span>
+      </div>`)}
       <div class="a-size" role="group" aria-label="글자 크기" hidden data-text-size-control>
         <button class="a-size__btn" type="button" data-text-size-step="-1" aria-label="글자 작게">${icon('textDown')}</button>
         <span class="a-size__dots" aria-hidden="true"><i></i><i></i><i></i></span>

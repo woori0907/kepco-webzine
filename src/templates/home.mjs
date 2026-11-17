@@ -11,6 +11,14 @@ import { icon } from './icons.mjs';
 function cover(issue, story) {
   return `
     <section class="cover" id="cover" aria-labelledby="cover-title" data-scene="base">
+      <div class="cover__bg" aria-hidden="true">
+        ${img(issue.coverArt, { eager: true, sizes: '100vw', className: 'cover__art' })}
+        <video class="cover__video" muted loop playsinline hidden
+               data-cover-video data-src="${esc(asset(issue.promoVideo.desktop))}" data-src-mobile="${esc(asset(issue.promoVideo.mobile))}"></video>
+      </div>
+      <button class="cover__toggle" type="button" hidden data-video-toggle aria-label="배경 영상 일시정지">
+        <span data-icon-pause>${icon('pause')}</span><span data-icon-play hidden>${icon('play')}</span>
+      </button>
       <div class="container cover__grid">
         <div class="cover__text">
           <h1 class="visually-hidden" id="cover-title">KEPCO 웹진 ${esc(issue.titleKo)} vol.${issue.vol}</h1>
@@ -24,23 +32,10 @@ function cover(issue, story) {
           <a class="cover__story" href="${article(story.slug)}">
             <span class="label">${esc(story.section.name)} · ${esc(story.corner)}</span>
             <span class="cover__story-title">${esc(flat(story.title))}</span>
-            <span class="cover__story-meta">${esc(story.author.name)} · ${icon('clock')}${readLabel(story)}</span>
+            <span class="cover__story-meta">${esc(story.author ? story.author.name : story.credits[0][1])} · ${icon('clock')}${readLabel(story)}</span>
             <span class="cover__story-go">${icon('right')}</span>
           </a>
         </div>
-
-        <figure class="cover__media">
-          <div class="cover__frame${issue.coverArt.art ? ` is-${issue.coverArt.art}` : ''}">
-            ${img(issue.coverArt, { eager: true, sizes: '(min-width: 1024px) 700px, 100vw', className: 'cover__art' })}
-            <video class="cover__video" muted loop playsinline hidden
-                   aria-label="${esc(issue.titleKo)} 40초 홍보영상"
-                   data-cover-video data-src="${esc(asset(issue.promoVideo))}"></video>
-            <button class="cover__toggle" type="button" hidden data-video-toggle aria-label="홍보영상 일시정지">
-              <span data-icon-pause>${icon('pause')}</span><span data-icon-play hidden>${icon('play')}</span>
-            </button>
-          </div>
-          <figcaption class="cover__caption">${esc(issue.coverArt.caption)}</figcaption>
-        </figure>
       </div>
     </section>`;
 }

@@ -5,32 +5,34 @@ const ARCHIVE_BASE = 'https://www.kepco.co.kr/KEPCO_FILE/html/';
 // 실제 서버에서는 지난 호가 같은 서버의 형제 폴더이므로 '../' 로 바꿔도 됩니다.
 
 export const issue = {
-  year: 2026,
-  month: 10,
-  vol: 640,
-  titleKo: '2026년 10월호',
-  titleEn: '2026 October',
-  dateLabel: '2026.10',
-  imageFolder: '2026-10',
+  year: 2027,
+  month: 1,
+  vol: 643,
+  titleKo: '2027년 1월호',
+  titleEn: '2027 January',
+  dateLabel: '2027.01',
+  imageFolder: '2026-10', // 사진 폴더 이름은 그대로 (assets/images/2026-10)
 
-  keyword: '전환',
-  keywordEn: 'Transition',
-  intro: '기억을, 지식을, 이제는 판단까지 기술에 맡기는 시대. 10월호는 ‘전환’ 앞에서 사람이 지켜야 할 자리와 고객·현장·지역에서 이미 시작된 변화를 담았습니다.',
+  keyword: '새로운 장면',
+  keywordEn: 'New Scene',
+  intro: '같은 풍경도 다른 각도에서 바라보면 새로운 장면이 됩니다. 1월호는 익숙한 화면에 새로운 질문을 입력해 보는 2027년의 첫 장면, 그리고 현장과 일상에서 이미 시작된 새로운 장면들을 담았습니다.',
 
+  // 표지 이미지 — 영상을 불러오기 전·재생할 수 없을 때 배경, 공유 미리보기(OG) 이미지
   coverArt: {
-    src: 'inception/hero',
-    alt: '0과 1이 세로로 흘러내리는 10월호 표지 아트',
-    caption: '10월호 표지 아트 · 이 자리에서 40초 홍보영상이 재생됩니다',
-    art: 'matrix',
+    src: 'perspective/00_hero_SHIFT_16x9',
+    alt: '',
   },
-  // 영상 파일이 있으면 표지 자리에서 소리 없이 반복 재생됩니다. 없으면 표지 아트가 그대로 보입니다.
-  promoVideo: 'assets/video/promo-2026-10.mp4',
+  // 메인 표지 배경 영상 (소리 없이 반복 재생, 일시정지 버튼 있음) — 화면 폭에 따라 하나만 불러옴 (767px 이하 mobile)
+  promoVideo: {
+    desktop: 'assets/video/2027-01/main/hero_desktop.mp4',
+    mobile: 'assets/video/2027-01/main/hero_mobile.mp4',
+  },
 
   // 공유 미리보기(OG)용 절대주소
-  siteUrl: 'https://www.kepco.co.kr/KEPCO_FILE/html/2026_10/',
+  siteUrl: 'https://www.kepco.co.kr/KEPCO_FILE/html/2027_01/',
   archive: {
     base: ARCHIVE_BASE,
-    main: `${ARCHIVE_BASE}2026_09/main.html`,
+    main: `${ARCHIVE_BASE}2026_12/main.html`,
   },
 
   // ---- 목차 구성 ----------------------------------------------------------
@@ -84,9 +86,9 @@ export const issue = {
 
   // EVENT — 콘텐츠 연계 퀴즈 (메인에는 넣지 않고 목차·기사 끝에서 연결)
   quiz: {
-    id: '2026-10',
+    id: '2027-01',
     corner: 'EVENT',
-    title: '10월호 읽고 푸는 퀴즈',
+    title: '1월호 읽고 푸는 퀴즈',
     desc: '세 문제를 모두 맞히면 응모할 수 있어요. 틀리면 힌트가 있는 기사를 알려드려요.',
     questions: [
       {
@@ -132,8 +134,8 @@ export const issue = {
   entry: {
     store: 'local',
     endpoint: '',
-    period: '2026. 10. 1.(목) ~ 10. 31.(토)',
-    announce: '2026. 11. 10.(화) 11월호 EVENT 페이지',
+    period: '2027. 1. 1.(금) ~ 1. 31.(일)',
+    announce: '2027. 2. 10.(수) 2월호 EVENT 페이지',
     prize: '정답자 중 추첨 30명 · 모바일 커피 쿠폰',
     privacy: {
       purpose: '이벤트 당첨자 선정 및 경품 발송',
@@ -151,9 +153,9 @@ export const issue = {
   //   어느 기사에 숨길지는 읽는 사람마다 무작위로 정해져 그 브라우저에 기억됩니다 (assets/js/churu.js)
   //   목차·메인·리모컨에는 넣지 않습니다.
   churu: {
-    id: '2026-10-churu',
+    id: '2027-01-churu',
     slug: 'find-churu', // 실제 파일은 articles/find-churu-<key로 만든 글자>.html — 목차에 없고 HTML에도 그대로 적지 않음
-    key: 'powercat-loves-churu-2026-10', // 바꾸면 응모 페이지 주소가 바뀜
+    key: 'powercat-loves-churu-2027-01', // 바꾸면 응모 페이지 주소가 바뀜
     total: 3,
     image: 'find-churu/churu.png',
     sprite: 'find-churu/powercat-sprite.png', // 가로로 3칸 — 찾은 개수번째 칸을 팝업에 씀
@@ -167,7 +169,7 @@ export const issue = {
   },
 
   poll: {
-    id: '2026-10',
+    id: '2027-01',
     title: '이번 호에서 가장 좋았던 기사는?',
     desc: '한 사람이 한 번 투표할 수 있어요. 결과는 다음 호에서 공개하고 기획에 반영해요.',
     // 보기는 목차 순서대로 모든 기사가 자동으로 들어갑니다.
