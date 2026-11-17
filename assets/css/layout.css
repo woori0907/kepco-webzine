@@ -435,7 +435,7 @@
     bottom: 0;
     z-index: 150;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     height: calc(var(--tabbar-height) + env(safe-area-inset-bottom, 0px));
     padding-bottom: env(safe-area-inset-bottom, 0px);
     background: var(--bg);
@@ -779,4 +779,31 @@
   width: 26px;
   height: 26px;
   margin: -13px 0 0 -13px;
+}
+
+/* 공유하기 안내 (assets/js/share.js) — 화면 아래 가운데에 잠깐 */
+.share-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  z-index: 310;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--text);
+  color: var(--bg);
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-semibold);
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+  pointer-events: none;
+}
+
+.share-toast:empty {
+  display: none;
+}
+
+.share-toast.is-shown {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }

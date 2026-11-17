@@ -30,6 +30,8 @@ export const issue = {
 
   // 공유 미리보기(OG)용 절대주소
   siteUrl: 'https://www.kepco.co.kr/KEPCO_FILE/html/2027_01/',
+  // e북 (사이드 리모컨 · 메인 원형 버튼, 새 창) — 실제 e북 주소가 정해지면 바꿔 주세요
+  ebook: `${ARCHIVE_BASE}2027_01/ebook/index.html`,
   archive: {
     base: ARCHIVE_BASE,
     main: `${ARCHIVE_BASE}2026_12/main.html`,

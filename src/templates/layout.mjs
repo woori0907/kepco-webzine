@@ -81,18 +81,22 @@ function footer(issue) {
   </footer>`;
 }
 
-function tabbar(isHome) {
+// 하단 탭바 (태블릿·모바일) — 목차 · 이번 호 · (기사: 공유하기 / 그 밖: 참여) · e북 · 위로
+function tabbar(issue, isHome, isArticle) {
   return `
   <nav class="tabbar" aria-label="빠른 이동" data-tabbar>
     <button class="tabbar__item" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>${icon('toc')}목차</button>
     <a class="tabbar__item" href="${home()}"${isHome ? ' aria-current="page"' : ''}>${icon('home')}이번 호</a>
-    <a class="tabbar__item" href="${home('#participate')}">${icon('chat')}참여</a>
+    ${isArticle
+      ? `<button class="tabbar__item" type="button" data-share>${icon('share')}공유</button>`
+      : `<a class="tabbar__item" href="${home('#participate')}">${icon('chat')}참여</a>`}
+    <a class="tabbar__item" href="${esc(issue.ebook)}" target="_blank" rel="noopener" aria-label="e북 보기 (새 창)">${icon('book')}e북</a>
     <button class="tabbar__item" type="button" data-scroll-top>${icon('up')}위로</button>
   </nav>`;
 }
 
 /**
- * 리모컨 (데스크톱 오른쪽 아래 고정) — 다음 기사 · 이전 기사 · 지난 호 보기 · 맨 위로
+ * 리모컨 (데스크톱 오른쪽 아래 고정) — 다음 기사 · 이전 기사 · 공유하기(기사만) · e북 · 지난 호 보기 · 맨 위로
  * 순서는 목차 순서 + 맨 끝 EVENT, 끝에서는 처음으로 돌아갑니다.
  * 메인·가이드처럼 기사가 아닌 페이지에서는 ‘다음’ = 첫 기사, ‘이전’ = 마지막(EVENT).
  * 아이콘만 보이고, 마우스·키보드 포커스 시 왼쪽에 이름표가 나옵니다(화면낭독기는 aria-label).
@@ -103,13 +107,14 @@ function remote(issue, articles, currentSlug) {
     { slug: EVENT_SLUG, name: issue.quiz.corner, title: issue.quiz.title },
   ];
   const i = pages.findIndex((x) => x.slug === currentSlug);
+  const isArticle = articles.some((a) => a.slug === currentSlug); // 공유하기는 기사 페이지에만
   const next = pages[(i + 1) % pages.length]; // i가 -1이면 첫 기사
   const prev = pages[(i - 1 + pages.length) % pages.length]; // i가 -1이면 마지막
   const item = (attrs, iconName, label, tip) => `
       <li><${attrs.tag} class="remote__btn" ${attrs.rest} aria-label="${esc(label)}" data-tip="${esc(tip)}">${icon(iconName)}</${attrs.tag}></li>`;
   return `
   <nav class="remote" aria-label="리모컨" data-remote>
-    <ul>${item({ tag: 'a', rest: `href="${article(next.slug)}"` }, 'right', `다음 기사: ${next.name} ${next.title}`, `다음 · ${next.name}`)}${item({ tag: 'a', rest: `href="${article(prev.slug)}"` }, 'left', `이전 기사: ${prev.name} ${prev.title}`, `이전 · ${prev.name}`)}${item({ tag: 'a', rest: `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"` }, 'archive', '지난 호 보기 (새 창)', '지난 호 보기')}${item({ tag: 'button', rest: 'type="button" data-scroll-top' }, 'up', '맨 위로', '맨 위로')}
+    <ul>${item({ tag: 'a', rest: `href="${article(next.slug)}"` }, 'right', `다음 기사: ${next.name} ${next.title}`, `다음 · ${next.name}`)}${item({ tag: 'a', rest: `href="${article(prev.slug)}"` }, 'left', `이전 기사: ${prev.name} ${prev.title}`, `이전 · ${prev.name}`)}${isArticle ? item({ tag: 'button', rest: 'type="button" data-share' }, 'share', '이 기사 공유하기', '공유하기') : ''}${item({ tag: 'a', rest: `href="${esc(issue.ebook)}" target="_blank" rel="noopener"` }, 'book', 'e북 보기 (새 창)', 'e북 보기')}${item({ tag: 'a', rest: `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"` }, 'archive', '지난 호 보기 (새 창)', '지난 호 보기')}${item({ tag: 'button', rest: 'type="button" data-scroll-top' }, 'up', '맨 위로', '맨 위로')}
     </ul>
   </nav>`;
 }
@@ -117,7 +122,7 @@ function remote(issue, articles, currentSlug) {
 /**
  * 메인 전용 사이드 내비게이션 (데스크톱 오른쪽 고정)
  *   점(dot) — 섹션(SPOTLIGHT · KEPCO NOW · LIFE & CULTURE · 참여)으로 이동, 지금 보는 섹션이 길게 표시 (dot-nav.js)
- *   그 아래 따로 떨어진 원형 버튼 — 지난 호 보기 · 맨 위로
+ *   그 아래 따로 떨어진 원형 버튼 — e북 보기 · 지난 호 보기 · 맨 위로
  */
 function dotnav(issue) {
   const stops = [
@@ -132,6 +137,7 @@ function dotnav(issue) {
       ${each(stops, (s, i) => `<li><a class="dots__link${i === 0 ? ' is-active' : ''}" href="#${s.id}" data-dot="${s.id}" data-tip="${esc(s.name)}"${i === 0 ? ' aria-current="true"' : ''}><span class="visually-hidden">${esc(s.name)}</span></a></li>`)}
     </ol>
     <div class="remote__rounds">
+      ${round('a', `href="${esc(issue.ebook)}" target="_blank" rel="noopener"`, 'book', 'e북 보기 (새 창)')}
       ${round('a', `href="${esc(issue.archive.main)}" target="_blank" rel="noopener"`, 'archive', '지난 호 보기 (새 창)')}
       ${round('button', 'type="button" data-scroll-top', 'up', '맨 위로')}
     </div>
@@ -201,7 +207,7 @@ ${menu(issue, p.articles, p.current)}
 ${p.main}
   </main>
 ${footer(issue)}
-${tabbar(isHome)}
+${tabbar(issue, isHome, p.articles.some((a) => a.slug === p.current))}
 ${isHome ? dotnav(issue) : remote(issue, p.articles, p.current)}
 </body>
 </html>

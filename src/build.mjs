@@ -155,7 +155,7 @@ articles.forEach((a) => {
     title: `${flat(a.title)} | KEPCO 웹진 ${issue.titleKo}`,
     description: a.oneLine,
     ogImage: a.hero.src || issue.coverArt.src,
-    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'listen.js', 'reactions.js', 'churu.js', 'highlight.js'],
+    scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'progress.js', 'toc-spy.js', 'lightbox.js', 'text-size.js', 'listen.js', 'share.js', 'reactions.js', 'churu.js', 'highlight.js'],
     styles: ['article.css', 'churu.css'],
     main: articleMain(a, issue),
   }));
