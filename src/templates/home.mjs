@@ -264,6 +264,31 @@ function participate(issue, articles) {
     </section>`;
 }
 
+/**
+ * 츄르를 찾아라 안내 팝업 (메인) — 안내만, 링크 없음 · 동작은 assets/js/churu-notice.js
+ *   PC: 왼쪽 아래 구석에서 올라오는 작은 카드 / 모바일: 화면 가운데 레이어 팝업(뒤를 어둡게)
+ *   닫기 · 오늘 하루 보지 않기
+ */
+function churuNotice(issue) {
+  const c = issue.churu;
+  if (!c || !c.notice) return '';
+  const n = c.notice;
+  const sprite = asset(`assets/images/${issue.imageFolder}/${c.sprite}`);
+  return `
+  <div class="notice-dim" hidden data-notice-dim></div>
+  <section class="notice" role="dialog" aria-labelledby="notice-title" aria-describedby="notice-text" hidden
+           data-notice="${esc(c.id)}">
+    <p class="notice__label" lang="en">${esc(n.label)}</p>
+    <h2 class="notice__title" id="notice-title">${esc(n.title)}</h2>
+    <p class="notice__text" id="notice-text">${esc(n.text)}</p>
+    <span class="notice__cat churu-cat churu-cat--1" role="img" aria-label="파워캣" style="background-image:url('${esc(sprite)}')"></span>
+    <div class="notice__actions">
+      <button class="notice__close" type="button" data-notice-close>닫기</button>
+      <button class="notice__today" type="button" data-notice-today>오늘 하루 보지 않기</button>
+    </div>
+  </section>`;
+}
+
 export function homeMain(issue, bySlug) {
   const articles = issue.sections
     .flatMap((s) => s.items.map((item) => bySlug[item.slug]))
@@ -272,5 +297,6 @@ export function homeMain(issue, bySlug) {
     cover(issue, bySlug[issue.coverStory]),
     `<div id="articles">${issue.sections.map((s, i) => section(s, bySlug, issue.coverStory, i)).join('')}</div>`,
     participate(issue, articles),
+    churuNotice(issue),
   ].join('\n');
 }

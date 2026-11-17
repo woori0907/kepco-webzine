@@ -141,8 +141,8 @@ write('index.html', page({
   title: `KEPCO 웹진 ${issue.titleKo} · ${issue.keyword}`,
   description: issue.intro,
   ogImage: issue.coverArt.src,
-  styles: ['vendor/slick/slick.css', 'home.css'],
-  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dot-nav.js', 'vendor/jquery/jquery.min.js', 'vendor/slick/slick.min.js', 'now-carousel.js', 'cover-video.js', 'participation.js', 'newsletter.js'],
+  styles: ['vendor/slick/slick.css', 'home.css', 'churu.css'],
+  scripts: ['menu.js', 'scroll-ui.js', 'smooth-scroll.js', 'rise.js', 'scene-bg.js', 'dot-nav.js', 'vendor/jquery/jquery.min.js', 'vendor/slick/slick.min.js', 'now-carousel.js', 'cover-video.js', 'churu-notice.js', 'participation.js', 'newsletter.js'],
   main: homeMain(issue, bySlug),
 }));
 

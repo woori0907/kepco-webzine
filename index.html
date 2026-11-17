@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/vendor/slick/slick.css">
   <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/churu.css">
 
   <script>document.documentElement.classList.add('js');try{var ts=localStorage.getItem('kepco-webzine:text-size');if(ts==='1'||ts==='2')document.documentElement.setAttribute('data-text-size',ts);}catch(e){}</script>
   <script src="assets/js/menu.js" defer></script>
@@ -36,6 +37,7 @@
   <script src="assets/vendor/slick/slick.min.js" defer></script>
   <script src="assets/js/now-carousel.js" defer></script>
   <script src="assets/js/cover-video.js" defer></script>
+  <script src="assets/js/churu-notice.js" defer></script>
   <script src="assets/js/participation.js" defer></script>
   <script src="assets/js/newsletter.js" defer></script>
   <script src="assets/js/glow-cursor.js" defer></script>
@@ -518,6 +520,19 @@
         </div>
       </div>
     </section>
+
+  <div class="notice-dim" hidden data-notice-dim></div>
+  <section class="notice" role="dialog" aria-labelledby="notice-title" aria-describedby="notice-text" hidden
+           data-notice="2027-01-churu">
+    <p class="notice__label" lang="en">HIDDEN EVENT</p>
+    <h2 class="notice__title" id="notice-title">숨은 츄르를 찾아라!</h2>
+    <p class="notice__text" id="notice-text">이번 호 기사 곳곳에 파워캣의 츄르 3개가 숨어 있어요. 모두 찾으면 비밀 이벤트에 응모할 수 있어요.</p>
+    <span class="notice__cat churu-cat churu-cat--1" role="img" aria-label="파워캣" style="background-image:url('assets/images/2026-10/find-churu/powercat-sprite.png')"></span>
+    <div class="notice__actions">
+      <button class="notice__close" type="button" data-notice-close>닫기</button>
+      <button class="notice__today" type="button" data-notice-today>오늘 하루 보지 않기</button>
+    </div>
+  </section>
   </main>
 
   <footer class="site-footer">
