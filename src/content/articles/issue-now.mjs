@@ -63,7 +63,6 @@ export default {
     { type: 'quote', text: '더 고객 중심으로, 더 스피드 있게, 더 효율적으로.', cite: '고객서비스혁신본부 슬로건' },
     { type: 'p', text: '‘100% 전력서비스 기업’을 향한 한전의 변화는 이제 시작됐다.' },
   ],
-  author: { name: 'OOO', role: '서비스혁신처 영업계획부 차장' },
   past: [
     { folder: '2026_09', file: 'theme01.html', vol: 639, date: '2026.09', title: '3대 메가프로젝트 시대, 대한민국의 미래를 움직이는 ‘해상풍력’' },
     { folder: '2026_08', file: 'theme01.html', vol: 638, date: '2026.08', title: '전력수급 위기 대응에 총력! 여름철 전력수급 전망 및 안정 대책' },
